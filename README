@@ -1,0 +1,33 @@
+
+attempt to create generated bindings for
+libzypp. Not restricted to one language.
+
+author: dmacvicar@suse.de
+
+Notes:
+
+- Some classes are not wrapped but converted to
+  equivalents:
+  
+Usage:
+
+Requires swig and ruby installed.
+
+make -f Makefile.swig
+ruby extconf.rb
+make
+ruby test.rb
+
+Ruby Notes
+==========
+
+* API tries to follow ruby standards:
+* zypp::Pathname -> std Pathname in ruby
+* zypp::Date -> std Time in ruby
+* ResStore does not implement iterators but:
+  * each
+  * each_by_name
+  * etc
+* lower case methods, ie: ZYppFactory::instance.get_zypp
+  instead of ZYppFactory::instance()->getZYpp()
+  z.initialize_target("/") for z.initializeTarget("/")
