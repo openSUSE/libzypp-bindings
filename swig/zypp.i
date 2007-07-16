@@ -1,5 +1,4 @@
 %module rzypp
-%include std_string.i
  %{
  /* Includes the header in the wrapper code */
 
@@ -12,8 +11,6 @@
  #include <zypp/ZYpp.h>
  #include <zypp/Pathname.h>
  #include "zypp/base/ReferenceCounted.h"
- #include "zypp/SourceFactory.h"
- #include "zypp/Source.h"
  #include "zypp/ResObject.h"
  #include "zypp/Target.h"
  #include "zypp/target/TargetImpl.h"
@@ -21,18 +18,19 @@
  #include "zypp/CapFactory.h"
  #include "zypp/Package.h"
 #include "zypp/ResFilters.h"
-#include "zypp/source/OnMediaLocation.h"
+#include "zypp/OnMediaLocation.h"
+ #include "zypp/Repository.h"
+ #include "zypp/RepoManager.h"
+ #include "zypp/repo/RepoType.h"
 #include "zypp/MediaSetAccess.h"
   
  using namespace boost;
  using namespace zypp;
+ using namespace zypp::repo;
  using namespace zypp::resfilter;
 
+ typedef std::set<Url> UrlSet;
  %}
-
-#ifdef SWIGRUBY
-%include "ruby.i"
-#endif
 
 %rename("+") "operator+";
 %rename("<<") "operator<<";
@@ -57,6 +55,13 @@ class intrusive_ptr {
 };
 
 %include "Pathname.i"
+%include "Url.i"
+    
+%include std_string.i
+%include "stl.i"
+%include "std_list.i"
+%include "std_set.i"
+ 
 %include "Arch.i"
 %include "ResStore.i"
 %include "Edition.i"
@@ -64,8 +69,11 @@ class intrusive_ptr {
 %include "Date.i"
 %include "Resolvable.i"
 %include "ByteCount.i"
-%include "Source.i"
-%include "SourceFactory.i"
+%include "RepoType.i"
+%include "Repository.i"
+%include "RepoInfo.i"
+%include "RepoManager.i"
+%include "RepoStatus.i"
 %include "ResObject.i"
 %include "TranslatedText.i"
 %include "CheckSum.i"
@@ -85,11 +93,18 @@ class intrusive_ptr {
 %include "ResPool.i"
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
-%include "Url.i"
 %include "MediaSetAccess.i"
+
+    
+#ifdef SWIGRUBY
+%include "ruby.i"
+#endif
+    
 
 /* define iterators using swig macros */
 iter2( ResStore, ResObject::Ptr )
+auto_iterator( std::list<RepoInfo>, RepoInfo )
+%alias Arch::asString "to_s";
     
 class ZYpp
 {

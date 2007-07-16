@@ -44,11 +44,7 @@ class Capability
     /** accessors needed by solver/zmd  */
     /** Deprecated */
     std::string index() const;
-    /** Deprecated, defaults to Rel::NONE */
-    Rel op() const;
-    /** Deprecated, defaults to Edition::noedition */
-    Edition edition() const;
-
+   
   private:
     typedef capability::CapabilityImpl          Impl;
     typedef capability::CapabilityImpl_Ptr      Impl_Ptr ;

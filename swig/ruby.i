@@ -1,5 +1,12 @@
 
-%rename("asString") foo(to_s);
+%rename("asString") to_s;
+
+#define auto_string( cl ) \
+%extend cl { \
+  std::string to_s() { \
+    return self->asString();\
+  } \
+}
 
 #define iter( cl, storetype ) \
 %mixin cl "Enumerable"; \
@@ -24,6 +31,19 @@
         } \
     } \
 }
+
+#define auto_iterator( cl, storetype ) \
+%mixin cl "Enumerable"; \
+%extend cl { \
+    void each() { \
+        cl::iterator i = self->begin(); \
+        while ( i != self->end() ) { \
+            rb_yield( SWIG_NewPointerObj( (void *) &*i, $descriptor(storetype), 0)); \
+            ++i; \
+        } \
+    } \
+}
+
 
 %extend Target {
     void each_by_kind( const ResObject::Kind & kind_r )

@@ -19,8 +19,8 @@ class ResObject : public Resolvable
     Vendor vendor() const;
     ByteCount size() const;
     ByteCount archivesize() const;
-    Source_Ref source() const;
-    unsigned sourceMediaNr() const;
+    Repository repository() const;
+    unsigned mediaNr() const;
     bool installOnly() const;
     Date buildtime() const;
     Date installtime() const;

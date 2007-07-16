@@ -10,3 +10,8 @@
 %typemap(freearg) const Url & {
  delete $1;
 }
+
+%typemap(out) Url {
+  VALUE rburlstr = rb_str_new2($1.asString().c_str());
+  $result = rburlstr ;
+}
