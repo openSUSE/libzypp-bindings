@@ -102,7 +102,7 @@ class intrusive_ptr {
     
 
 /* define iterators using swig macros */
-iter2( ResStore, ResObject::Ptr )
+iter2( ResStore, ResObject* )
 auto_iterator( std::list<RepoInfo>, RepoInfo )
 %alias Arch::asString "to_s";
     

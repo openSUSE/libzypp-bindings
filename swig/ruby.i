@@ -8,29 +8,50 @@
   } \
 }
 
-#define iter( cl, storetype ) \
-%mixin cl "Enumerable"; \
-%extend cl { \
+
+// #define iter( cl, storetype ) \
+// %mixin cl "Enumerable"; \
+// %extend cl { \
+//     void each() { \
+//         cl::iterator i = self->begin(); \
+//         while ( i != self->end() ) { \
+//             rb_yield( SWIG_NewPointerObj( (void *) &*i, $descriptor(storetype), 1)); \
+//             ++i; \
+//         } \
+//     } \
+// }
+
+
+/*
+ *  Extend cls with an ruby-like each iterator.  Yields objects of type storetype.
+ *  Parameter storetype must be a pointer type.
+ */
+#define iter2( cls, storetype ) \
+%mixin cls "Enumerable"; \
+%extend cls { \
     void each() { \
-        cl::iterator i = self->begin(); \
+	cls::iterator i = self->begin(); \
         while ( i != self->end() ) { \
-            rb_yield( SWIG_NewPointerObj( (void *) &*i, $descriptor(storetype), 1)); \
+	    const storetype tmp = &**i; \
+	    rb_yield( SWIG_NewPointerObj( (void*) tmp, $descriptor(storetype), 0)); \
             ++i; \
         } \
     } \
 }
 
-#define iter2( cl, storetype ) \
-%mixin cl "Enumerable"; \
-%extend cl { \
-    void each() { \
-        cl::iterator i = self->begin(); \
-        while ( i != self->end() ) { \
-            rb_yield( SWIG_NewPointerObj( (void *) &*i, $descriptor(storetype), 0)); \
-            ++i; \
-        } \
-    } \
-}
+
+// %mixin ResStore "Enumerable";
+// %extend ResStore {
+//     void each() {
+//         ResStore::iterator i = self->begin();
+//         while ( i != self->end() ) {
+// 	    const ResObject* tmp = &**i;
+// 	    rb_yield( SWIG_NewPointerObj( (void*) tmp, $descriptor(ResObject*), 0));
+// 	    ++i;
+// 	}
+//     }
+// }
+
 
 #define auto_iterator( cl, storetype ) \
 %mixin cl "Enumerable"; \
@@ -95,5 +116,4 @@
 %rename("dryRun=") ZYppCommitPolicy::dryRun(bool);
 %rename("rpmNoSignature=") ZYppCommitPolicy::rpmNoSignature(bool);
 %rename("syncPoolAfterCommit=") ZYppCommitPolicy::syncPoolAfterCommit(bool);
-
 
