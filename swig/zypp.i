@@ -23,7 +23,7 @@
  #include "zypp/RepoManager.h"
  #include "zypp/repo/RepoType.h"
 #include "zypp/MediaSetAccess.h"
-  
+
  using namespace boost;
  using namespace zypp;
  using namespace zypp::repo;
@@ -56,12 +56,13 @@ class intrusive_ptr {
 
 %include "Pathname.i"
 %include "Url.i"
-    
+
 %include std_string.i
 %include "stl.i"
 %include "std_list.i"
 %include "std_set.i"
- 
+
+%include "NeedAType.i"
 %include "Arch.i"
 %include "ResStore.i"
 %include "Edition.i"
@@ -95,27 +96,27 @@ class intrusive_ptr {
 %include "ZYppCommitResult.i"
 %include "MediaSetAccess.i"
 
-    
+
 #ifdef SWIGRUBY
 %include "ruby.i"
 #endif
-    
+
 
 /* define iterators using swig macros */
 iter2( ResStore, ResObject* )
 auto_iterator( std::list<RepoInfo>, RepoInfo )
 %alias Arch::asString "to_s";
-    
+
 class ZYpp
 {
   public:
     typedef intrusive_ptr<ZYpp>       Ptr;
     typedef intrusive_ptr<const ZYpp> constPtr;
   public:
-    
+
     ResPool pool() const;
     ResPoolProxy poolProxy() const;
-    
+
     /*
     SourceFeed_Ref sourceFeed() const;
     */
@@ -128,13 +129,13 @@ class ZYpp
     Target_Ptr target() const;
     void initializeTarget(const Pathname & root);
     void finishTarget();
-    
+
     typedef ZYppCommitResult CommitResult;
     ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
- 
+
     Resolver_Ptr resolver() const;
     KeyRing_Ptr keyRing() const;
-    
+
      /*
     void setTextLocale( const Locale & textLocale_r );
     Locale getTextLocale() const;
@@ -147,10 +148,10 @@ class ZYpp
     Pathname homePath() const;
     Pathname tmpPath() const;
     void setHomePath( const Pathname & path );
-    
+
     Arch architecture() const;
     void setArchitecture( const Arch & arch );
-    
+
     protected:
     virtual ~ZYpp();
     private:
