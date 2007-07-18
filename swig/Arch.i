@@ -3,6 +3,10 @@ typedef std::set<Arch,CompareByGT<Arch> > CompatSet;
 
 %ignore Arch::compare(const Arch &, const Arch &);
 
+#ifdef SWIGRUBY
+%alias Arch::asString "to_s";
+#endif
+
 class Arch
 {
 public:

@@ -1,4 +1,8 @@
 
+#ifdef SWIGRUBY
+%alias Edition::asString "to_s";
+#endif
+
 class Edition
 {
   public:
@@ -29,4 +33,5 @@ class Edition
   public:
     static int match( const Edition & lhs, const Edition & rhs );
     int match( const Edition & rhs ) const;
-  };
+};
+

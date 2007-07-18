@@ -40,14 +40,14 @@
 }
 
 %extend Resolvable::TraitsType::KindType {
-    const char* asString() {
+    const char* toS() {
 	return "unknown";
     }
 }
 
 // this is just a workaround since the whole code above does not work
 %extend Resolvable {
-    const char* kindAsString()
+    const char* kindToS()
     {
 	if (isKind<Package>(self))
 	    return "package";
