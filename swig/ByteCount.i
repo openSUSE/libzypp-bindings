@@ -8,3 +8,4 @@
   VALUE rbbytenum = INT2NUM( (ByteCount::SizeType) $1 );
   return rbbytenum;
 }
+

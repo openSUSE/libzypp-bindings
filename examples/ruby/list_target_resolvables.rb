@@ -15,5 +15,8 @@ r.each do | p |
     # puts p.class
     puts "#{p.kind_to_s} #{p.name} #{p.edition.to_s} #{p.arch.to_s}"
     puts "  #{p.summary}"
+    puts "  #{p.size}"
+    puts "  #{p.vendor}"
+    puts "  #{p.buildtime}"
 end
 
