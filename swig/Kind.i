@@ -1,12 +1,12 @@
 
 %typemap(in) Resolvable::Kind {
-  
+
   VALUE kindstring = rb_funcall( $input, rb_intern("to_s"), 0, 0);
   kindstring = rb_funcall( kindstring, rb_intern("downcase"), 0, 0);
   std::string s(RSTRING(pathstring)->ptr);
-  
+
   // FIXME make the string lowercase first
-  
+
   if ( s == "patch" )
   {
     $1 == Patch::Kind;
@@ -38,3 +38,28 @@
   const char *s = $1.asString().c_str();
   $result = ID2SYM(rb_intern(s));
 }
+
+%extend Resolvable::TraitsType::KindType {
+    const char* asString() {
+	return "unknown";
+    }
+}
+
+// this is just a workaround since the whole code above does not work
+%extend Resolvable {
+    const char* kindAsString()
+    {
+	if (isKind<Package>(self))
+	    return "package";
+	else if (isKind<Patch>(self))
+	    return "patch";
+	else if (isKind<Product>(self))
+	    return "product";
+	else if (isKind<Pattern>(self))
+	    return "pattern";
+	else if (isKind<Language>(self))
+	    return "language";
+	return "unknown";
+    }
+}
+
