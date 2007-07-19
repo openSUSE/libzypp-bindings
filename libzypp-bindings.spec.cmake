@@ -1,7 +1,7 @@
 #
 # spec file for package libzypp-bindings
 #
-# Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2007 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
 # package are under the same license as the package itself.
 #
@@ -10,16 +10,16 @@
 
 # norootforbuild
 
-Name:           libzypp-bindings
-Version:        0.3
-Release:        1
+Name:           @PACKAGE@
+Version:        @VERSION@
+Release:        0
 License:        GPL
 Group:          Development/Languages/Ruby
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  gcc-c++, ruby-devel
+BuildRequires:  cmake gcc-c++ ruby-devel swig
 BuildRequires:  libzypp-devel >= 3.0.0
 Requires:       libzypp >= 3.0.0
-Source:         %{name}.tar.bz2
+Source:         %{name}-%{version}.tar.bz2
 Summary:        Language Bindings for libzypp
 %description
 Language Bindings for libzypp
@@ -30,7 +30,7 @@ Language Bindings for libzypp
     Klaus Kaempf <kkaempf@suse.de>
 
 %prep
-%setup -n %{name}
+%setup -q
 
 %build
 mkdir build
@@ -41,7 +41,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DCMAKE_CXX_FLAGS="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
-
+      ..
 make %{?jobs:-j %jobs}
 
 %install
