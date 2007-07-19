@@ -1,5 +1,5 @@
 #
-# spec file for package ruby-zypp (Version 0.0_svn)
+# spec file for package libzypp-bindings
 #
 # Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -10,8 +10,8 @@
 
 # norootforbuild
 
-Name:           zypp-bindngs
-Version:        0.1
+Name:           libzypp-bindings
+Version:        0.3
 Release:        1
 License:        GPL
 Group:          Development/Languages/Ruby
