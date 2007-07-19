@@ -1,0 +1,5 @@
+-------------------------------------------------------------------
+Thu Jul 19 16:13:08 CEST 2007 - aschnell@suse.de
+
+- New package with swig generated bindings for libzypp
+

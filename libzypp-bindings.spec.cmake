@@ -33,11 +33,16 @@ Language Bindings for libzypp
 %setup -n %{name}
 
 %build
-pushd src
-    ruby extconf.rb
-    make
-popd
-#make -C tests check
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+      -DLIB=%{_lib} \
+      -DCMAKE_C_FLAGS="%{optflags}" \
+      -DCMAKE_CXX_FLAGS="%{optflags}" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_SKIP_RPATH=1 \
+
+make %{?jobs:-j %jobs}
 
 %install
 %{__install} -D -m 0755 src/rzypp.so \
