@@ -45,7 +45,7 @@
     }
 }
 
-// this is just a workaround since the whole code above does not work
+// FIXME: this is just a workaround since the whole code above does not work
 %extend Resolvable {
     const char* kindToS()
     {

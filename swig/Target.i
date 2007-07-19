@@ -2,25 +2,25 @@
 typedef intrusive_ptr<Target> Target_Ptr;
 
 class Target
-  {
+{
   public:
-    
+
     typedef std::list<PoolItem_Ref> PoolItemList;
 
   public:
 
     /** All resolvables provided by the target. */
     const ResStore & resolvables();
-    
-    /** 
+
+    /**
      * reload the target in future calls if
      * needed.
      * note the loading can actually be delayed, but
-     * the next call to resolvables must reflect the 
+     * the next call to resolvables must reflect the
      * status of the system.
     */
     void reset();
-    
+
     /**
      * load resolvables of certain kind in the internal store
      * and return a iterator
@@ -41,15 +41,6 @@ class Target
 
     ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
 
-    /** JUST FOR TESTSUITE */
-    /** Sort according to prereqs and media numbers
-     * \todo provide it as standalone algorithm
-    */
-    void getResolvablesToInsDel ( const ResPool pool_r,
-                                  PoolItemList & dellist_r,
-                                  PoolItemList & instlist_r,
-                                  PoolItemList & srclist_r ) const;
-
 #ifndef STORAGE_DISABLED
     /** enables the storage target */
     bool isStorageEnabled() const;
@@ -64,6 +55,6 @@ class Target
 
     /** return the last modification date of the target */
     Date timestamp() const;
-  };
-  
+};
+
 %template(Target_Ptr) intrusive_ptr<Target>;

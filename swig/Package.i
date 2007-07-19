@@ -1,6 +1,6 @@
 
-  class Package : public ResObject
-  {
+class Package : public ResObject
+{
 
   public:
     typedef detail::PackageImplIf    Impl;
@@ -10,10 +10,7 @@
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /**
-     * Checksum the source says this package should have
-     */
-    CheckSum checksum() const;
+
     /** Get the package change log */
     Changelog changelog() const;
     /** */
@@ -50,10 +47,11 @@
     //DiskUsage diskusage() const;
 
     /** location in source */
-    Pathname location() const;
+    OnMediaLocation location() const;
 
   protected:
     Package( const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Package();
-  };
+};
+
