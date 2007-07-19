@@ -8,8 +8,6 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
-
 Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
@@ -45,8 +43,8 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
 make %{?jobs:-j %jobs}
 
 %install
-%{__install} -D -m 0755 src/rzypp.so \
-    %{buildroot}%{_libdir}/ruby/%{rb_ver}/%{rb_arch}/rzypp.so
+cd build
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -54,9 +52,5 @@ make %{?jobs:-j %jobs}
 %files
 %defattr(-,root,root,-)
 %{_libdir}/ruby/%{rb_ver}/%{rb_arch}/rzypp.so
-%doc MAINTAINER COPYING README
-%doc tests/*.rb
 
 %changelog -n ruby-zypp
-* Tue Mar 21 2006 - mrueckert@suse.de
-- Initial package
