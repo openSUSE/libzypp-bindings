@@ -12,20 +12,15 @@ Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
 License:        GPL
-Group:          Development/Languages/Ruby
+Summary:        -
+Group:          -
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  cmake gcc-c++ ruby-devel swig
 BuildRequires:  libzypp-devel >= 3.0.0
-Requires:       libzypp >= 3.0.0
 Source:         %{name}-%{version}.tar.bz2
-Summary:        Language Bindings for libzypp
-%description
-Language Bindings for libzypp
 
- Authors:
-----------
-    Duncan Mac-Vicar P. <dmacvicar@suse.de>
-    Klaus Kaempf <kkaempf@suse.de>
+%description
+-
 
 %prep
 %setup -q
@@ -49,8 +44,15 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %clean
 %{__rm} -rf %{buildroot}
 
-%files
+%package -n ruby-zypp
+Summary:        -
+Group:          -
+
+%description -n ruby-zypp
+-
+
+%files -n ruby-zypp
 %defattr(-,root,root,-)
 %{_libdir}/ruby/%{rb_ver}/%{rb_arch}/rzypp.so
 
-%changelog -n ruby-zypp
+%changelog
