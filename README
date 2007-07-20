@@ -1,22 +1,17 @@
 
-attempt to create generated bindings for
+Attempt to create generated bindings for
 libzypp. Not restricted to one language.
 
-author: dmacvicar@suse.de
+Author: dmacvicar@suse.de
 
 Notes:
 
 - Some classes are not wrapped but converted to
   equivalents:
-  
+
 Usage:
 
 Requires swig and ruby installed.
-
-make -f Makefile.swig
-ruby extconf.rb
-make
-ruby test.rb
 
 Ruby Notes
 ==========
