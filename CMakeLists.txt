@@ -54,6 +54,11 @@ MESSAGE( STATUS "Ruby arch dir: ${RUBY_ARCH_DIR}" )
 
 ADD_SUBDIRECTORY(swig)
 
+ADD_CUSTOM_TARGET( svncheck
+  COMMAND cd $(CMAKE_SOURCE_DIR) && ! LC_ALL=C svn status --show-updates
+  --quiet | grep -v '^Status against revision'
+)
+
 SET( AUTOBUILD_COMMAND
   COMMAND ${CMAKE_MAKE_PROGRAM} package_source
   COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package
