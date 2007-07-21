@@ -12,8 +12,8 @@ Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
 License:        GPL
-Summary:        -
-Group:          -
+Summary:        Bindings for libzypp
+Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  cmake gcc-c++ ruby-devel swig
 BuildRequires:  libzypp-devel >= 3.0.0
@@ -45,8 +45,8 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{__rm} -rf %{buildroot}
 
 %package -n ruby-zypp
-Summary:        -
-Group:          -
+Summary:        Ruby bindings for libzypp
+Group:          Development/Languages/Ruby
 
 %description -n ruby-zypp
 -
