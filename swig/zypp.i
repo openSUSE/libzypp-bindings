@@ -138,7 +138,11 @@ class ZYpp
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
     */
     Target_Ptr target() const;
+#ifdef SWIGRUBY
     void initializeTarget(const Pathname & root);
+#else
+    void initializeTarget(const std::string & root);
+#endif
     void finishTarget();
 
     typedef ZYppCommitResult CommitResult;
