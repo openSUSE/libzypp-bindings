@@ -4,12 +4,11 @@ SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/zypp.i" )
 
 ADD_CUSTOM_COMMAND (
    OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx
-   COMMAND ${CMAKE_COMMAND} -E echo_append "Creating wrapper code..."
-#COMMAND ${SWIG_EXECUTABLE} -c++ -ruby -autorename -xmlout parse.xml -I/usr/include swig/zypp.i
+   COMMAND ${CMAKE_COMMAND} -E echo_append "Creating wrapper code for ruby..."
    COMMAND ${SWIG_EXECUTABLE} -c++ -ruby -autorename -xmlout ${CMAKE_CURRENT_BINARY_DIR}/parse.xml -o ${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx -I${ZYPP_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/zypp.i
    COMMAND ${CMAKE_COMMAND} -E echo "Done."
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/zypp.i
+   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.i
 )
 
 ADD_CUSTOM_TARGET( glue
@@ -26,3 +25,4 @@ TARGET_LINK_LIBRARIES( rzypp ${ZYPP_LIBRARY} )
 TARGET_LINK_LIBRARIES( rzypp ${RUBY_LIBRARY} )
 
 INSTALL(TARGETS rzypp LIBRARY DESTINATION ${RUBY_ARCH_DIR} )
+
