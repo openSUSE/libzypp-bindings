@@ -1,4 +1,9 @@
+#ifdef SWIGRUBY
 %module rzypp
+#else
+%module zypp
+#endif
+
  %{
  /* Includes the header in the wrapper code */
 
@@ -59,8 +64,13 @@ class intrusive_ptr {
 
 %include std_string.i
 %include "stl.i"
-%include "std_list.i"
-%include "std_set.i"
+#ifdef SWIGRUBY
+%include "ruby/std_list.i"
+%include "ruby/std_set.i"
+#else
+%include std_list.i
+%include std_set.i
+#endif
 
 %include "NeedAType.i"
 %include "Arch.i"
@@ -98,13 +108,15 @@ class intrusive_ptr {
 
 
 #ifdef SWIGRUBY
-%include "ruby.i"
-#endif
 
+%include "ruby.i"
 
 /* define iterators using swig macros */
 iter2( ResStore, ResObject* )
 auto_iterator( std::list<RepoInfo>, RepoInfo )
+
+#endif
+
 
 class ZYpp
 {
