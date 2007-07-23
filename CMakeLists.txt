@@ -57,7 +57,7 @@ ADD_CUSTOM_TARGET( svncheck
 
 SET( AUTOBUILD_COMMAND
   COMMAND ${CMAKE_MAKE_PROGRAM} package_source
-  COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package
+  COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package/
   COMMAND ${CMAKE_COMMAND} -E remove ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2
   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/package/${PACKAGE}.changes" "${CMAKE_BINARY_DIR}/package/${PACKAGE}.changes"
 )
@@ -71,6 +71,5 @@ ADD_CUSTOM_TARGET( autobuild
   ${AUTOBUILD_COMMAND}
 )
 
-MESSAGE(STATUS "Writing spec file...")
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp-bindings.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp-bindings.spec @ONLY)
+ADD_SUBDIRECTORY(package)
 
