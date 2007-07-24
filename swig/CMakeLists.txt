@@ -1,5 +1,5 @@
 
 ADD_SUBDIRECTORY(ruby)
 
-# ADD_SUBDIRECTORY(python)
+ADD_SUBDIRECTORY(python)
 

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 24 11:36:49 CEST 2007 - aschnell@suse.de
+
+- added Python bindings
+
+-------------------------------------------------------------------
 Thu Jul 19 16:13:08 CEST 2007 - aschnell@suse.de
 
 - New package with swig generated bindings for libzypp
