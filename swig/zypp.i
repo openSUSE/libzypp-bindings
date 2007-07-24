@@ -109,11 +109,17 @@ class intrusive_ptr {
 
 #ifdef SWIGRUBY
 
-%include "ruby.i"
+%include "ruby/ruby.i"
 
 /* define iterators using swig macros */
 iter2( ResStore, ResObject* )
 auto_iterator( std::list<RepoInfo>, RepoInfo )
+
+#endif
+
+#ifdef SWIGPYTHON
+
+%include "python/python.i"
 
 #endif
 

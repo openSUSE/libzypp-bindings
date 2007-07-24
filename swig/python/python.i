@@ -1,6 +1,6 @@
 
-%define iter( cl )
-%extend cl {
+%define iter( cls )
+%extend cls {
     %pythoncode %{
     def __iter__(self):
         r = self.range()
@@ -10,4 +10,4 @@
     %}
 };
 %enddef
-    
+
