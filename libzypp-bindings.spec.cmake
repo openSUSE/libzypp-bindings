@@ -64,7 +64,7 @@ Group:          Development/Languages/Python
 
 %files -n python-zypp
 %defattr(-,root,root,-)
-%{_libdir}/python2.5/site-package/_zypp.so
-%{_libdir}/python2.5/site-package/zypp.py
+%{_libdir}/python2.5/site-packages/_zypp.so
+%{_libdir}/python2.5/site-packages/zypp.py
 
 %changelog

@@ -3,9 +3,9 @@ FIND_PACKAGE(PythonLibs REQUIRED)
 MESSAGE( STATUS "Python include path: ${PYTHON_INCLUDE_PATH}" )
 
 IF(DEFINED LIB)
-  SET(PYTHON_LIB_PATH "/usr/${LIB}/python2.5/site-package/")
+  SET(PYTHON_LIB_PATH "/usr/${LIB}/python2.5/site-packages/")
 ELSE(DEFINED LIB)
-  SET(PYTHON_LIB_PATH "/usr/lib/python2.5/site-package/")
+  SET(PYTHON_LIB_PATH "/usr/lib/python2.5/site-packages/")
 ENDIF(DEFINED LIB)
 MESSAGE(STATUS "Python lib path: ${PYTHON_LIB_PATH}")
 
