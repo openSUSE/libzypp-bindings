@@ -78,6 +78,10 @@ class intrusive_ptr {
 %include "Edition.i"
 %include "Kind.i"
 %include "Date.i"
+%include "Capability.i"
+%include "CapSet.i"
+%include "Dependencies.i"
+%include "Dep.i"
 %include "Resolvable.i"
 %include "ByteCount.i"
 %include "RepoType.i"
@@ -88,8 +92,6 @@ class intrusive_ptr {
 %include "ResObject.i"
 %include "TranslatedText.i"
 %include "CheckSum.i"
-%include "Dependencies.i"
-%include "Capability.i"
 %include "CapMatch.i"
 %include "CapFactory.i"
 %include "NVR.i"
@@ -99,7 +101,6 @@ class intrusive_ptr {
 %include "KeyRing.i"
 %include "Target.i"
 %include "ResStatus.i"
-%include "Dep.i"
 %include "PoolItem.i"
 %include "ResPool.i"
 %include "ZYppCommitPolicy.i"
@@ -113,6 +114,7 @@ class intrusive_ptr {
 
 /* define iterators using swig macros */
 iter2( ResStore, ResObject* )
+iter3( CapSet, Capability* )
 auto_iterator( std::list<RepoInfo>, RepoInfo )
 
 #endif

@@ -12,11 +12,22 @@ r = z.target.resolvables
 # puts r.class
 
 r.each do | p |
+
     # puts p.class
     puts "#{p.kind_to_s} #{p.name} #{p.edition.to_s} #{p.arch.to_s}"
-    puts "  #{p.summary}"
-    puts "  #{p.size}"
-    puts "  #{p.vendor}"
-    puts "  #{p.buildtime}"
+    puts "  Summary: #{p.summary}"
+    puts "  Size: #{p.size}"
+    puts "  Vendor: #{p.vendor}"
+    puts "  Buildtime: #{p.buildtime}"
+
+    d = p.dep(Dep.PROVIDES)
+    # puts d.class
+    d.each do | x |
+	# puts x.class
+	puts "  Provides: #{x.to_s}"
+    end
+
+    puts
+
 end
 

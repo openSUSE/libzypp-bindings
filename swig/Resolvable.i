@@ -13,10 +13,8 @@ class Resolvable
     const Edition & edition() const;
     const Arch & arch() const;
 
-    //const CapSet & dep( Dep which_r ) const;
-    //const Dependencies & deps() const;
-    //void injectProvides( const Capability & cap_r );
-    //void injectRequires( const Capability & cap_r );
+    const CapSet & dep( Dep which_r ) const;
+    const Dependencies & deps() const;
 
   protected:
     Resolvable( const Kind & kind_r,

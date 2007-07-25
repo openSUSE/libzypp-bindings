@@ -39,6 +39,22 @@
     } \
 }
 
+/*
+ *  Like iter2, but does only one dereferencing from the iterator.
+ */
+#define iter3( cls, storetype ) \
+%mixin cls "Enumerable"; \
+%extend cls { \
+    void each() { \
+	cls::iterator i = self->begin(); \
+        while ( i != self->end() ) { \
+	    const storetype tmp = &*i; \
+	    rb_yield( SWIG_NewPointerObj( (void*) tmp, $descriptor(storetype), 0)); \
+            ++i; \
+        } \
+    } \
+}
+
 
 // %mixin ResStore "Enumerable";
 // %extend ResStore {
