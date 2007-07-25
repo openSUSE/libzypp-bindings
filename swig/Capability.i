@@ -1,6 +1,10 @@
 
+#ifdef SWIGRUBY
+%alias Capability::asString "to_s";
+#endif
+
 class Capability
-  {
+{
   public:
     /** */
     typedef capability::CapabilityTraits::KindType  Kind;
@@ -44,7 +48,7 @@ class Capability
     /** accessors needed by solver/zmd  */
     /** Deprecated */
     std::string index() const;
-   
+
   private:
     typedef capability::CapabilityImpl          Impl;
     typedef capability::CapabilityImpl_Ptr      Impl_Ptr ;
@@ -62,18 +66,17 @@ class Capability
     friend class capability::CapabilityImpl;
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
-  };
-  ///////////////////////////////////////////////////////////////////
+};
 
-  template<class _Cap>
-    inline bool isKind( const Capability & cap )
-    { return cap.kind() == capability::CapTraits<_Cap>::kind; }
+template<class _Cap>
+inline bool isKind( const Capability & cap )
+{ return cap.kind() == capability::CapTraits<_Cap>::kind; }
 
-  ///////////////////////////////////////////////////////////////////
 
-  /** Ordering relation used by ::CapSet. */
-  struct CapOrder : public std::binary_function<Capability, Capability, bool>
-  {
+/** Ordering relation used by ::CapSet. */
+struct CapOrder : public std::binary_function<Capability, Capability, bool>
+{
     bool operator()( const Capability & lhs, const Capability & rhs ) const
     { return lhs._pimpl.get() < rhs._pimpl.get(); }
-  };
+};
+
