@@ -1,4 +1,6 @@
 
+
+// I don't think this is correct: ctor and dtor are not taken into account
 class CapSet
 {
 
