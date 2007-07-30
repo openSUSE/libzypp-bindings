@@ -1,7 +1,6 @@
 
 class CapFactory
-  {
-    friend std::ostream & operator<<( std::ostream & str, const CapFactory & obj );
+{
 
   public:
     /** Default ctor */
@@ -54,4 +53,4 @@ class CapFactory
     struct Impl;
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
-  };
+};

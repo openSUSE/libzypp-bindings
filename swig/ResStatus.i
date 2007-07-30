@@ -1,8 +1,6 @@
 
 class ResStatus
-  {
-    friend std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
-    friend bool operator==( const ResStatus & lhs, const ResStatus & rhs );
+{
 
   public:
     /** \name BitField range definitions.
@@ -177,7 +175,7 @@ class ResStatus
     { return fieldValueIs<TransactField>( LOCKED ); }
 
     bool isKept() const
-    { return fieldValueIs<TransactField>( KEEP_STATE ); }      
+    { return fieldValueIs<TransactField>( KEEP_STATE ); }
 
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
@@ -214,7 +212,7 @@ class ResStatus
 
     bool isToBeInstalledNotSoft () const
     { return isToBeInstalled() && !fieldValueIs<TransactDetailField>( SOFT_INSTALL ); }
-      
+
 
     bool isToBeUninstalledSoft () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( SOFT_REMOVE ); }
@@ -222,7 +220,7 @@ class ResStatus
   public:
 
     bool setTransactValue( TransactValue newVal_r, TransactByValue causer_r );
-  bool setLock( bool toLock_r, TransactByValue causer_r );  
+  bool setLock( bool toLock_r, TransactByValue causer_r );
   bool maySetLock( bool to_r, TransactByValue causer_r );
     bool setTransact( bool toTansact_r, TransactByValue causer_r );
     bool maySetTransact( bool val_r, TransactByValue causer );
@@ -370,4 +368,4 @@ class ResStatus
 
   private:
     BitFieldType _bitfield;
-  };
+};

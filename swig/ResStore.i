@@ -4,8 +4,7 @@ class ResStore
   typedef ResObject                ResT;
   typedef std::set<ResT::Ptr>      StorageT;
   typedef StorageT::size_type      size_type;
-  
-  friend std::ostream & operator<<( std::ostream & str, const ResStore & obj );
+
   public:
     ResStore();
     ~ResStore();

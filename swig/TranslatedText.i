@@ -1,7 +1,6 @@
-  class TranslatedText
-  {
-    friend std::ostream & operator<<( std::ostream & str, const TranslatedText & obj );
 
+class TranslatedText
+{
   public:
     /** Implementation  */
     class Impl;
@@ -20,7 +19,7 @@
 
     /** true if the text have no translations for any language */
     bool empty() const ;
-    
+
     /** static default empty translated text  */
     static const TranslatedText notext;
 
@@ -41,4 +40,5 @@
   private:
     /** Pointer to implementation */
     RWCOW_pointer<Impl> _pimpl;
-  };
+
+};

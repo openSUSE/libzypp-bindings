@@ -1,9 +1,9 @@
+
 class RepoStatus
-  {
-    friend std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
+{
 
   public:
-    
+
     /**
      * Checksum of the repository.
      * Usually the checksum of the index, but any
@@ -11,20 +11,20 @@ class RepoStatus
      * in any way is sufficient.
      */
     std::string checksum() const;
-    
+
     /**
      * timestamp of the repository. If the repository
      * changes, it has to be updated as well with the
      * new timestamp.
      */
     Date timestamp() const;
-    
+
     /**
      * set the repository checksum \see checksum
      * \param checksum
      */
     RepoStatus & setChecksum( const std::string &checksum );
-    
+
     /**
      * set the repository timestamp \see timestamp
      * \param timestamp
@@ -37,7 +37,7 @@ class RepoStatus
   public:
     /** Default ctor */
     RepoStatus();
-    
+
     /**
      * \short Status from a single file
      * As most repository state is represented
@@ -45,7 +45,7 @@ class RepoStatus
      * construct the status from a file.
      */
     RepoStatus( const Pathname &file );
-    
+
     /** Dtor */
     ~RepoStatus();
 
@@ -54,4 +54,4 @@ class RepoStatus
   private:
     /** Pointer to implementation */
     RWCOW_pointer<Impl> _pimpl;
-  };
+};

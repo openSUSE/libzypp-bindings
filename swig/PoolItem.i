@@ -1,7 +1,6 @@
 
 class PoolItem_Ref
-  {
-    friend std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj );
+{
 
   public:
     /** Implementation  */
@@ -34,19 +33,9 @@ class PoolItem_Ref
     ResObject::constPtr resolvable() const;
 
   public:
-    /** Implicit conversion into ResObject::constPtr to
-     *  support query filters operating on ResObject.
-    */
-    operator ResObject::constPtr() const
-    { return resolvable(); }
 
     /** Forward \c -> access to ResObject. */
     ResObject::constPtr operator->() const
-    { return resolvable(); }
-
-    /** Conversion to bool to allow pointer style tests
-     *  for nonNULL \ref resolvable. */
-    operator ResObject::constPtr::unspecified_bool_type() const
     { return resolvable(); }
 
   private:
@@ -62,7 +51,7 @@ class PoolItem_Ref
     void restoreState() const;
     bool sameState() const;
     //@}
-  };
-  ///////////////////////////////////////////////////////////////////
+};
 
-  typedef PoolItem_Ref PoolItem;
+typedef PoolItem_Ref PoolItem;
+
