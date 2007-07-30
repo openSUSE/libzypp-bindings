@@ -14,6 +14,9 @@ public:
 
 #ifdef SWIGRUBY
 
+// Something like 'opts.repoCachePath = tmp_cache_path.path()' causes out and
+// in transformation. Can that be avoided?
+
 %typemap(in) const Pathname&, Pathname* {
     VALUE pathstring = rb_funcall( $input, rb_intern("to_s"), 0, 0);
     Pathname *p = new Pathname( (RSTRING(pathstring)->ptr) );
