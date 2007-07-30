@@ -47,13 +47,13 @@ public:
      * If enabled is false, then this repository must be ignored as if does
      * not exists, except when checking for duplicate alias.
      */
-    boost::tribool enabled() const;
+    bool enabled() const;
 
     /**
      * If true, the repostory must be refreshed before creating resolvables
      * from it
      */
-    boost::tribool autorefresh() const;
+    bool autorefresh() const;
 
     /**
      * Type of repository,
@@ -96,13 +96,13 @@ public:
      * enable or disable the repository \see enabled
      * \param enabled
      */
-    RepoInfo & setEnabled( boost::tribool enabled );
+    RepoInfo & setEnabled( bool enabled );
 
     /**
      * enable or disable autorefresh \see autorefresh
      * \param enabled
      */
-    RepoInfo & setAutorefresh( boost::tribool autorefresh );
+    RepoInfo & setAutorefresh( bool autorefresh );
 
     /**
      * set the repository alias \see alias
