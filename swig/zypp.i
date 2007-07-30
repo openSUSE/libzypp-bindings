@@ -28,11 +28,13 @@
  #include "zypp/RepoManager.h"
  #include "zypp/repo/RepoType.h"
 #include "zypp/MediaSetAccess.h"
+#include "zypp/TmpPath.h"
 
  using namespace boost;
  using namespace zypp;
  using namespace zypp::repo;
  using namespace zypp::resfilter;
+ using namespace zypp::filesystem;
 
  typedef std::set<Url> UrlSet;
  %}
@@ -106,6 +108,7 @@ class intrusive_ptr {
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
 %include "MediaSetAccess.i"
+%include "TmpPath.i"
 
 
 #ifdef SWIGRUBY

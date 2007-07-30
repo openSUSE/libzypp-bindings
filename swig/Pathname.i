@@ -8,7 +8,7 @@
 }
 
 %typemap(freearg) const Pathname & {
- delete $1;
+  delete $1;
 }
 
 %typemap(out) Pathname {
