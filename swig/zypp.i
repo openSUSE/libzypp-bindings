@@ -74,6 +74,8 @@ class intrusive_ptr {
 %include std_set.i
 #endif
 
+%include "boost_tribool.i"
+
 %include "NeedAType.i"
 %include "Arch.i"
 %include "ResStore.i"
