@@ -1,5 +1,5 @@
 
-// %template(ResObject_Ptr) intrusive_ptr<ResObject>;
+%template(ResObject_constPtr) intrusive_ptr<const ResObject>;
 
 class ResObject : public Resolvable
 {
@@ -28,5 +28,5 @@ class ResObject : public Resolvable
     ResObject( const Kind & kind_r,
                const NVRAD & nvrad_r );
     virtual ~ResObject();
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
 };
+

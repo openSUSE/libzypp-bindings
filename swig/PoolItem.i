@@ -30,7 +30,8 @@ class PoolItem_Ref
     /** Returns the ResObject::constPtr.
      * \see \ref operator->
     */
-    ResObject::constPtr resolvable() const;
+    // ResObject::constPtr resolvable() const;
+    intrusive_ptr<const ResObject> resolvable() const;
 
   public:
 
