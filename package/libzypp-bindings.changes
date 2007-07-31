@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 31 17:53:52 CEST 2007 - aschnell@suse.de
+
+- improved bindings for various classes
+- adoptions to libzypp changes
+
+-------------------------------------------------------------------
 Tue Jul 24 11:36:49 CEST 2007 - aschnell@suse.de
 
 - added Python bindings
