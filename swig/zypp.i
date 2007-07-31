@@ -118,6 +118,7 @@ class intrusive_ptr {
 /* define iterators using swig macros */
 iter2( ResStore, ResObject* )
 iter3( CapSet, Capability* )
+iter3(ResPool, PoolItem_Ref*)
 auto_iterator( std::list<RepoInfo>, RepoInfo )
 
 #endif

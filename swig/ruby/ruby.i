@@ -30,7 +30,7 @@
 %mixin cls "Enumerable"; \
 %extend cls { \
     void each() { \
-	cls::iterator i = self->begin(); \
+	cls::const_iterator i = self->begin(); \
         while ( i != self->end() ) { \
 	    const storetype tmp = &**i; \
 	    rb_yield( SWIG_NewPointerObj( (void*) tmp, $descriptor(storetype), 0)); \
@@ -46,7 +46,7 @@
 %mixin cls "Enumerable"; \
 %extend cls { \
     void each() { \
-	cls::iterator i = self->begin(); \
+	cls::const_iterator i = self->begin(); \
         while ( i != self->end() ) { \
 	    const storetype tmp = &*i; \
 	    rb_yield( SWIG_NewPointerObj( (void*) tmp, $descriptor(storetype), 0)); \
@@ -93,16 +93,16 @@
     }
 }
 
-%extend ResPool {
-    void each()
-    {
-        ResPool::const_iterator i = self->begin();
-        while ( i != self->end() ) {
-            rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_PoolItem_Ref, 0));
-            ++i;
-        }
-    }
-}
+// %extend ResPool {
+//     void each()
+//     {
+//         ResPool::const_iterator i = self->begin();
+//         while ( i != self->end() ) {
+//             rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_PoolItem_Ref, 0));
+//             ++i;
+//         }
+//     }
+// }
 
 %extend ResPool {
     void each_by_kind( const ResObject::Kind & kind_r )
