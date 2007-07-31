@@ -6,6 +6,12 @@ class CapSet
 
 };
 
+
+#ifdef SWIGRUBY
+iter3(CapSet, Capability*);
+#endif
+
+
 // The ruby std_set.i can only handle one template parameter
 
 // #ifdef SWIGPYTHON
@@ -13,3 +19,15 @@ class CapSet
 // typedef std::set<Capability,CapOrder> CapSetTemp;
 // #endif
 
+#ifdef SWIGPYTHON
+%extend CapSet
+{
+    // just a test
+    const Capability* haha()
+    {
+	CapSet::iterator i = self->begin();
+	const Capability* tmp = &*i;
+	return tmp;
+    }
+}
+#endif

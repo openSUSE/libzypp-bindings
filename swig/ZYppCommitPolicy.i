@@ -1,5 +1,12 @@
+
+#ifdef SWIGRUBY
+%rename("dryRun=") ZYppCommitPolicy::dryRun(bool);
+%rename("rpmNoSignature=") ZYppCommitPolicy::rpmNoSignature(bool);
+%rename("syncPoolAfterCommit=") ZYppCommitPolicy::syncPoolAfterCommit(bool);
+#endif
+
 class ZYppCommitPolicy
-  {
+{
   public:
     ZYppCommitPolicy()
     : _restrictToMedia    ( 0 )
@@ -49,4 +56,4 @@ class ZYppCommitPolicy
     bool     _dryRun;
     bool     _rpmNoSignature;
     bool     _syncPoolAfterCommit;
-  };
+};

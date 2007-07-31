@@ -4,55 +4,45 @@
 %module zypp
 #endif
 
- %{
- /* Includes the header in the wrapper code */
-
- #include "zypp/base/PtrTypes.h"
- #include <zypp/Edition.h>
- #include <zypp/ResTraits.h>
- #include <zypp/ResPoolProxy.h>
- #include <zypp/ResStore.h>
- #include <zypp/ZYppFactory.h>
- #include <zypp/ZYpp.h>
- #include <zypp/Pathname.h>
- #include "zypp/base/ReferenceCounted.h"
- #include "zypp/ResObject.h"
- #include "zypp/Target.h"
- #include "zypp/target/TargetImpl.h"
+%{
+/* Includes the header in the wrapper code */
+#include "zypp/base/PtrTypes.h"
+#include <zypp/Edition.h>
+#include <zypp/ResTraits.h>
+#include <zypp/ResPoolProxy.h>
+#include <zypp/ResStore.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYpp.h>
+#include <zypp/Pathname.h>
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/ResObject.h"
+#include "zypp/Target.h"
+#include "zypp/target/TargetImpl.h"
 #include "zypp/TranslatedText.h"
- #include "zypp/CapFactory.h"
- #include "zypp/Package.h"
+#include "zypp/CapFactory.h"
+#include "zypp/Package.h"
 #include "zypp/ResFilters.h"
 #include "zypp/OnMediaLocation.h"
- #include "zypp/Repository.h"
- #include "zypp/RepoManager.h"
- #include "zypp/repo/RepoType.h"
+#include "zypp/Repository.h"
+#include "zypp/RepoManager.h"
+#include "zypp/repo/RepoType.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/TmpPath.h"
 
- using namespace boost;
- using namespace zypp;
- using namespace zypp::repo;
- using namespace zypp::resfilter;
- using namespace zypp::filesystem;
+using namespace boost;
+using namespace zypp;
+using namespace zypp::repo;
+using namespace zypp::resfilter;
+using namespace zypp::filesystem;
 
- typedef std::set<Url> UrlSet;
- %}
+typedef std::set<Url> UrlSet;
+%}
 
 %rename("+") "operator+";
 %rename("<<") "operator<<";
 %rename("!=") "operator!=";
 %rename("!") "operator!";
 %rename("==") "operator==";
-
-/* Parse the header file to generate wrappers */
-%ignore zypp::operator<<( std::ostream & str, const ZYppFactory & obj );
-%ignore zypp::base::operator<<( std::ostream & str, const ReferenceCounted & obj );
-
-/*
-//%include "zypp/base/Deprecated.h"
-//%include "zypp/base/PtrTypes.h"
-*/
 
 
 template < typename T >
@@ -61,19 +51,26 @@ class intrusive_ptr {
   T *operator->();
 };
 
-%include "Pathname.i"
-%include "Url.i"
 
-%include std_string.i
+%include "std_string.i"
 %include "stl.i"
+
+
 #ifdef SWIGRUBY
 %include "ruby/std_list.i"
 %include "ruby/std_set.i"
-#else
-%include std_list.i
-%include std_set.i
+%include "ruby/ruby.i"
 #endif
 
+#ifdef SWIGPYTHON
+%include "std_list.i"
+%include "std_set.i"
+%include "python/python.i"
+#endif
+
+
+%include "Pathname.i"
+%include "Url.i"
 %include "NeedAType.i"
 %include "Arch.i"
 %include "ResStore.i"
@@ -109,25 +106,6 @@ class intrusive_ptr {
 %include "ZYppCommitResult.i"
 %include "MediaSetAccess.i"
 %include "TmpPath.i"
-
-
-#ifdef SWIGRUBY
-
-%include "ruby/ruby.i"
-
-/* define iterators using swig macros */
-iter2( ResStore, ResObject* )
-iter3( CapSet, Capability* )
-iter3(ResPool, PoolItem_Ref*)
-auto_iterator( std::list<RepoInfo>, RepoInfo )
-
-#endif
-
-#ifdef SWIGPYTHON
-
-%include "python/python.i"
-
-#endif
 
 
 class ZYpp

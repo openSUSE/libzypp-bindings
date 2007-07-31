@@ -18,3 +18,19 @@ class ResStore
     void clear();
 };
 
+#ifdef SWIGRUBY
+iter2(ResStore, ResObject*);
+#endif
+
+#ifdef SWIGPYTHON
+%extend ResStore
+{
+    // just a test
+    const ResObject* haha()
+    {
+	ResStore::iterator i = self->begin();
+	const ResObject* tmp = &**i;
+	return tmp;
+    }
+}
+#endif

@@ -134,3 +134,6 @@ public:
 typedef std::list<RepoInfo> RepoInfoList;
 %template(RepoInfoList) std::list<RepoInfo>;
 
+#ifdef SWIGRUBY
+auto_iterator(std::list<RepoInfo>, RepoInfo);
+#endif
