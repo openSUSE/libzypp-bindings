@@ -30,3 +30,21 @@ class ResObject : public Resolvable
     virtual ~ResObject();
 };
 
+// FIXME: this is just a workaround, see Kind.i
+%extend intrusive_ptr<const ResObject> {
+    const char* kindToS()
+    {
+	if (isKind<Package>(*self))
+	    return "package";
+	else if (isKind<Patch>(*self))
+	    return "patch";
+	else if (isKind<Product>(*self))
+	    return "product";
+	else if (isKind<Pattern>(*self))
+	    return "pattern";
+	else if (isKind<Language>(*self))
+	    return "language";
+	return "unknown";
+    }
+}
+
