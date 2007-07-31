@@ -37,11 +37,27 @@ repos.each do | repo |
     z.add_resolvables(store)
 end
 
-puts pool.class
+# puts pool.class
 
 pool.each do | p |
-    puts p.class
-    # TODO
-    # puts "#{p.name}"
+
+    # puts p.class
+    r = p.resolvable
+    # puts r.class
+    puts "#{r.kind_to_s} #{r.name} #{r.edition.to_s} #{r.arch.to_s}"
+    puts "  Summary: #{r.summary}"
+    puts "  Size: #{r.size}"
+    puts "  Vendor: #{r.vendor}"
+    puts "  Buildtime: #{r.buildtime}"
+
+    d = r.dep(Dep.PROVIDES)
+    # puts d.class
+    d.each do | x |
+	# puts y.class
+	puts "  Provides: #{x.to_s}"
+    end
+
+    puts
+
 end
 
