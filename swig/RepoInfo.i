@@ -17,21 +17,14 @@ public:
     std::string alias() const;
 
     /**
-     * A Url under which the metadata are located, or a set of mirrors.
-     *
-     * This can't be empty in order the repository to be valid
-     * unless the download of the mirror list succeeds and it
-     * contains a valid url.
-     */
-    std::set<Url> baseUrls() const;
-
-    /**
      * Url of a file which contains a list of Urls
      * If empty, the base url will be used.
      */
     Url mirrorListUrl() const;
 
-    typedef std::set<Url>::const_iterator urls_const_iterator;
+    typedef std::set<Url> url_set;
+    typedef url_set::size_type urls_size_type;
+    typedef transform_iterator<repo::RepoVariablesUrlReplacer, url_set::const_iterator> urls_const_iterator;
 
     /**
      * iterator that points at begin of repository urls
