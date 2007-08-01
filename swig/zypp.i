@@ -16,6 +16,7 @@
 #include <zypp/Pathname.h>
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/ResObject.h"
+#include "zypp/ResPoolManager.h"
 #include "zypp/Target.h"
 #include "zypp/target/TargetImpl.h"
 #include "zypp/TranslatedText.h"
@@ -102,6 +103,7 @@ class intrusive_ptr {
 %include "ResStatus.i"
 %include "PoolItem.i"
 %include "ResPool.i"
+%include "ResPoolManager.i"
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
 %include "MediaSetAccess.i"
