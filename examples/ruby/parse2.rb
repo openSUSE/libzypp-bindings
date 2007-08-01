@@ -25,8 +25,7 @@ repo_info.add_base_url("file:///ARVIN/zypp/trunk/repotools/")
 
 repo_manager.add_repository(repo_info)
 
-z = ZYppFactory::instance.get_zypp
-pool = z.pool()
+res_pool_manager = ResPoolManager.new()
 
 repos = repo_manager.known_repositories()
 repos.each do | repo |
@@ -34,9 +33,10 @@ repos.each do | repo |
     repo_manager.build_cache(repo)
     rep = repo_manager.create_from_cache(repo)
     store = rep.resolvables()
-    z.add_resolvables(store)
+    res_pool_manager.insert(store)
 end
 
+pool = res_pool_manager.accessor()
 # puts pool.class
 
 pool.each do | p |
