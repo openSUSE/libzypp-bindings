@@ -46,3 +46,14 @@
     } \
 }
 
+
+%exception {
+  try {
+    $action
+  }
+  catch (const Exception& e) {
+    static VALUE zyppexception = rb_define_class("ZYppException", rb_eStandardError);
+    rb_raise(zyppexception, e.asString().c_str());
+  }
+}
+
