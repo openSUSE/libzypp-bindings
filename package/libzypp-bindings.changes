@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Aug 17 14:37:06 CEST 2007 - aschnell@suse.de
+
+- moved ruby files to vendor_ruby (bug #301127)
+
+-------------------------------------------------------------------
 Mon Aug 13 20:46:35 CEST 2007 - aschnell@suse.de
 
 - added exceptions

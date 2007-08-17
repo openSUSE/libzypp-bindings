@@ -53,7 +53,7 @@ Group:          Development/Languages/Ruby
 
 %files -n ruby-zypp
 %defattr(-,root,root,-)
-%{_libdir}/ruby/%{rb_ver}/%{rb_arch}/rzypp.so
+%{_libdir}/ruby/vendor_ruby/%{rb_ver}/%{rb_arch}/rzypp.so
 
 %package -n python-zypp
 Summary:        Python bindings for libzypp
