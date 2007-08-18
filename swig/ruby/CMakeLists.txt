@@ -2,9 +2,8 @@
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
 
 FIND_PACKAGE(Ruby REQUIRED)
-EXECUTE_PROCESS(COMMAND ${RUBY_EXECUTABLE} -r rbconfig -e "puts Config::CONFIG['vendorarchdir']"
+EXECUTE_PROCESS(COMMAND ${RUBY_EXECUTABLE} -r rbconfig -e "print Config::CONFIG['vendorarchdir']"
    OUTPUT_VARIABLE RUBY_VENDOR_ARCH_DIR)
-STRING(REPLACE "\n" "" RUBY_VENDOR_ARCH_DIR "${RUBY_VENDOR_ARCH_DIR}")
 MESSAGE( STATUS "Ruby vendor arch dir: ${RUBY_VENDOR_ARCH_DIR}" )
 MESSAGE( STATUS "Ruby include path: ${RUBY_INCLUDE_PATH}" )
 
