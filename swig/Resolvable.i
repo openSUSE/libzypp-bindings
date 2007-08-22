@@ -23,3 +23,12 @@ class Resolvable
     virtual std::ostream & dumpOn( std::ostream & str ) const;
 };
 
+int compareByN(const Resolvable::constPtr & lhs,
+	       const Resolvable::constPtr & rhs);
+
+int compareByNVR(const Resolvable::constPtr & lhs,
+		 const Resolvable::constPtr & rhs);
+
+int compareByNVRA(const Resolvable::constPtr& lhs,
+		  const Resolvable::constPtr& rhs);
+
