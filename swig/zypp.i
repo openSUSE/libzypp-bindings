@@ -1,8 +1,4 @@
-#ifdef SWIGRUBY
-%module rzypp
-#else
 %module zypp
-#endif
 
 %{
 /* Includes the header in the wrapper code */

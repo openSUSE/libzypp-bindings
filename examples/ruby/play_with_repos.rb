@@ -1,6 +1,6 @@
 
-require 'rzypp'
-include Rzypp
+require 'zypp'
+include Zypp
 
 a = Arch.new("i386")
 puts a.to_s

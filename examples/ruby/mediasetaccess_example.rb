@@ -1,6 +1,6 @@
 
-require 'rzypp'
-include Rzypp
+require 'zypp'
+include Zypp
 
 a = MediaSetAccess.new("http://dist.suse.de/install/stable-x86", "/")
 p = a.provide_file("/content", 1)

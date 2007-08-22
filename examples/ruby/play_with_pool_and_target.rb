@@ -1,6 +1,6 @@
 
-require 'rzypp'
-include Rzypp
+require 'zypp'
+include Zypp
 
 z = ZYppFactory::instance.get_zypp
 
@@ -17,5 +17,4 @@ p.each do | pi |
   puts pi.methods
   exit
 end
-
 

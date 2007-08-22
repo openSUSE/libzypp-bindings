@@ -1,6 +1,6 @@
 
-require 'rzypp'
-include Rzypp
+require 'zypp'
+include Zypp
 
 z = ZYppFactory::instance.get_zypp
 # puts z.class

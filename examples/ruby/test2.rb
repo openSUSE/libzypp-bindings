@@ -1,8 +1,7 @@
 
-require 'rzypp'
+require 'zypp'
 require 'pathname'
-
-include Rzypp
+include Zypp
 
 z = ZYppFactory::instance.get_zypp
 
@@ -15,5 +14,4 @@ puts z.target.class
 #r = z.target.resolvables
 puts t.class
 #puts t.methods
-
 

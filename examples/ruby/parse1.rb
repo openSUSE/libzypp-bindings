@@ -1,6 +1,6 @@
 
-require 'rzypp'
-include Rzypp
+require 'zypp'
+include Zypp
 
 tmp_cache_path = TmpDir.new()
 tmp_raw_cache_path = TmpDir.new()
