@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 23 17:10:56 CEST 2007 - aschnell@suse.de
+
+- added to_a functions
+
+-------------------------------------------------------------------
 Thu Aug 23 12:49:01 CEST 2007 - aschnell@suse.de
 
 - added some comparison functions
