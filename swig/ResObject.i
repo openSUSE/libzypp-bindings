@@ -1,8 +1,4 @@
 
-#ifdef SWIGRUBY
-%alias intrusive_ptr<const ResObject>::cmp "<=>";
-#endif
-
 %template(ResObject_constPtr) intrusive_ptr<const ResObject>;
 
 class ResObject : public Resolvable
@@ -53,7 +49,7 @@ class ResObject : public Resolvable
 	return "unknown";
     }
 
-    int cmp(intrusive_ptr<const ResObject>& other)
+    int __cmp__(intrusive_ptr<const ResObject>& other)
     {
 	return compareByNVRA(*self, other);
     }

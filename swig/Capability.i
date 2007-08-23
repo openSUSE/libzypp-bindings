@@ -1,7 +1,6 @@
 
 #ifdef SWIGRUBY
 %alias Capability::asString "to_s";
-%alias Capability::cmp "<=>";
 #endif
 
 class Capability
@@ -82,11 +81,9 @@ struct CapOrder : public std::binary_function<Capability, Capability, bool>
 };
 
 
-#ifdef SWIGRUBY
-
 %extend Capability
 {
-    int cmp(const Capability& other)
+    int __cmp__(const Capability& other)
     {
 	// TODO: use CapOrder::operator()?
 	if(self->asString() < other.asString())
@@ -97,4 +94,3 @@ struct CapOrder : public std::binary_function<Capability, Capability, bool>
     }
 }
 
-#endif
