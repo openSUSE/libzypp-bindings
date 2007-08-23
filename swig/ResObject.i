@@ -1,4 +1,8 @@
 
+#ifdef SWIGRUBY
+%alias intrusive_ptr<const ResObject>::cmp "<=>";
+#endif
+
 %template(ResObject_constPtr) intrusive_ptr<const ResObject>;
 
 class ResObject : public Resolvable
@@ -30,8 +34,10 @@ class ResObject : public Resolvable
     virtual ~ResObject();
 };
 
-// FIXME: this is just a workaround, see Kind.i
-%extend intrusive_ptr<const ResObject> {
+
+%extend intrusive_ptr<const ResObject>
+{
+    // FIXME: this is just a workaround, see Kind.i
     const char* kindToS()
     {
 	if (isKind<Package>(*self))
@@ -45,6 +51,11 @@ class ResObject : public Resolvable
 	else if (isKind<Language>(*self))
 	    return "language";
 	return "unknown";
+    }
+
+    int cmp(intrusive_ptr<const ResObject>& other)
+    {
+	return compareByNVRA(*self, other);
     }
 }
 

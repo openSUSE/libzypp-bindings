@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 23 12:49:01 CEST 2007 - aschnell@suse.de
+
+- added some comparison functions
+
+-------------------------------------------------------------------
 Wed Aug 22 12:58:05 CEST 2007 - aschnell@suse.de
 
 - renamed ruby module to zypp

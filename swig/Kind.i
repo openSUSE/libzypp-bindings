@@ -45,8 +45,9 @@
     }
 }
 
-// FIXME: this is just a workaround since the whole code above does not work
-%extend Resolvable {
+%extend Resolvable
+{
+    // FIXME: this is just a workaround since the whole code above does not work
     const char* kindToS()
     {
 	if (isKind<Package>(self))
