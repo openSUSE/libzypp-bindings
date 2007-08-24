@@ -29,6 +29,7 @@
     } \
 }
 
+
 /*
  *  Like iter2, but does only one dereferencing from the iterator.
  */
@@ -58,26 +59,15 @@
 }
 
 
-#define auto_iterator( cl, storetype ) \
-%mixin cl "Enumerable"; \
-%extend cl { \
-    void each() { \
-        cl::iterator i = self->begin(); \
-        while ( i != self->end() ) { \
-            rb_yield( SWIG_NewPointerObj( (void *) &*i, $descriptor(storetype), 0)); \
-            ++i; \
-        } \
-    } \
-}
-
-
-%exception {
+%exception
+{
   try {
     $action
   }
   catch (const Exception& e) {
     static VALUE zyppexception = rb_define_class("ZYppException", rb_eStandardError);
-    rb_raise(zyppexception, e.asString().c_str());
+    std::string tmp = e.historyAsString() + e.asUserString();
+    rb_raise(zyppexception, tmp.c_str());
   }
 }
 
