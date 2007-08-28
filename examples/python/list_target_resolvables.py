@@ -1,10 +1,11 @@
+#!/usr/bin/python
 
-from zypp import ZYppFactory, Dep
+from zypp import ZYppFactory, Pathname, Dep
 
 z = ZYppFactory.instance().getZYpp()
 print z
 
-z.initializeTarget("/")
+z.initializeTarget(Pathname("/"))
 
 r = z.target().resolvables()
 print r

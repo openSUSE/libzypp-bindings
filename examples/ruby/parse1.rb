@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 
 require 'zypp'
 include Zypp
@@ -21,7 +22,7 @@ repo_info.set_enabled(true)
 repo_info.set_autorefresh(false)
 # repo_info.add_base_url("ftp://dist.suse.de/install/stable-x86/")
 # repo_info.add_base_url("http://software.opensuse.org/download/home:/Arvin42/openSUSE_Factory/")
-repo_info.add_base_url("file:///ARVIN/zypp/trunk/repotools/tmp")
+repo_info.add_base_url("file:///suse/aschnell/tmp")
 
 repo_manager.add_repository(repo_info)
 

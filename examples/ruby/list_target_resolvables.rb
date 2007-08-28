@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 
 require 'zypp'
 include Zypp
@@ -5,7 +6,7 @@ include Zypp
 z = ZYppFactory::instance.get_zypp
 # puts z.class
 
-t = z.initialize_target("/")
+t = z.initialize_target(Pathname.new("/"))
 # puts t.class
 
 r = z.target.resolvables

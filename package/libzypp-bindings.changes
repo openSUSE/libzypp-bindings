@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Aug 28 23:57:36 CEST 2007 - aschnell@suse.de
+
+- added KeyRing and PublicKey classes
+
+-------------------------------------------------------------------
 Thu Aug 23 17:10:56 CEST 2007 - aschnell@suse.de
 
 - added to_a functions

@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 
 require 'zypp'
 include Zypp
@@ -5,9 +6,11 @@ include Zypp
 
 keyring = ZYppFactory::instance.get_zypp.key_ring
 
-# FIXME
 path = Pathname.new("/suse/aschnell/tmp/repodata/repomd.xml.key")
+puts path
+
 publickey = PublicKey.new(path)
+puts publickey
 
 id = publickey.id()
 
