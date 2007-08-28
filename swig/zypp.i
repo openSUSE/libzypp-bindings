@@ -94,6 +94,7 @@ class intrusive_ptr {
 %include "NVRA.i"
 %include "NVRAD.i"
 %include "Package.i"
+%include "PublicKey.i"
 %include "KeyRing.i"
 %include "Target.i"
 %include "ResStatus.i"
