@@ -1,4 +1,8 @@
 
+#ifdef SWIGRUBY
+%alias PublicKey::asString "to_s";
+#endif
+
 class PublicKey
 {
 
