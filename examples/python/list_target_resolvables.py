@@ -22,5 +22,4 @@ print d
 
 x = d.haha()
 print x
-print x.asString()
 
