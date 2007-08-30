@@ -1,6 +1,6 @@
 
-#ifdef SWIGRUBY
-%alias Capability::asString "to_s";
+#if defined(SWIGPYTHON) || defined(SWIGRUBY)
+%rename Capability::asString "__str__";
 #endif
 
 class Capability

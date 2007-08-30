@@ -1,6 +1,6 @@
 
-#ifdef SWIGRUBY
-%alias Edition::asString "to_s";
+#if defined(SWIGPYTHON) || defined(SWIGRUBY)
+%rename Edition::asString "__str__";
 #endif
 
 class Edition

@@ -1,6 +1,6 @@
 
-#ifdef SWIGRUBY
-%alias RepoType::asString "to_s";
+#if defined(SWIGPYTHON) || defined(SWIGRUBY)
+%rename RepoType::asString "__str__";
 #endif
 
 struct RepoType

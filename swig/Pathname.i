@@ -1,6 +1,6 @@
 
-#ifdef SWIGRUBY
-%alias Pathname::c_str "to_s";
+#if defined(SWIGPYTHON) || defined(SWIGRUBY)
+%rename Pathname::asString "__str__";
 #endif
 
 class Pathname
@@ -11,7 +11,7 @@ public:
     Pathname(const std::string&);
     Pathname(const char*);
 
-    const char* c_str() const;
+    const std::string & asString() const;
 
     bool empty() const;
     bool absolute() const;

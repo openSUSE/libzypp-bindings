@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 30 16:31:16 CEST 2007 - aschnell@suse.de
+
+- some work on python bindings
+
+-------------------------------------------------------------------
 Tue Aug 28 23:57:36 CEST 2007 - aschnell@suse.de
 
 - added KeyRing and PublicKey classes

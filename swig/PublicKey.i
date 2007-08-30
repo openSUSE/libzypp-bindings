@@ -1,6 +1,6 @@
 
-#ifdef SWIGRUBY
-%alias PublicKey::asString "to_s";
+#if defined(SWIGPYTHON) || defined(SWIGRUBY)
+%rename PublicKey::asString "__str__";
 #endif
 
 class PublicKey
