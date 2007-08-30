@@ -1,15 +1,15 @@
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
 
+FIND_PACKAGE(PythonInterp REQUIRED)
 FIND_PACKAGE(PythonLibs REQUIRED)
-MESSAGE( STATUS "Python include path: ${PYTHON_INCLUDE_PATH}" )
 
-IF(DEFINED LIB)
-  SET(PYTHON_LIB_PATH "/usr/${LIB}/python2.5/site-packages/")
-ELSE(DEFINED LIB)
-  SET(PYTHON_LIB_PATH "/usr/lib/python2.5/site-packages/")
-ENDIF(DEFINED LIB)
+EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from distutils import sysconfig; print sysconfig.get_python_lib()" OUTPUT_VARIABLE PYTHON_LIB_PATH)
+STRING(REPLACE "\n" "" PYTHON_LIB_PATH "${PYTHON_LIB_PATH}")
+
+MESSAGE(STATUS "Python executable: ${PYTHON_EXECUTABLE}")
 MESSAGE(STATUS "Python lib path: ${PYTHON_LIB_PATH}")
+MESSAGE(STATUS "Python include path: ${PYTHON_INCLUDE_PATH}")
 
 SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx" )
 SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/zypp.i" )
