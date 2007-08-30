@@ -14,11 +14,19 @@ puts publickey
 
 id = publickey.id()
 
-puts "known #{keyring.is_key_known(id)}"
-puts "trusted #{keyring.is_key_trusted(id)}"
+puts "is key known/trusted #{keyring.is_key_known(id)} #{keyring.is_key_trusted(id)}"
 
 keyring.import_key(publickey, true)
 
-puts "known #{keyring.is_key_known(id)}"
-puts "trusted #{keyring.is_key_trusted(id)}"
+puts "is key known/trusted #{keyring.is_key_known(id)} #{keyring.is_key_trusted(id)}"
+
+puts "list of known keys:"
+keyring.public_keys.each do |key|
+    puts key
+end
+
+puts "list of trusted keys:"
+keyring.trusted_public_keys.each do |key|
+    puts key
+end
 

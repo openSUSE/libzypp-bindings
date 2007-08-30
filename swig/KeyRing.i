@@ -16,7 +16,12 @@ public:
 
     void deleteKey(const std::string& id, bool trusted = false);
 
+    std::list<PublicKey> publicKeys();
+    std::list<PublicKey> trustedPublicKeys();
+
 };
 
 %template(KeyRing_Ptr) intrusive_ptr<KeyRing>;
+
+%template(list_PublicKey) std::list<PublicKey>;
 
