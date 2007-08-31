@@ -23,5 +23,5 @@ public:
 
 %template(KeyRing_Ptr) intrusive_ptr<KeyRing>;
 
-%template(list_PublicKey) std::list<PublicKey>;
+%template(List_PublicKey) std::list<PublicKey>;
 
