@@ -1,6 +1,10 @@
 
+#if defined(SWIGPYTHON) || defined(SWIGRUBY)
+%rename Dep::asString "__str__";
+#endif
+
 struct Dep
-  {
+{
     /** \name Dependency types
      * These are the \em real dependency type contants to
      * use. Don't mind that it's not an enum.
@@ -61,4 +65,4 @@ struct Dep
     {}
     /** The operator. */
     for_use_in_switch _type;
-  };
+};
