@@ -1,6 +1,16 @@
 
 class ResStatus
 {
+  public:
+
+    /** Default ctor. */
+    ResStatus();
+
+    /** Ctor setting the initial . */
+    ResStatus( bool isInstalled_r );
+
+    /** Dtor. */
+    ~ResStatus();
 
   public:
     /** \name BitField range definitions.
@@ -78,9 +88,9 @@ class ResStatus
       };
     enum SolverStateValue
       {
-	NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
-	SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
-	IMPOSSIBLE = bit::RangeValue<SolverStateField,2>::value	 // impossible to install
+         NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
+         SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
+         IMPOSSIBLE = bit::RangeValue<SolverStateField,2>::value	 // impossible to install
       };
 
     enum LicenceConfirmedValue
@@ -91,15 +101,6 @@ class ResStatus
     //@}
 
   public:
-
-    /** Default ctor. */
-    ResStatus();
-
-    /** Ctor setting the initial . */
-    ResStatus( bool isInstalled_r );
-
-    /** Dtor. */
-    ~ResStatus();
 
     /** Debug helper returning the bitfield.
      * It's save to expose the bitfield, as it can't be used to
@@ -369,3 +370,14 @@ class ResStatus
   private:
     BitFieldType _bitfield;
 };
+
+#ifdef SWIGPERL5
+
+   %extend ResStatus {
+      
+      bool setToBeInstalledUser()
+      {   
+         return self->setToBeInstalled(ResStatus::USER);
+      }   
+   };
+#endif

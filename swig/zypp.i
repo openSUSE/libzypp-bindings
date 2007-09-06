@@ -1,11 +1,17 @@
 %module zypp
 
+#ifdef SWIGPERL5
+%{
+   #define SWIGPERLHACK
+   #undef NORMAL
+%}   
+#endif
+
 %{
 /* Includes the header in the wrapper code */
 #include "zypp/base/PtrTypes.h"
 #include <zypp/Edition.h>
 #include <zypp/ResTraits.h>
-#include <zypp/ResPoolProxy.h>
 #include <zypp/ResStore.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/ZYpp.h>
@@ -14,7 +20,10 @@
 #include "zypp/ResObject.h"
 #include "zypp/ResPoolManager.h"
 #include "zypp/Target.h"
-#include "zypp/target/TargetImpl.h"
+#ifndef SWIGPERLHACK
+   #include "zypp/target/TargetImpl.h"
+   #include "zypp/MediaSetAccess.h"
+#endif
 #include "zypp/TranslatedText.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Package.h"
@@ -23,8 +32,8 @@
 #include "zypp/Repository.h"
 #include "zypp/RepoManager.h"
 #include "zypp/repo/RepoType.h"
-#include "zypp/MediaSetAccess.h"
 #include "zypp/TmpPath.h"
+#include "zypp/Resolver.h"
 
 using namespace boost;
 using namespace zypp;
@@ -33,6 +42,7 @@ using namespace zypp::resfilter;
 using namespace zypp::filesystem;
 
 typedef std::set<Url> UrlSet;
+typedef std::list<std::string> StringList;
 %}
 
 %rename("+") "operator+";
@@ -65,9 +75,13 @@ class intrusive_ptr {
 %include "python/python.i"
 #endif
 
+#ifdef SWIGPERL5
+%include "std_list.i"
+#endif
 
 %include "Pathname.i"
 %include "Url.i"
+%include "ResStatus.i"
 %include "NeedAType.i"
 %include "Arch.i"
 %include "ResStore.i"
@@ -96,15 +110,18 @@ class intrusive_ptr {
 %include "Package.i"
 %include "PublicKey.i"
 %include "KeyRing.i"
-%include "Target.i"
-%include "ResStatus.i"
+#ifndef SWIGPERL5
+   %include "Target.i"
+   %include "MediaSetAccess.i"
+#endif
 %include "PoolItem.i"
 %include "ResPool.i"
 %include "ResPoolManager.i"
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
-%include "MediaSetAccess.i"
 %include "TmpPath.i"
+%include "Resolver.i"
+%include "ItemCapKind.i"
 
 
 class ZYpp

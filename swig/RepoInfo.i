@@ -1,5 +1,7 @@
-
-%template(UrlSet) std::set<Url>;
+#ifdef SWIGPERL5
+#else
+   %template(UrlSet) std::set<Url>;
+#endif
 
 class RepoInfo
 {
