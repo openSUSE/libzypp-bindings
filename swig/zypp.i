@@ -2,8 +2,10 @@
 
 #ifdef SWIGPERL5
 %{
-   #define SWIGPERLHACK
    #undef NORMAL
+   #undef readdir 
+   #undef Fflush 
+   #undef Mkdir 
 %}   
 #endif
 
@@ -20,10 +22,8 @@
 #include "zypp/ResObject.h"
 #include "zypp/ResPoolManager.h"
 #include "zypp/Target.h"
-#ifndef SWIGPERLHACK
-   #include "zypp/target/TargetImpl.h"
-   #include "zypp/MediaSetAccess.h"
-#endif
+#include "zypp/target/TargetImpl.h"
+#include "zypp/MediaSetAccess.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Package.h"
