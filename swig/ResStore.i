@@ -34,3 +34,27 @@ iter2(ResStore, ResObject*);
     }
 }
 #endif
+
+#ifdef SWIGPERL5
+
+%extend ResStore {
+   
+   ResStore::iterator begin() {
+      return self->begin();
+   }
+   ResStore::iterator end() {
+      return self->end();
+   }
+   ResStore::iterator iterator_incr(ResStore::iterator *it) {
+      (*it)++;
+      return *it;
+   }
+   const ResObject* iterator_value(ResStore::iterator it) {
+      return (&**it);
+   }
+   bool iterator_equal(ResStore::iterator it1, ResStore::iterator it2) {
+      return (it1 == it2);
+   }
+};
+
+#endif

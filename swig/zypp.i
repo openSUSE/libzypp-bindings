@@ -110,10 +110,8 @@ class intrusive_ptr {
 %include "Package.i"
 %include "PublicKey.i"
 %include "KeyRing.i"
-#ifndef SWIGPERL5
-   %include "Target.i"
-   %include "MediaSetAccess.i"
-#endif
+%include "Target.i"
+%include "MediaSetAccess.i"
 %include "PoolItem.i"
 %include "ResPool.i"
 %include "ResPoolManager.i"
