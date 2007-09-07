@@ -13,3 +13,12 @@
 
 #endif
 
+#ifdef SWIGPERL5
+
+%typemap(out) ByteCount {
+   $result = sv_newmortal();
+   sv_setiv($result, (IV) (ByteCount::SizeType) $1 );
+   argvi++;
+}
+
+#endif
