@@ -152,23 +152,7 @@ class ResPool
 
 #ifdef SWIGPERL5
 
-%extend ResPool {
-
-   pool::PoolTraits::const_iterator iterator_incr(pool::PoolTraits::const_iterator *it ) {
-      (*it)++;
-      return *it;
-   }
-   pool::PoolTraits::const_iterator iterator_decr(pool::PoolTraits::const_iterator it) {
-      (it)--;
-      return it;
-   }
-   bool iterator_equal(pool::PoolTraits::const_iterator it1, pool::PoolTraits::const_iterator it2) {
-      return (it1 == it2);
-   }
-   PoolItem_Ref iterator_value(pool::PoolTraits::const_iterator it) {
-      return (*it);
-   }
-};
+iter2(ResPool, PoolItem_Ref);
 
 #endif
 

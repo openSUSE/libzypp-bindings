@@ -31,3 +31,7 @@ iter3(CapSet, Capability*);
     }
 }
 #endif
+
+#ifdef SWIGPERL5
+iter2(CapSet, Capability);
+#endif

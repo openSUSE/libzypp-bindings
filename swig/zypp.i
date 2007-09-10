@@ -77,6 +77,7 @@ class intrusive_ptr {
 
 #ifdef SWIGPERL5
 %include "std_list.i"
+%include "perl5/perl.i"
 #endif
 
 %include "Pathname.i"

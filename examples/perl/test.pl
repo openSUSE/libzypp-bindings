@@ -9,18 +9,20 @@ $ipkg = <STDIN>;
 chomp($ipkg);
 print "Importing packages from pdb!\n\n";
 print "This may take a while, please be patient!\n";
-$pdb->readOut;
+if($pdb->readOut ne 1){
+   exit;
+}
 $store = $pdb->getStore;
 $zypp->addResolvables($store);
 
 $pool = $zypp->pool;
-$it_b = $pool->begin;
-$it_e = $pool->end;
+$it_b = $pool->cBegin;
+$it_e = $pool->cEnd;
 
 $checker = 0;
 
 print "Looking for package...!\n";
-while ($pool->iterator_equal($it_b, $pool->end) ne 1){
+while ($pool->iterator_equal($it_b, $pool->cEnd) ne 1){
    $pkg = $pool->iterator_value($it_b);
    $test = $pkg->resolvable;
    $it_b = $pool->iterator_incr($it_b);
@@ -40,7 +42,7 @@ if($checker eq 0){
 
 $resolver = zypp::Resolver->new($pool);
 
-$it_b = $pool->begin;
+$it_b = $pool->cBegin;
 if($resolver->resolvePool ne 1){
    print "Unable to solve the pool!!!\n";
    print "Problem Description: ";
@@ -51,7 +53,7 @@ if($resolver->resolvePool ne 1){
 }else{
    print "These packages has to be installed: \n";
 #   while ($it_b ne $pool->end){
-   while ($pool->iterator_equal($it_b, $pool->end) ne 1){
+   while ($pool->iterator_equal($it_b, $pool->cEnd) ne 1){
       $pkg = $pool->iterator_value($it_b);
       $it_b = $pool->iterator_incr($it_b);
       $test = $pkg->resolvable;
