@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep  3 16:49:07 CEST 2007 - schwab@suse.de
+
+- Fix broken compiler flags.
+
+-------------------------------------------------------------------
+
 Thu Aug 30 16:31:16 CEST 2007 - aschnell@suse.de
 
 - some work on python bindings

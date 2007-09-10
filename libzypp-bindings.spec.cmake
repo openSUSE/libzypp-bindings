@@ -30,8 +30,9 @@ mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DLIB=%{_lib} \
-      -DCMAKE_C_FLAGS="%{optflags}" \
-      -DCMAKE_CXX_FLAGS="%{optflags}" \
+      -DCMAKE_VERBOSE_MAKEFILE=TRUE \
+      -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       ..
