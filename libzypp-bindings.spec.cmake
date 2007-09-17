@@ -68,4 +68,16 @@ Group:          Development/Languages/Python
 %{_libdir}/python2.5/site-packages/_zypp.so
 %{_libdir}/python2.5/site-packages/zypp.py
 
+%package -n perl-zypp
+Summary:        Perl bindings for libzypp
+Group:          Development/Languages/Perl
+
+%description -n perl-zypp
+-
+
+%files -n perl-zypp
+%defattr(-,root,root,-)
+/usr/lib/perl5/*/*/zypp.pm
+/usr/lib/perl5/*/*/zypp.so
+
 %changelog
