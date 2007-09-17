@@ -3,10 +3,10 @@
 #ifdef SWIGPERL5
 %{
    #undef NORMAL
-   #undef readdir 
-   #undef Fflush 
-   #undef Mkdir 
-%}   
+   #undef readdir
+   #undef Fflush
+   #undef Mkdir
+%}
 #endif
 
 %{

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 17 18:58:53 CEST 2007 - aschnell@suse.de
+
+- generate Perl bindings
+- use ZYpp Url class
+
+-------------------------------------------------------------------
 Mon Sep  3 16:49:07 CEST 2007 - schwab@suse.de
 
 - Fix broken compiler flags.
