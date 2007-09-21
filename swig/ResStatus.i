@@ -379,5 +379,10 @@ class ResStatus
       {   
          return self->setToBeInstalled(ResStatus::USER);
       }   
+
+      bool setToBeInstalledLow()
+      {
+         return self->setToBeInstalled(ResStatus::APPL_LOW);
+      }
    };
 #endif

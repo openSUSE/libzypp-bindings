@@ -43,6 +43,7 @@ using namespace zypp::filesystem;
 
 typedef std::set<Url> UrlSet;
 typedef std::list<std::string> StringList;
+typedef std::list<solver::detail::ItemCapKind> ItemCapKindList;
 %}
 
 %rename("+") "operator+";
@@ -119,8 +120,8 @@ class intrusive_ptr {
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
 %include "TmpPath.i"
-%include "Resolver.i"
 %include "ItemCapKind.i"
+%include "Resolver.i"
 
 
 class ZYpp
