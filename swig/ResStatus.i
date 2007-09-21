@@ -380,9 +380,9 @@ class ResStatus
          return self->setToBeInstalled(ResStatus::USER);
       }   
 
-      bool setToBeInstalledLow()
+      bool resetTransactUser()
       {
-         return self->setToBeInstalled(ResStatus::APPL_LOW);
+         return self->resetTransact(ResStatus::USER);
       }
    };
 #endif
