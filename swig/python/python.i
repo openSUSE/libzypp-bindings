@@ -5,6 +5,11 @@
 
 namespace zypp
 {
+    // These operators must be ignored otherwise the wrapper does
+    // not compile (using swig 1.3.29).
+    %ignore operator==;
+    %ignore operator!=;
+
     // Just to avoid warnings.
     %ignore operator<<;
 }

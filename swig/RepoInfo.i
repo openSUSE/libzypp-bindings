@@ -71,7 +71,7 @@ public:
      * \note could be an empty pathname for repo
      * infos created in memory.
      */
-     Pathname filepath() const;
+     zypp::Pathname filepath() const;
 
     /**
      * Add a base url. \see baseUrls
@@ -121,7 +121,7 @@ public:
      * \short set the repository filepath
      * \param path File path
      */
-    RepoInfo & setFilepath( const Pathname &filename );
+    RepoInfo & setFilepath( const zypp::Pathname &filename );
 
     std::ostream & dumpOn( std::ostream & str ) const;
 

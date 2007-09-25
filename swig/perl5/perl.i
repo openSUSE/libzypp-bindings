@@ -1,3 +1,13 @@
+
+namespace zypp
+{
+    // These operators must be ignored otherwise the wrapper does
+    // not compile (using swig 1.3.29).
+    %ignore operator<<;
+    %ignore operator==;
+    %ignore operator!=;
+}
+
 %define iter(cls, storetype)
 %extend cls {
    cls::const_iterator iterator_incr(cls::const_iterator *it){

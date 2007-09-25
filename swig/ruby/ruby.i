@@ -13,6 +13,14 @@ namespace zypp
     // Just to avoid warnings.
     %ignore operator!=;
     %ignore operator<<;
+
+    namespace filesystem
+    {
+	// Same as above.
+	%ignore operator==;
+	%ignore operator!=;
+	%ignore operator<<;
+    }
 }
 
 

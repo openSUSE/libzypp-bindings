@@ -44,14 +44,14 @@ class Target
 #ifndef STORAGE_DISABLED
     /** enables the storage target */
     bool isStorageEnabled() const;
-    void enableStorage(const Pathname &root_r);
+    void enableStorage(const zypp::Pathname &root_r);
 #endif
 
     /** Set the log file for target */
-    bool setInstallationLogfile(const Pathname & path_r);
+    bool setInstallationLogfile(const zypp::Pathname & path_r);
 
     /** Return the root set for this target */
-    Pathname root() const;
+    zypp::Pathname root() const;
 
     /** return the last modification date of the target */
     Date timestamp() const;

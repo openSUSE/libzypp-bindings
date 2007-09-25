@@ -6,7 +6,7 @@ class KeyRing
 
 public:
 
-    KeyRing(const Pathname& baseTmpDir);
+    KeyRing(const zypp::Pathname& baseTmpDir);
     ~KeyRing();
 
     void importKey(const PublicKey& key, bool trusted = false);

@@ -5,7 +5,7 @@ class PublicKey
 public:
 
     PublicKey();
-    PublicKey(const Pathname& file);
+    PublicKey(const zypp::Pathname& file);
     ~PublicKey();
 
     bool isValid() const;
@@ -15,7 +15,7 @@ public:
     std::string id() const;
     std::string name() const;
     std::string fingerprint() const;
-    Pathname path() const;
+    zypp::Pathname path() const;
 
 };
 

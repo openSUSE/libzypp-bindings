@@ -144,7 +144,7 @@ class ZYpp
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
     */
     Target_Ptr target() const;
-    void initializeTarget(const Pathname & root);
+    void initializeTarget(const zypp::Pathname & root);
     void finishTarget();
 
     typedef ZYppCommitResult CommitResult;
@@ -162,9 +162,9 @@ class ZYpp
     LocaleSet getAvailableLocales() const;
     void availableLocale( const Locale & locale_r );
     */
-    Pathname homePath() const;
-    Pathname tmpPath() const;
-    void setHomePath( const Pathname & path );
+    zypp::Pathname homePath() const;
+    zypp::Pathname tmpPath() const;
+    void setHomePath( const zypp::Pathname & path );
 
     Arch architecture() const;
     void setArchitecture( const Arch & arch );
