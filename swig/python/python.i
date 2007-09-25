@@ -22,3 +22,16 @@ namespace zypp
 };
 %enddef
 
+
+%exception
+{
+  try {
+    $action
+  }
+  catch (const Exception& e) {
+    std::string tmp = e.historyAsString() + e.asUserString();
+    PyErr_SetString(PyExc_RuntimeError, const_cast<char*>(tmp.c_str()));
+    return NULL;
+  }
+}
+

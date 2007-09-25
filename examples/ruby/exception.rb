@@ -20,7 +20,7 @@ repo_info.set_alias("factorytest")
 repo_info.set_name("Test Repo for Factory.")
 repo_info.set_enabled(true)
 repo_info.set_autorefresh(false)
-repo_info.add_base_url("file:///tmp/does-not-exist")
+repo_info.add_base_url(Url.new("file:///tmp/does-not-exist"))
 
 begin
   repo_manager.add_repository(repo_info)
@@ -28,7 +28,7 @@ begin
   repo_manager.build_cache(repo_info)
 rescue ZYppException => e
   puts "ZYppException caught"
-  puts e.to_s
+  puts e
 else
   puts "Oh, no exception"
 end
