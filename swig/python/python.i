@@ -1,4 +1,15 @@
 
+
+%rename *::asString "__str__";
+
+
+namespace zypp
+{
+    // Just to avoid warnings.
+    %ignore operator<<;
+}
+
+
 %define iter( cls )
 %extend cls {
     %pythoncode %{

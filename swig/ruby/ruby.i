@@ -1,5 +1,21 @@
 
 
+%rename *::asString "__str__";
+
+
+namespace zypp
+{
+    // Not ignoring gives a very strange error in the "pokus" testsuite: SWIG
+    // defines a Ruby module-function "==" which (when included into the main
+    // namespace) is apparently used where is should not.
+    %ignore operator==;
+
+    // Just to avoid warnings.
+    %ignore operator!=;
+    %ignore operator<<;
+}
+
+
 /*
  *  Extend cls with an ruby-like each iterator and a to_a method.  Yields
  *  objects of type storetype.  Parameter storetype must be a pointer type.

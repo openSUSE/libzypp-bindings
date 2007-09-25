@@ -10,7 +10,7 @@ class Resolvable
 
     const Kind & kind() const;
     const std::string & name() const;
-    const Edition & edition() const;
+    const zypp::Edition & edition() const;
     const Arch & arch() const;
 
     const CapSet & dep( Dep which_r ) const;

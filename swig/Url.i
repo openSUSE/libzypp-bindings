@@ -1,20 +1,30 @@
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename Url::asString "__str__";
-#endif
+// example for including the original header file
 
-class Url
+#if 1
+
+// TODO: tell make about dependencies
+%include <zypp/Url.h>
+
+#else
+
+namespace zypp
 {
-public:
+    class Url
+    {
+    public:
 
-    Url();
-    ~Url();
+	Url();
+	~Url();
 
-    Url(const std::string& encodedUrl);
+	Url(const Url &url);
+	Url(const std::string &encodedUrl);
 
-    bool isValid() const;
+	bool isValid() const;
 
-    std::string asString() const;
+	std::string asString() const;
 
-};
+    };
+}
 
+#endif

@@ -1,8 +1,4 @@
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename Capability::asString "__str__";
-#endif
-
 class Capability
 {
   public:

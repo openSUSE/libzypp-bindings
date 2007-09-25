@@ -7,7 +7,7 @@
     /** Ctor */
     explicit
     NVR( const std::string & name_r,
-         const Edition & edition_r = Edition() )
+         const zypp::Edition & edition_r = zypp::Edition() )
     : name( name_r )
     , edition( edition_r )
     {}
@@ -19,7 +19,7 @@
     /**  */
     std::string name;
     /**  */
-    Edition edition;
+    zypp::Edition edition;
 
   public:
     /** Comparison mostly for std::container */

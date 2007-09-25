@@ -1,8 +1,4 @@
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename PublicKey::asString "__str__";
-#endif
-
 class PublicKey
 {
 

@@ -1,6 +1,6 @@
 #ifdef SWIGPERL5
 #else
-   %template(UrlSet) std::set<Url>;
+    %template(UrlSet) std::set<Url>;
 #endif
 
 class RepoInfo
@@ -79,13 +79,13 @@ public:
      *
      * To edit or remove urls, create a new RepoInfo instead.
      */
-    RepoInfo & addBaseUrl( const Url &url );
+    RepoInfo & addBaseUrl( const zypp::Url &url );
 
     /**
      * Set mirror list url. \see mirrorListUrl
      * \param url The base url for the list
      */
-    RepoInfo & setMirrorListUrl( const Url &url );
+    RepoInfo & setMirrorListUrl( const zypp::Url &url );
 
     /**
      * enable or disable the repository \see enabled

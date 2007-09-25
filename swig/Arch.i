@@ -3,10 +3,6 @@ typedef std::set<Arch,CompareByGT<Arch> > CompatSet;
 
 %ignore Arch::compare(const Arch &, const Arch &);
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename Arch::asString "__str__";
-#endif
-
 class Arch
 {
 public:

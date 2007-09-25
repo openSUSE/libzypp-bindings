@@ -37,7 +37,7 @@ class Package : public ResObject
     /** */
     Text postun() const;
     /** */
-    ByteCount sourcesize() const;
+    zypp::ByteCount sourcesize() const;
     /** */
     std::list<std::string> authors() const;
     /** */

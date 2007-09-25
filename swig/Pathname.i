@@ -1,8 +1,4 @@
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename Pathname::asString "__str__";
-#endif
-
 class Pathname
 {
 public:

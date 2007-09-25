@@ -32,7 +32,7 @@ class CapFactory
     Capability parse( const Resolvable::Kind & refers_r,
                       const std::string & name_r,
                       Rel op_r,
-                      const Edition & edition_r ) const;
+                      const zypp::Edition & edition_r ) const;
 
     /** Special Capability, triggering evaluation of Hal
      * capabilities when matched.

@@ -7,7 +7,7 @@ struct NVRA : public NVR
     /** Ctor */
     explicit
     NVRA( const std::string & name_r,
-          const Edition & edition_r = Edition(),
+          const zypp::Edition & edition_r = Edition(),
           const Arch & arch_r = Arch() )
     : NVR( name_r, edition_r )
     , arch( arch_r )

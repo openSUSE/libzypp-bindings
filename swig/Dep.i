@@ -1,8 +1,4 @@
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename Dep::asString "__str__";
-#endif
-
 struct Dep
 {
     /** \name Dependency types

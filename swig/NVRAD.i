@@ -8,7 +8,7 @@ struct NVRAD : public NVRA, public Dependencies
     /** Ctor */
     explicit
     NVRAD( const std::string & name_r,
-           const Edition & edition_r = Edition(),
+           const zypp::Edition & edition_r = zypp::Edition(),
            const Arch & arch_r = Arch(),
            const Dependencies & deps_r = Dependencies() )
     : NVRA( name_r, edition_r, arch_r )

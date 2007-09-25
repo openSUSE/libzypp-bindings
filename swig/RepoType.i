@@ -1,8 +1,4 @@
 
-#if defined(SWIGPYTHON) || defined(SWIGRUBY)
-%rename RepoType::asString "__str__";
-#endif
-
 struct RepoType
 {
     static const RepoType RPMMD;

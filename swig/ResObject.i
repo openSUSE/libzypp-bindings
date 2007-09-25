@@ -17,8 +17,8 @@ class ResObject : public Resolvable
     Text delnotify() const;
     Text licenseToConfirm() const;
     Vendor vendor() const;
-    ByteCount size() const;
-    ByteCount downloadSize() const;
+    zypp::ByteCount size() const;
+    zypp::ByteCount downloadSize() const;
     Repository repository() const;
     unsigned mediaNr() const;
     bool installOnly() const;
