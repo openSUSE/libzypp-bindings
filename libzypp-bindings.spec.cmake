@@ -8,6 +8,8 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+# nodebuginfo
+
 Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
