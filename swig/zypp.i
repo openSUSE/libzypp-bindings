@@ -6,6 +6,7 @@
    #undef readdir
    #undef Fflush
    #undef Mkdir
+   #undef strerror
 %}
 #endif
 
