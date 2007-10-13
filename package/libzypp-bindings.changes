@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sat Oct 13 18:36:35 CEST 2007 - aschnell@suse.de
+
+- fixed build in beta
+
+-------------------------------------------------------------------
 Thu Oct 04 11:44:18 CEST 2007 - aschnell@suse.de
 
 - don't generate a debuginfo package (bug #297711)
