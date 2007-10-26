@@ -53,5 +53,7 @@
                          const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
     void removeRepository( const RepoInfo & info,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+    RepoInfo getRepositoryInfo( const std::string &alias,
+                                const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );    
 
   };
