@@ -1,3 +1,9 @@
+#ifdef SWIGPERL5
+#else
+%template(PoolItemSet) std::set<PoolItem_Ref>;
+%apply std::set<PoolItem_Ref>::const_iterator { ResPool::const_iterator };
+%apply unsigned { ResPool::size_type };
+#endif
 
 class ResPool
 {
@@ -27,7 +33,7 @@ class ResPool
 
     /** \name Iterate through all ResObjects (all kinds). */
     //@{
-    #ifdef SWIGPERL5 
+    #ifdef SWIGPERL5
     const_iterator begin() const;
     const_iterator end() const;
     #endif
@@ -191,6 +197,21 @@ iter3(ResPool, PoolItem_Ref*);
             ++i;
         }
     }
+}
+
+#endif
+
+#ifdef SWIGPYTHON
+%newobject ResPool::const_iterator(PyObject **PYTHON_SELF);
+%extend  ResPool {
+  swig::PySwigIterator* iterator(PyObject **PYTHON_SELF)
+  {
+    return swig::make_output_iterator(self->begin(), self->begin(),
+                                      self->end(), *PYTHON_SELF);
+  }
+%pythoncode {
+  def __iter__(self): return self.iterator()
+}
 }
 
 #endif
