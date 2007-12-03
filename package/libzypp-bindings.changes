@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Dec  3 18:56:11 CET 2007 - ma@suse.de
+
+- Add Pool iterator for python.
+
+-------------------------------------------------------------------
 Sat Oct 13 18:36:35 CEST 2007 - aschnell@suse.de
 
 - fixed build in beta
