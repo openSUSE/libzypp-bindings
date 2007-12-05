@@ -29,8 +29,32 @@ for repo in repos:
 Z.applyLocks()
 Z.resolver().establishPool();
 
-print 'List Updates:'
+#
+# Does not to check and apply updates for the update stack first.
+#
+print 'List Upadtes:'
 for item in Z.pool().byKindIterator(zypp.KindOfPatch()):
+   if item.status().isInstalled():
+      continue
    if item.status().isNeeded():
+      if not item.status().setTransact( True, zypp.ResStatus.USER ):
+        raise "Error set transact: %s" % item
       resolvable = zypp.asKindPatch( item )
       print '%s | %s-%s | %s | %s' % (resolvable.repository().info().alias(), resolvable.name(), resolvable.edition(), resolvable.category(), item.status() )
+
+if not Z.resolver().resolvePool():
+  raise "Solver Error"
+
+for item in Z.pool():
+  if item.status().transacts():
+    print item
+
+#
+# dryRun!
+#
+policy = zypp.ZYppCommitPolicy()
+policy.dryRun( True )
+policy.syncPoolAfterCommit( False )
+
+result = Z.commit( policy )
+print result
