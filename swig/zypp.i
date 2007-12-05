@@ -141,6 +141,9 @@ class intrusive_ptr {
 %include "TmpPath.i"
 %include "ItemCapKind.i"
 %include "Resolver.i"
+#ifdef SWIGPYTHON
+%include "python/callbacks.i"
+#endif
 
 
 class ZYpp
