@@ -56,3 +56,12 @@ class PoolItem_Ref
 
 typedef PoolItem_Ref PoolItem;
 
+%extend PoolItem_Ref
+{
+  std::string asString() const
+  {
+    std::ostringstream str;
+    str << *self;
+    return str.str();
+  }
+}

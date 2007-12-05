@@ -12,6 +12,7 @@
 
 %{
 /* Includes the header in the wrapper code */
+#include <sstream>
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Edition.h"
 #include "zypp/ResTraits.h"
@@ -28,6 +29,14 @@
 #include "zypp/TranslatedText.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Package.h"
+#include "zypp/Patch.h"
+#include "zypp/Atom.h"
+#include "zypp/SrcPackage.h"
+#include "zypp/Script.h"
+#include "zypp/Message.h"
+#include "zypp/Pattern.h"
+#include "zypp/Language.h"
+#include "zypp/Product.h"
 #include "zypp/ResFilters.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Repository.h"
@@ -113,6 +122,13 @@ class intrusive_ptr {
 %include "NVRAD.i"
 %include "Package.i"
 %include "Patch.i"
+%include "Atom.i"
+%include "SrcPackage.i"
+%include "Script.i"
+%include "Message.i"
+%include "Pattern.i"
+%include "Language.i"
+%include "Product.i"
 %include "PublicKey.i"
 %include "KeyRing.i"
 %include "Target.i"
@@ -171,6 +187,14 @@ class ZYpp
 
     Arch architecture() const;
     void setArchitecture( const Arch & arch );
+
+   /**
+    * \short Apply persistant locks to current pool.
+    * Call this before solving
+    *
+    * \returns Number of items locked
+    */
+   int applyLocks();
 
     protected:
     virtual ~ZYpp();

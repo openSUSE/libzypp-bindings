@@ -374,11 +374,11 @@ class ResStatus
 #ifdef SWIGPERL5
 
    %extend ResStatus {
-      
+
       bool setToBeInstalledUser()
-      {   
+      {
          return self->setToBeInstalled(ResStatus::USER);
-      }   
+      }
 
       bool resetTransactUser()
       {
@@ -386,3 +386,13 @@ class ResStatus
       }
    };
 #endif
+
+%extend ResStatus
+{
+  std::string asString() const
+  {
+    std::ostringstream str;
+    str << *self;
+    return str.str();
+  }
+}
