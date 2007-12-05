@@ -26,7 +26,7 @@ for item in Z.pool():
     else:
       t = "*"
     print "%s %s:%s-%s.%s\t(%s)" % ( t,
-                                     item.resolvable().kindToS(),
+                                     item.resolvable().kind(),
                                      item.resolvable().name(),
                                      item.resolvable().edition(),
                                      item.resolvable().arch(),

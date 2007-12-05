@@ -11,7 +11,7 @@ class Resolver
       bool verifySystem (bool considerNewHardware);
       bool establishPool (void);
       bool freshenPool (void);
-      bool resolvePool (void);      
+      bool resolvePool (void);
       bool resolvePool (bool tryAllPossibilities);
       bool resolveDependencies( void );
       void undo( void );
@@ -19,7 +19,7 @@ class Resolver
       void doUpgrade( UpgradeStatistics & opt_stats_r );
       std::list<PoolItem_Ref> problematicUpdateItems( void ) const;
       ResolverProblemList problems();
-      std::list<std::string> problemDescription( void ) const;      
+      std::list<std::string> problemDescription( void ) const;
       void applySolutions( const ProblemSolutionList & solutions );
 
       Arch architecture() const;
@@ -27,14 +27,14 @@ class Resolver
       void setForceResolve (const bool force);
       const bool forceResolve();
       void setPreferHighestVersion (const bool highestVersion);
-      const bool preferHighestVersion();      
+      const bool preferHighestVersion();
       bool transactResObject( ResObject::constPtr robj, bool install = true);
       //bool transactResKind( Resolvable::Kind kind );
       void transactReset( ResStatus::TransactByValue causer );
       void addRequire (const Capability & capability);
-      void addConflict (const Capability & capability);      
+      void addConflict (const Capability & capability);
       void setTimeout( int seconds );
-      int timeout();      
+      int timeout();
       void setMaxSolverPasses (int count);
       int maxSolverPasses ();
       bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");
@@ -48,3 +48,5 @@ class Resolver
       solver::detail::Resolver_Ptr _pimpl;
 };
 
+typedef intrusive_ptr<Resolver> Resolver_Ptr;
+%template(Resolver_Ptr) intrusive_ptr<Resolver>;

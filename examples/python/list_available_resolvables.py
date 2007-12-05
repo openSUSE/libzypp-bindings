@@ -18,7 +18,7 @@ for repo in repos:
 print "Available items: %d" % ( Z.pool().size() )
 
 for item in Z.pool():
-    print "* %s:%s-%s.%s\t(%s)" % ( item.resolvable().kindToS(),
+    print "* %s:%s-%s.%s\t(%s)" % ( item.resolvable().kind(),
                                     item.resolvable().name(),
                                     item.resolvable().edition(),
                                     item.resolvable().arch(),

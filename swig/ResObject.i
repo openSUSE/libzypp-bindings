@@ -31,6 +31,7 @@ class ResObject : public Resolvable
 };
 
 
+#if 0
 %extend intrusive_ptr<const ResObject>
 {
     // FIXME: this is just a workaround, see Kind.i
@@ -54,4 +55,4 @@ class ResObject : public Resolvable
 	return compareByNVRA(*self, other);
     }
 }
-
+#endif

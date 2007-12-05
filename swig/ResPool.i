@@ -1,9 +1,5 @@
-#ifdef SWIGPERL5
-#else
-%template(PoolItemSet) std::set<PoolItem_Ref>;
-%apply std::set<PoolItem_Ref>::const_iterator { ResPool::const_iterator };
+
 %apply unsigned { ResPool::size_type };
-#endif
 
 class ResPool
 {
@@ -202,6 +198,7 @@ iter3(ResPool, PoolItem_Ref*);
 #endif
 
 #ifdef SWIGPYTHON
+%template(PoolItemSet) std::set<PoolItem_Ref>;
 %newobject ResPool::const_iterator(PyObject **PYTHON_SELF);
 %extend  ResPool {
   swig::PySwigIterator* iterator(PyObject **PYTHON_SELF)
@@ -209,8 +206,20 @@ iter3(ResPool, PoolItem_Ref*);
     return swig::make_output_iterator(self->begin(), self->begin(),
                                       self->end(), *PYTHON_SELF);
   }
+  swig::PySwigIterator* kinditerator(PyObject **PYTHON_SELF, const ResObject::Kind & kind_r)
+  {
+    return swig::make_output_iterator(self->byKindBegin( kind_r ), self->byKindBegin( kind_r ),
+                                      self->byKindEnd( kind_r ), *PYTHON_SELF);
+  }
+  swig::PySwigIterator* nameiterator(PyObject **PYTHON_SELF, const std::string &name)
+  {
+    return swig::make_output_iterator(self->byNameBegin( name ), self->byNameBegin( name ),
+                                      self->byNameEnd( name ), *PYTHON_SELF);
+  }
 %pythoncode {
   def __iter__(self): return self.iterator()
+  def byKindIterator(self, kind): return self.kinditerator(kind)
+  def byNameIterator(self, name): return self.nameiterator(name)
 }
 }
 

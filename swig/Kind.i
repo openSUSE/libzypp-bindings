@@ -1,66 +1,37 @@
 
-%typemap(in) Resolvable::Kind {
-
-  VALUE kindstring = rb_funcall( $input, rb_intern("to_s"), 0, 0);
-  kindstring = rb_funcall( kindstring, rb_intern("downcase"), 0, 0);
-  std::string s(RSTRING(pathstring)->ptr);
-
-  // FIXME make the string lowercase first
-
-  if ( s == "patch" )
-  {
-    $1 == Patch::Kind;
-  }
-  if ( s == "package" )
-  {
-    $1 == Package::Kind;
-  }
-  if ( s == "script" )
-  {
-    $1 == Script::Kind;
-  }
-  if ( s == "message" )
-  {
-    $1 == Message::Kind;
-  }
-  if ( s == "pattern" )
-  {
-    $1 == Pattern::Kind;
-  }
-  if ( s == "Selection" )
-  {
-    $1 == Selection::Kind;
-  }
-
-}
-
-%typemap(out) Kind {
-  const char *s = $1.asString().c_str();
-  $result = ID2SYM(rb_intern(s));
-}
-
-%extend Resolvable::TraitsType::KindType {
-    const char* toS() {
-	return "unknown";
-    }
-}
-
-%extend Resolvable
+template<class _Tp>
+class KindOf
 {
-    // FIXME: this is just a workaround since the whole code above does not work
-    const char* kindToS()
-    {
-	if (isKind<Package>(self))
-	    return "package";
-	else if (isKind<Patch>(self))
-	    return "patch";
-	else if (isKind<Product>(self))
-	    return "product";
-	else if (isKind<Pattern>(self))
-	    return "pattern";
-	else if (isKind<Language>(self))
-	    return "language";
-	return "unknown";
-    }
-}
+      public:
+        /** DefaultCtor: empty string */
+        KindOf()
+        {}
+        /** Ctor from string.
+         * Lowercase version of \a value_r is used as identification.
+        */
+        explicit
+        KindOf( const std::string & value_r )
+        : _value( str::toLower(value_r) )
+        {}
+        /** Dtor */
+        ~KindOf()
+        {}
+      public:
+        /** Identification string. */
+        const std::string & asString() const
+        { return _value; }
 
+        /** Order on KindOf (arbitrary).
+         * Not necessarily lexicographical.
+         * \todo Enable class _Tp to define the order,
+         * Fix logical operators below to use compare,
+        */
+        int compare( const KindOf & rhs ) const
+        { return _value.compare( rhs._value ); }
+
+      private:
+        /** */
+        std::string _value;
+};
+
+%template(KindOfResolvable) KindOf<Resolvable>;
