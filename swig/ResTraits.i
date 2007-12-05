@@ -15,24 +15,25 @@ template<typename _Res>
 
 %template(ResTraitsResolvable) ResTraits<Resolvable>;
 
-%pythoncode
-{
-  def KindOfPackage():
-    return KindOfResolvable( "package" )
-  def KindOfSrcPackage():
-    return KindOfResolvable( "srcpackage" )
-  def KindOfPatch():
-    return KindOfResolvable( "patch" )
-  def KindOfPattern():
-    return KindOfResolvable( "pattern" )
-  def KindOfProduct():
-    return KindOfResolvable( "product" )
-  def KindOfAtom():
-    return KindOfResolvable( "atom" )
-  def KindOfScript():
-    return KindOfResolvable( "script" )
-  def KindOfMessage():
-    return KindOfResolvable( "message" )
-  def KindOfLanguage():
-    return KindOfResolvable( "language" )
-}
+#ifdef SWIGPYTHON
+%pythoncode %{
+def KindOfPackage():
+  return KindOfResolvable( "package" )
+def KindOfSrcPackage():
+  return KindOfResolvable( "srcpackage" )
+def KindOfPatch():
+  return KindOfResolvable( "patch" )
+def KindOfPattern():
+  return KindOfResolvable( "pattern" )
+def KindOfProduct():
+  return KindOfResolvable( "product" )
+def KindOfAtom():
+  return KindOfResolvable( "atom" )
+def KindOfScript():
+  return KindOfResolvable( "script" )
+def KindOfMessage():
+  return KindOfResolvable( "message" )
+def KindOfLanguage():
+  return KindOfResolvable( "language" )
+%}
+#endif

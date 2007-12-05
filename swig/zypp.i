@@ -13,12 +13,12 @@
 %{
 /* Includes the header in the wrapper code */
 #include "zypp/base/PtrTypes.h"
-#include <zypp/Edition.h>
-#include <zypp/ResTraits.h>
-#include <zypp/ResStore.h>
-#include <zypp/ZYppFactory.h>
-#include <zypp/ZYpp.h>
-#include <zypp/Pathname.h>
+#include "zypp/Edition.h"
+#include "zypp/ResTraits.h"
+#include "zypp/ResStore.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/ZYpp.h"
+#include "zypp/Pathname.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/ResObject.h"
 #include "zypp/ResPoolManager.h"
