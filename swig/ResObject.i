@@ -27,3 +27,13 @@ class ResObject : public Resolvable
                const NVRAD & nvrad_r );
     virtual ~ResObject();
 };
+
+
+%extend intrusive_ptr<const ResObject>
+{
+    int __cmp__(intrusive_ptr<const ResObject>& other)
+    {
+	return compareByNVRA(*self, other);
+    }
+}
+

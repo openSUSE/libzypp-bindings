@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Dec 06 10:52:05 CET 2007 - aschnell@suse.de
+
+- readded cmp for ResObject
+
+-------------------------------------------------------------------
 Mon Dec  3 18:56:11 CET 2007 - ma@suse.de
 
 - Add Pool iterator for python.

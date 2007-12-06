@@ -15,7 +15,7 @@ r = z.target.resolvables
 r.each do | p |
 
     # puts p.class
-    puts "#{p.kind_to_s} #{p.name} #{p.edition.to_s} #{p.arch.to_s}"
+    puts "#{p.kind} #{p.name} #{p.edition.to_s} #{p.arch.to_s}"
     puts "  Summary: #{p.summary}"
     puts "  Size: #{p.size}"
     puts "  Vendor: #{p.vendor}"

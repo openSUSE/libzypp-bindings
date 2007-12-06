@@ -45,7 +45,7 @@ pool.each do | p |
     # puts p.class
     r = p.resolvable
     # puts r.class
-    puts "#{r.kind_to_s} #{r.name} #{r.edition.to_s} #{r.arch.to_s}"
+    puts "#{r.kind} #{r.name} #{r.edition.to_s} #{r.arch.to_s}"
     puts "  Summary: #{r.summary}"
     puts "  Size: #{r.size}"
     puts "  Vendor: #{r.vendor}"
