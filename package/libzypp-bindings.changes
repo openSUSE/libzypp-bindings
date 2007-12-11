@@ -1,0 +1,78 @@
+-------------------------------------------------------------------
+Mon Dec  3 18:56:11 CET 2007 - ma@suse.de
+
+- Add Pool iterator for python.
+
+-------------------------------------------------------------------
+Sat Oct 13 18:36:35 CEST 2007 - aschnell@suse.de
+
+- fixed build in beta
+
+-------------------------------------------------------------------
+Thu Oct 04 11:44:18 CEST 2007 - aschnell@suse.de
+
+- don't generate a debuginfo package (bug #297711)
+
+-------------------------------------------------------------------
+Mon Sep 17 18:58:53 CEST 2007 - aschnell@suse.de
+
+- generate Perl bindings
+- use ZYpp Url class
+
+-------------------------------------------------------------------
+Mon Sep  3 16:49:07 CEST 2007 - schwab@suse.de
+
+- Fix broken compiler flags.
+
+-------------------------------------------------------------------
+
+Thu Aug 30 16:31:16 CEST 2007 - aschnell@suse.de
+
+- some work on python bindings
+
+-------------------------------------------------------------------
+Tue Aug 28 23:57:36 CEST 2007 - aschnell@suse.de
+
+- added KeyRing and PublicKey classes
+
+-------------------------------------------------------------------
+Thu Aug 23 17:10:56 CEST 2007 - aschnell@suse.de
+
+- added to_a functions
+
+-------------------------------------------------------------------
+Thu Aug 23 12:49:01 CEST 2007 - aschnell@suse.de
+
+- added some comparison functions
+
+-------------------------------------------------------------------
+Wed Aug 22 12:58:05 CEST 2007 - aschnell@suse.de
+
+- renamed ruby module to zypp
+
+-------------------------------------------------------------------
+Fri Aug 17 14:37:06 CEST 2007 - aschnell@suse.de
+
+- moved ruby files to vendor_ruby (bug #301127)
+
+-------------------------------------------------------------------
+Mon Aug 13 20:46:35 CEST 2007 - aschnell@suse.de
+
+- added exceptions
+
+-------------------------------------------------------------------
+Tue Jul 31 17:53:52 CEST 2007 - aschnell@suse.de
+
+- improved bindings for various classes
+- adoptions to libzypp changes
+
+-------------------------------------------------------------------
+Tue Jul 24 11:36:49 CEST 2007 - aschnell@suse.de
+
+- added Python bindings
+
+-------------------------------------------------------------------
+Thu Jul 19 16:13:08 CEST 2007 - aschnell@suse.de
+
+- New package with swig generated bindings for libzypp
+
