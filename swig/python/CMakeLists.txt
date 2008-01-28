@@ -4,8 +4,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
 FIND_PACKAGE(PythonInterp REQUIRED)
 FIND_PACKAGE(PythonLibs REQUIRED)
 
-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from distutils import sysconfig; print sysconfig.get_python_lib()" OUTPUT_VARIABLE PYTHON_LIB_PATH)
-STRING(REPLACE "\n" "" PYTHON_LIB_PATH "${PYTHON_LIB_PATH}")
+EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib())" OUTPUT_VARIABLE PYTHON_LIB_PATH)
 
 MESSAGE(STATUS "Python executable: ${PYTHON_EXECUTABLE}")
 MESSAGE(STATUS "Python lib path: ${PYTHON_LIB_PATH}")
