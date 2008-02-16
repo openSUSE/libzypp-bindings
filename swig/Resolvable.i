@@ -1,6 +1,8 @@
+class Resolvable : protected sat::Solvable,
+                     public base::ReferenceCounted, private base::NonCopyable
+  {
+    friend std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
 
-class Resolvable
-{
   public:
     typedef Resolvable               Self;
     typedef ResTraits<Self>          TraitsType;
@@ -8,27 +10,25 @@ class Resolvable
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
 
-    const Kind & kind() const;
-    const std::string & name() const;
-    const zypp::Edition & edition() const;
-    const Arch & arch() const;
+  public:
+    /** Whether this represents a valid- or no-solvable. */
+    
+    /** \name Dependencies. */
+    //@{
+    /** Select by Dep. */
+    //Capabilities dep( Dep which_r ) const
+    //{ return operator[]( which_r ); }
+    
+    //@}
 
-    const CapSet & dep( Dep which_r ) const;
-    const Dependencies & deps() const;
+  public:
+    const sat::Solvable & satSolvable() const { return *this; }
 
   protected:
-    Resolvable( const Kind & kind_r,
-                const NVRAD & nvrad_r );
+    /** Ctor */
+    Resolvable( const sat::Solvable & solvable_r );
+    /** Dtor */
     virtual ~Resolvable();
+    /** Helper for stream output */
     virtual std::ostream & dumpOn( std::ostream & str ) const;
-};
-
-int compareByN(const Resolvable::constPtr & lhs,
-	       const Resolvable::constPtr & rhs);
-
-int compareByNVR(const Resolvable::constPtr & lhs,
-		 const Resolvable::constPtr & rhs);
-
-int compareByNVRA(const Resolvable::constPtr& lhs,
-		  const Resolvable::constPtr& rhs);
-
+ };

@@ -1,31 +1,31 @@
 
 
 // I don't think this is correct: ctor and dtor are not taken into account
-class CapSet
+class Capabilities
 {
 
 };
 
 
 #ifdef SWIGRUBY
-iter3(CapSet, Capability*);
+iter3(Capabilities, Capability*);
 #endif
 
 
 // The ruby std_set.i can only handle one template parameter
 
 // #ifdef SWIGPYTHON
-// %template(CapSetTemp) std::set<Capability, CapOrder>;
-// typedef std::set<Capability,CapOrder> CapSetTemp;
+// %template(CapabilitiesTemp) std::set<Capability, CapOrder>;
+// typedef std::set<Capability,CapOrder> CapabilitiesTemp;
 // #endif
 
 #ifdef SWIGPYTHON
-%extend CapSet
+%extend Capabilities
 {
     // just a test
     const Capability* haha()
     {
-	CapSet::iterator i = self->begin();
+	Capabilities::iterator i = self->begin();
 	const Capability* tmp = &*i;
 	return tmp;
     }
@@ -33,5 +33,5 @@ iter3(CapSet, Capability*);
 #endif
 
 #ifdef SWIGPERL5
-iter2(CapSet, Capability);
+iter2(Capabilities, Capability);
 #endif

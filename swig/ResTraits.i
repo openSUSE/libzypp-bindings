@@ -1,13 +1,13 @@
 
 /** Base of ResTraits. Defines the Resolvable::Kind type. */
-struct ResolvableTraits
+/*struct ResolvableTraits
 {
     typedef KindOf<Resolvable>  KindType;
-};
+};*/
 
 /** ResTraits. Defines common types and the Kind value. */
 template<typename _Res>
-  struct ResTraits : public ResolvableTraits
+  struct ResTraits
   {
       typedef intrusive_ptr<_Res>       PtrType;
       typedef intrusive_ptr<const _Res> constPtrType;
@@ -66,4 +66,3 @@ X##_constPtr asKind##X( const PoolItem & p );
 %STUFF(Atom)
 %STUFF(Script)
 %STUFF(Message)
-%STUFF(Language)

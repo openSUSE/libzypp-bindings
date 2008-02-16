@@ -16,18 +16,15 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Edition.h"
 #include "zypp/ResTraits.h"
-#include "zypp/ResStore.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 #include "zypp/Pathname.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/ResObject.h"
-#include "zypp/ResPoolManager.h"
 #include "zypp/Target.h"
 #include "zypp/target/TargetImpl.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/TranslatedText.h"
-#include "zypp/CapFactory.h"
 #include "zypp/Package.h"
 #include "zypp/Patch.h"
 #include "zypp/Atom.h"
@@ -35,7 +32,6 @@
 #include "zypp/Script.h"
 #include "zypp/Message.h"
 #include "zypp/Pattern.h"
-#include "zypp/Language.h"
 #include "zypp/Product.h"
 #include "zypp/ResFilters.h"
 #include "zypp/OnMediaLocation.h"
@@ -53,8 +49,11 @@ using namespace zypp::filesystem;
 
 typedef std::set<Url> UrlSet;
 typedef std::list<std::string> StringList;
-typedef std::list<solver::detail::ItemCapKind> ItemCapKindList;
 %}
+
+%nodefault ByKind;
+%define DEFINE_PTR_TYPE(name)
+%enddef
 
 %rename("+") "operator+";
 %rename("<<") "operator<<";
@@ -96,13 +95,12 @@ class intrusive_ptr {
 %include "ResStatus.i"
 %include "NeedAType.i"
 %include "Arch.i"
-%include "ResStore.i"
 %include "Edition.i"
 %include "Kind.i"
 %include "ResTraits.i"
 %include "Date.i"
 %include "Capability.i"
-%include "CapSet.i"
+%include "Capabilities.i"
 %include "Dependencies.i"
 %include "Dep.i"
 %include "Resolvable.i"
@@ -116,10 +114,6 @@ class intrusive_ptr {
 %include "TranslatedText.i"
 %include "CheckSum.i"
 %include "CapMatch.i"
-%include "CapFactory.i"
-%include "NVR.i"
-%include "NVRA.i"
-%include "NVRAD.i"
 %include "Package.i"
 %include "Patch.i"
 %include "Atom.i"
@@ -127,7 +121,6 @@ class intrusive_ptr {
 %include "Script.i"
 %include "Message.i"
 %include "Pattern.i"
-%include "Language.i"
 %include "Product.i"
 %include "PublicKey.i"
 %include "KeyRing.i"
@@ -135,16 +128,13 @@ class intrusive_ptr {
 %include "MediaSetAccess.i"
 %include "PoolItem.i"
 %include "ResPool.i"
-%include "ResPoolManager.i"
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
 %include "TmpPath.i"
-%include "ItemCapKind.i"
 %include "Resolver.i"
 #ifdef SWIGPYTHON
 %include "python/callbacks.i"
 #endif
-
 
 class ZYpp
 {
@@ -153,14 +143,9 @@ class ZYpp
     typedef intrusive_ptr<const ZYpp> constPtr;
   public:
 
-    ResPool pool() const;
-    ResPoolProxy poolProxy() const;
+    //ResPool pool() const;
+    //ResPoolProxy poolProxy() const;
 
-    /*
-    SourceFeed_Ref sourceFeed() const;
-    */
-    void addResolvables (const ResStore& store, bool installed = false);
-    void removeResolvables (const ResStore& store);
     /*
     DiskUsageCounter::MountPointSet diskUsage();
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
