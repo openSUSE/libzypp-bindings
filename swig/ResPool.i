@@ -1,4 +1,4 @@
-
+namespace zypp {
 %apply unsigned { ResPool::size_type };
 
 %nodefault ResPool;
@@ -6,6 +6,8 @@
 %ignore ResPool::byKindEnd;
 %ignore ResPool::byNameBegin;
 %ignore ResPool::byNameEnd;
+
+
 
 class ResPool
   {
@@ -41,16 +43,10 @@ class ResPool
       /**  */
       size_type size() const;
 
-      /** \name Iterate through all PoolItems (all kinds). */
-      //@{
       /** */
-      const_iterator begin() const
-      { return make_filter_begin( pool::ByPoolItem(), store() ); }
-      /** */
-      const_iterator end() const
-      { return make_filter_end( pool::ByPoolItem(), store() ); }
-      //@}
-
+      const_iterator begin() const;
+      const_iterator end() const;
+      
     public:
       /** Return the corresponding \ref PoolItem.
        * Pool and sat pool should be in sync. Returns an empty
@@ -366,3 +362,5 @@ iter3(ResPool, PoolItem*);
 }
 
 #endif
+
+}
