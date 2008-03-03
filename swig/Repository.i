@@ -13,14 +13,6 @@
     */
     Repository();
 
-    /** \short Factory ctor taking a RepositoryImpl.
-     * This is quite low level. You usually want to use RepoManager to
-     * manage the repositories.
-     * \see RepoManager
-    */
-    explicit
-    Repository( const Impl_Ptr & impl_r );
-
      /** \short Factory ctor taking a RepositoryImpl.
       */
     explicit
