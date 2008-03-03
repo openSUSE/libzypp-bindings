@@ -1,62 +1,92 @@
+#if 1
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : Repository
+    //
+    /** */
+    class Repository : protected sat::detail::PoolMember,
+                 private base::SafeBool<Repository>
+    {
+    public:
+        typedef filter_iterator<detail::ByRepository, sat::detail::SolvableIterator> SolvableIterator;
+        typedef sat::detail::size_type size_type;
 
-  class Repository : private base::SafeBool<Repository>
-  {
-  public:
-    typedef repo::RepositoryImpl     Impl;
-    typedef repo::RepositoryImpl_Ptr Impl_Ptr;
+    public:
+        /** Default ctor creates \ref noRepository.*/
+        Repository();
 
-  public:
+        /** \ref PoolImpl ctor. */
+        explicit Repository( sat::detail::RepoIdType id_r );
 
-    /**
-     * \short Default ctor: noRepository.
-     * \see RepoManager::createFromCache.
-    */
-    Repository();
+    public:
+        /** Represents no \ref Repository. */
+        static const Repository noRepository;
 
-    /** \short Factory ctor taking a RepositoryImpl.
-     * This is quite low level. You usually want to use RepoManager to
-     * manage the repositories.
-     * \see RepoManager
-    */
-    explicit
-    Repository( const Impl_Ptr & impl_r );
+        /** Return whether this is the system repository. */
+        bool isSystemRepo() const;
 
-     /** \short Factory ctor taking a RepositoryImpl.
-      */
-    explicit
-    Repository( const RepoInfo & info_r );
+    public:
+        /** The repos name (alias). */
+        std::string name() const;
 
-    /**
-     * A dummy Repository (Id \c 0) providing nothing, doing nothing.
-    */
-    static const Repository noRepository;
+        /** Whether \ref Repository contains solvables. */
+        bool solvablesEmpty() const;
 
-    /** Validate Repository in a boolean context.
-     * \c FALSE iff == noRepository.
-    */
-    //using base::SafeBool<Repository>::operator bool_type;
+        /** Number of solvables in \ref Repository. */
+        size_type solvablesSize() const;
 
-  public:
-    typedef unsigned long NumericId;
+        /** Iterator to the first \ref Solvable. */
+        SolvableIterator solvablesBegin() const;
 
-    /** Runtime unique numeric Repository Id. */
-    NumericId numericId() const;
+        /** Iterator behind the last \ref Solvable. */
+        SolvableIterator solvablesEnd() const;
 
-    /**
-     * \short Repository info used to create this repository
-     */
-    const RepoInfo & info() const;
+    public:
+        /** Return any associated \ref RepoInfo. */
+        RepoInfo info() const;
 
-    /**
-     * \short Patch RPMs the repository provides
-     */
-    const std::list<packagedelta::PatchRpm> & patchRpms() const;
+        /** Set \ref RepoInfo for this repository.
+         * \throws Exception if this is \ref noRepository
+         * \throws Exception if the \ref RepoInfo::alias
+         *         does not match the \ref Repository::name.
+	 */
+        void setInfo( const RepoInfo & info_r );
 
-    /**
-     * \short Delta RPMs the repository provides
-     */
-    const std::list<packagedelta::DeltaRpm> & deltaRpms() const;
+	/** Remove any \ref RepoInfo set for this repository. */
+        void clearInfo();
 
-  };
+    public:
+        /** Remove this \ref Repository from it's \ref Pool. */
+        void eraseFromPool();
 
- 
+        /** Functor calling \ref eraseFromPool. */
+        struct EraseFromPool;
+
+    public:
+        /** \name Repository content manipulating methods.
+         * \todo maybe a separate Repository/Solvable content manip interface
+         * provided by the pool.
+         */
+        //@{
+        /** Load \ref Solvables from a solv-file.
+         * In case of an exception the repository remains in the \ref Pool.
+         * \throws Exception if this is \ref noRepository
+         * \throws Exception if loading the solv-file fails.
+         * \see \ref Pool::addRepoSolv and \ref Repository::EraseFromPool
+         */
+        void addSolv( const Pathname & file_r );
+
+        /** Add \c count_r new empty \ref Solvable to this \ref Repository. */
+        sat::detail::SolvableIdType addSolvables( unsigned count_r );
+        /** \overload Add only one new \ref Solvable. */
+        sat::detail::SolvableIdType addSolvable();
+        //@}
+
+    public:
+        /** Expert backdoor. */
+        ::_Repo * get() const;
+        /** Expert backdoor. */
+        sat::detail::RepoIdType id() const { return _id; }
+    };
+    ///////////////////////////////////////////////////////////////////
+#endif
