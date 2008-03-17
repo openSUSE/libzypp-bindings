@@ -3,10 +3,6 @@
                     private base::SafeBool<Capability>
   {
     public:
-      // legacy
-      std::string index() const ZYPP_DEPRECATED;
-
-    public:
       enum CtorFlag { PARSED, UNPARSED };
 
     public:
