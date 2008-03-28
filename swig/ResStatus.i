@@ -26,9 +26,11 @@ class ResStatus
     typedef bit::Range<FieldType,StateField::end,          2> EstablishField;
     typedef bit::Range<FieldType,EstablishField::end,      2> TransactField;
     typedef bit::Range<FieldType,TransactField::end,       2> TransactByField;
-    typedef bit::Range<FieldType,TransactByField::end,     3> TransactDetailField;
-    typedef bit::Range<FieldType,TransactDetailField::end, 2> SolverStateField;
+    typedef bit::Range<FieldType,TransactByField::end,     2> TransactDetailField;
+    typedef bit::Range<FieldType,TransactDetailField::end, 1> SolverStateField;
     typedef bit::Range<FieldType,SolverStateField::end,    1> LicenceConfirmedField;
+    typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;
+
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -83,14 +85,12 @@ class ResStatus
         EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
 	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
         DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
-        DUE_TO_UNLINK   = bit::RangeValue<TransactDetailField,3>::value,
-        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,4>::value
+        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,3>::value
       };
     enum SolverStateValue
       {
          NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
-         SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
-         IMPOSSIBLE = bit::RangeValue<SolverStateField,2>::value	 // impossible to install
+         SEEN       = bit::RangeValue<SolverStateField,1>::value // already seen during ResolverUpgrade
       };
 
     enum LicenceConfirmedValue
@@ -98,6 +98,15 @@ class ResStatus
         LICENCE_UNCONFIRMED = bit::RangeValue<LicenceConfirmedField,0>::value,
         LICENCE_CONFIRMED   = bit::RangeValue<LicenceConfirmedField,1>::value
       };
+
+    enum WeakValue
+      {
+       NO_WEAK                = bit::RangeValue<WeakField,0>::value,
+       SUGGESTED              = bit::RangeValue<WeakField,1>::value,
+       RECOMMENDED             = bit::RangeValue<WeakField,2>::value,
+       SUGGESTED_AND_RECOMMENDED = bit::RangeValue<WeakField,3>::value
+      };
+
     //@}
 
   public:
