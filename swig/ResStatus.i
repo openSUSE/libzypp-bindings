@@ -211,9 +211,6 @@ class ResStatus
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
-    bool isToBeUninstalledDueToUnlink() const
-    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK ); }
-
     bool isToBeUninstalledDueToUpgrade() const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
 
@@ -246,7 +243,6 @@ class ResStatus
     bool maySetToBeInstalled (TransactByValue causer);
     bool setToBeUninstalled (TransactByValue causer);
     bool maySetToBeUninstalled (TransactByValue causer);
-    bool setToBeUninstalledDueToUnlink ( );
     bool setToBeUninstalledDueToObsolete ( );
     bool setToBeUninstalledDueToUpgrade ( TransactByValue causer );
     bool setToBeInstalledSoft ( );
@@ -297,18 +293,9 @@ class ResStatus
     bool isSeen () const
     { return fieldValueIs<SolverStateField>( SEEN ); }
 
-    bool isImpossible () const
-    { return fieldValueIs<SolverStateField>( IMPOSSIBLE ); }
-
     bool setSeen (bool value)
     {
       fieldValueAssign<SolverStateField>( value ? SEEN : NORMAL );
-      return true;
-    }
-
-    bool setImpossible (bool value)
-    {
-      fieldValueAssign<SolverStateField>( value ? IMPOSSIBLE : NORMAL );
       return true;
     }
 
@@ -342,7 +329,6 @@ class ResStatus
     static const ResStatus unneeded;	// uninstalled, unneeded
     static const ResStatus needed;	// uninstalled, incomplete
     static const ResStatus incomplete;	// installed, incomplete
-    static const ResStatus impossible;	// uninstallable
     //@}
 
   private:
