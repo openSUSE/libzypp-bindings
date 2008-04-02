@@ -23,8 +23,7 @@ class ResStatus
     typedef bit::BitField<FieldType> BitFieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                        1> StateField;
-    typedef bit::Range<FieldType,StateField::end,          2> EstablishField;
-    typedef bit::Range<FieldType,EstablishField::end,      2> TransactField;
+    typedef bit::Range<FieldType,StateField::end,          2> TransactField;
     typedef bit::Range<FieldType,TransactField::end,       2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end,     2> TransactDetailField;
     typedef bit::Range<FieldType,TransactDetailField::end, 1> SolverStateField;
@@ -47,13 +46,6 @@ class ResStatus
       {
         UNINSTALLED = bit::RangeValue<StateField,0>::value,
         INSTALLED   = bit::RangeValue<StateField,1>::value
-      };
-    enum EstablishValue
-      {
-        UNDETERMINED = bit::RangeValue<EstablishField,0>::value,
-        UNNEEDED     = bit::RangeValue<EstablishField,1>::value, // has freshens, none trigger
-        SATISFIED    = bit::RangeValue<EstablishField,2>::value, // has none or triggered freshens, all requirements fulfilled
-        INCOMPLETE   = bit::RangeValue<EstablishField,3>::value	 // installed: has none or triggered freshens, requirements unfulfilled
       };
     enum TransactValue
       {
@@ -154,33 +146,6 @@ class ResStatus
     bool isToBeUninstalled() const
     { return isInstalled() && transacts(); }
 
-    bool isUndetermined() const
-    { return fieldValueIs<EstablishField>( UNDETERMINED ); }
-
-    bool isEstablishedUneeded() const
-    { return fieldValueIs<EstablishField>( UNNEEDED ); }
-
-    bool isEstablishedSatisfied() const
-    { return fieldValueIs<EstablishField>( SATISFIED ); }
-
-    bool isEstablishedIncomplete() const
-    { return fieldValueIs<EstablishField>( INCOMPLETE ); }
-
-    bool isUnneeded() const
-    { return isUninstalled() && fieldValueIs<EstablishField>( UNNEEDED ); }
-
-    bool isSatisfied() const
-    { return isUninstalled() && fieldValueIs<EstablishField>( SATISFIED ); }
-
-    bool isComplete () const
-    { return isInstalled() && fieldValueIs<EstablishField>( SATISFIED ); }
-
-    bool isIncomplete() const
-    { return isInstalled() && fieldValueIs<EstablishField>( INCOMPLETE ); }
-
-    bool isNeeded() const
-    { return isUninstalled() && fieldValueIs<EstablishField>( INCOMPLETE ); }
-
     bool isLocked() const
     { return fieldValueIs<TransactField>( LOCKED ); }
 
@@ -266,30 +231,6 @@ class ResStatus
 	return true;
     }
 
-    bool setUndetermined ()
-    {
-      fieldValueAssign<EstablishField>(UNDETERMINED);
-      return true;
-    }
-
-    bool setUnneeded ()
-    {
-      fieldValueAssign<EstablishField>(UNNEEDED);
-      return true;
-    }
-
-    bool setSatisfied ()
-    {
-      fieldValueAssign<EstablishField>(SATISFIED);
-      return true;
-    }
-
-    bool setIncomplete ()
-    {
-      fieldValueAssign<EstablishField>(INCOMPLETE);
-      return true;
-    }
-
     bool isSeen () const
     { return fieldValueIs<SolverStateField>( SEEN ); }
 
@@ -334,7 +275,6 @@ class ResStatus
   private:
     /** Ctor for intialization of builtin constants. */
     ResStatus( StateValue s,
-               EstablishValue e     = UNDETERMINED,
                TransactValue t      = KEEP_STATE,
                InstallDetailValue i = EXPLICIT_INSTALL,
                RemoveDetailValue r  = EXPLICIT_REMOVE,
