@@ -163,6 +163,9 @@ class ResStatus
     bool isUndetermined() const
     { return fieldValueIs<ValidateField>( UNDETERMINED ); }
 
+    ValidateValue validate() const
+    { return (ValidateValue)_bitfield.value<ValidateField>(); }
+
     bool isSatisfied() const
     { return fieldValueIs<ValidateField>( SATISFIED ); }
 
