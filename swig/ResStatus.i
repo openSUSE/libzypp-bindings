@@ -23,7 +23,8 @@ class ResStatus
     typedef bit::BitField<FieldType> BitFieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                        1> StateField;
-    typedef bit::Range<FieldType,StateField::end,          2> TransactField;
+    typedef bit::Range<FieldType,StateField::end,          2> ValidateField;      
+    typedef bit::Range<FieldType,ValidateField::end,       2> TransactField;
     typedef bit::Range<FieldType,TransactField::end,       2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end,     2> TransactDetailField;
     typedef bit::Range<FieldType,TransactDetailField::end, 1> SolverStateField;
@@ -46,6 +47,13 @@ class ResStatus
       {
         UNINSTALLED = bit::RangeValue<StateField,0>::value,
         INSTALLED   = bit::RangeValue<StateField,1>::value
+      };
+    enum ValidateValue
+      {
+       UNDETERMINED = bit::RangeValue<ValidateField,0>::value,
+        BROKEN       = bit::RangeValue<ValidateField,1>::value,
+        SATISFIED    = bit::RangeValue<ValidateField,2>::value,
+        NONRELEVANT  = bit::RangeValue<ValidateField,3>::value
       };
     enum TransactValue
       {
@@ -152,6 +160,18 @@ class ResStatus
     bool isKept() const
     { return fieldValueIs<TransactField>( KEEP_STATE ); }
 
+    bool isUndetermined() const
+    { return fieldValueIs<ValidateField>( UNDETERMINED ); }
+
+    bool isSatisfied() const
+    { return fieldValueIs<ValidateField>( SATISFIED ); }
+
+    bool isBroken() const
+    { return fieldValueIs<ValidateField>( BROKEN ); }
+
+    bool isNonRelevant() const
+    { return fieldValueIs<ValidateField>( NONRELEVANT ); }
+
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
 
@@ -231,6 +251,30 @@ class ResStatus
 	return true;
     }
 
+    bool setUndetermined ()
+    {
+      fieldValueAssign<ValidateField>(UNDETERMINED);
+      return true;
+    }
+
+    bool setSatisfied ()
+    {
+      fieldValueAssign<ValidateField>(SATISFIED);
+      return true;
+    }
+
+    bool setBroken ()
+    {
+      fieldValueAssign<ValidateField>(BROKEN);
+      return true;
+    }
+
+    bool setNonRelevant ()
+    {
+      fieldValueAssign<ValidateField>(NONRELEVANT);
+      return true;
+    }
+
     bool isSeen () const
     { return fieldValueIs<SolverStateField>( SEEN ); }
 
@@ -275,6 +319,7 @@ class ResStatus
   private:
     /** Ctor for intialization of builtin constants. */
     ResStatus( StateValue s,
+	       ValidateValue v      = UNDETERMINED, 
                TransactValue t      = KEEP_STATE,
                InstallDetailValue i = EXPLICIT_INSTALL,
                RemoveDetailValue r  = EXPLICIT_REMOVE,
