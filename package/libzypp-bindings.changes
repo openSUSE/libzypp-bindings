@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr 25 20:15:39 CEST 2008 - coolo@suse.de
+
+- remove obsolete ResPool methods
+
+-------------------------------------------------------------------
 Fri Apr 11 22:41:15 CEST 2008 - coolo@suse.de
 
 - adapt to libzypp 4.10
