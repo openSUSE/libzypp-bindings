@@ -12,6 +12,13 @@
 
 %{
 /* Includes the header in the wrapper code */
+#ifdef SWIGRUBY
+#define REG_EXTENDED 1
+#define REG_ICASE (REG_EXTENDED << 1)
+#define REG_NEWLINE (REG_ICASE << 1)
+#define REG_NOSUB (REG_NEWLINE << 1)
+#endif
+
 #include <sstream>
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Edition.h"
