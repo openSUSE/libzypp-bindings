@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May  6 11:28:45 CEST 2008 - coolo@suse.de
+
+- compile ruby
+
+-------------------------------------------------------------------
 Fri Apr 25 20:15:39 CEST 2008 - coolo@suse.de
 
 - remove obsolete ResPool methods
