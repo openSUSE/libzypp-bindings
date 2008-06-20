@@ -115,6 +115,7 @@ class intrusive_ptr {
 %include "RepoType.i"
 %include "Repository.i"
 %include "RepoInfo.i"
+%include "Service.i"
 %include "RepoManager.i"
 %include "RepoStatus.i"
 %include "ResObject.i"
