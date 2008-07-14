@@ -106,7 +106,6 @@ class intrusive_ptr {
 %include "Date.i"
 %include "Capability.i"
 %include "Capabilities.i"
-%include "Dependencies.i"
 %include "Dep.i"
 %include "Resolvable.i"
 %include "ByteCount.i"

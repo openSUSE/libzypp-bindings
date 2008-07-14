@@ -2,6 +2,7 @@
 Mon Jul 14 15:07:46 CEST 2008 - ma@suse.de
 
 - Remove obsolete references to Script/Message/Atom. 
+- Remove obsolete references to Dependencies.
 
 -------------------------------------------------------------------
 Tue May  6 11:28:45 CEST 2008 - coolo@suse.de
