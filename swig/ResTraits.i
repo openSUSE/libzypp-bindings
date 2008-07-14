@@ -63,6 +63,3 @@ X##_constPtr asKind##X( const PoolItem & p );
 %STUFF(SrcPackage)
 %STUFF(Pattern)
 %STUFF(Product)
-%STUFF(Atom)
-%STUFF(Script)
-%STUFF(Message)

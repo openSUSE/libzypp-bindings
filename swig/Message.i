@@ -1,1 +1,0 @@
-%include <zypp/Message.h>
