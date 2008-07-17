@@ -1,4 +1,4 @@
-
+cmake_minimum_required(VERSION 2.6)
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 SET(CMAKE_MODULE_PATH ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules ${CMAKE_MODULE_PATH})
@@ -33,7 +33,6 @@ SET (CPACK_SOURCE_IGNORE_FILES
 
 INCLUDE(CPack)
 
-#FIND_PACKAGE(SWIG REQUIRED)
 MESSAGE(STATUS "Looking modules in ${CMAKE_MODULE_PATH}")
 FIND_PROGRAM(SWIG_EXECUTABLE
   NAMES swig-1.3 swig
@@ -73,4 +72,3 @@ ADD_CUSTOM_TARGET( srcpackage
 
 MESSAGE(STATUS "Writing spec file...")
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp-bindings.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp-bindings.spec @ONLY)
-
