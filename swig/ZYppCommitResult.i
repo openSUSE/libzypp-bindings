@@ -1,6 +1,6 @@
 %include <zypp/ZYppCommitResult.h>
 
-%extend ZYppCommitResult
+%extend zypp::ZYppCommitResult
 {
   std::string asString() const
   {

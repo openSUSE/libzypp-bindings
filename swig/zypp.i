@@ -66,13 +66,18 @@ typedef std::list<std::string> StringList;
 %rename("!") "operator!";
 %rename("==") "operator==";
 
-
 template < typename T >
 class intrusive_ptr {
   public:
   T *operator->();
 };
 
+namespace zypp {
+  namespace base {
+    // silence 'Nothing known about class..' warning
+    class  ReferenceCounted {};
+  }
+}
 
 %include "std_string.i"
 %include "stl.i"

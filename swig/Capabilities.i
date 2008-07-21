@@ -1,6 +1,8 @@
 
-
-// I don't think this is correct: ctor and dtor are not taken into account
+#if 1
+%include <zypp/Capabilities.h>
+#else
+// I dont think this is correct: ctor and dtor are not taken into account
 class Capabilities
 {
 
@@ -34,4 +36,5 @@ iter3(Capabilities, Capability*);
 
 #ifdef SWIGPERL5
 iter2(Capabilities, Capability);
+#endif
 #endif

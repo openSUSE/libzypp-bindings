@@ -58,27 +58,27 @@ Group:          Development/Languages/Ruby
 %defattr(-,root,root,-)
 %{_libdir}/ruby/vendor_ruby/%{rb_ver}/%{rb_arch}/zypp.so
 
-#%package -n python-zypp
-#Summary:        Python bindings for libzypp
-#Group:          Development/Languages/Python
-#%description -n python-zypp
-#-
-#
-#%files -n python-zypp
-#%defattr(-,root,root,-)
-#%{_libdir}/python2.5/site-packages/_zypp.so
-#%{_libdir}/python2.5/site-packages/zypp.py
+%package -n python-zypp
+Summary:        Python bindings for libzypp
+Group:          Development/Languages/Python
+%description -n python-zypp
+-
 
-#%package -n perl-zypp
-#Summary:        Perl bindings for libzypp
-#Group:          Development/Languages/Perl
-#
-#%description -n perl-zypp
-#-
-#
-#%files -n perl-zypp
-#%defattr(-,root,root,-)
-#/usr/lib/perl5/*/*/zypp.pm
-#/usr/lib/perl5/*/*/zypp.so
+%files -n python-zypp
+%defattr(-,root,root,-)
+%{_libdir}/python2.5/site-packages/_zypp.so
+%{_libdir}/python2.5/site-packages/zypp.py
+
+%package -n perl-zypp
+Summary:        Perl bindings for libzypp
+Group:          Development/Languages/Perl
+
+%description -n perl-zypp
+-
+
+%files -n perl-zypp
+%defattr(-,root,root,-)
+/usr/lib/perl5/*/*/zypp.pm
+/usr/lib/perl5/*/*/zypp.so
 
 %changelog

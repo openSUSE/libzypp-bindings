@@ -1,8 +1,8 @@
 %include <zypp/PoolItem.h>
 
-typedef PoolItem PoolItem;
+//typedef PoolItem PoolItem;
 
-%extend PoolItem
+%extend zypp::PoolItem
 {
   std::string asString() const
   {
