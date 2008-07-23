@@ -1,3 +1,4 @@
+%ignore zypp::make_res_object;
 
 %include <zypp/ResObject.h>
 

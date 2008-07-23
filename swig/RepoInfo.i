@@ -4,7 +4,5 @@
 #endif
 
 %include <zypp/RepoInfo.h>
-
-typedef std::list<RepoInfo> RepoInfoList;
-%template(RepoInfoList) std::list<RepoInfo>;
-
+typedef std::list<zypp::RepoInfo> RepoInfoList;
+%template(RepoInfoList) std::list<zypp::RepoInfo>;

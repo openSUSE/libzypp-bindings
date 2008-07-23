@@ -11,5 +11,7 @@
 //   %rename Edition::match(const Edition& lhs, const Edition& rhs) match2;
 //}
 
+%ignore zypp::Edition::compare(const Edition &, const Edition &);
+
+%template(IdStringEdition) zypp::IdStringType<zypp::Edition>;
 %include <zypp/Edition.h>
-%ignore zypp::Edition::match(Edition const &);

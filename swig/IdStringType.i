@@ -1,0 +1,2 @@
+
+%include <zypp/IdStringType.h>

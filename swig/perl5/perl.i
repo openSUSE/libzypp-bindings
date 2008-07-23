@@ -1,4 +1,6 @@
 
+%ignore zypp::Arch_empty;
+
 namespace zypp
 {
     // These operators must be ignored otherwise the wrapper does
@@ -6,6 +8,14 @@ namespace zypp
     %ignore operator<<;
     %ignore operator==;
     %ignore operator!=;
+
+    namespace filesystem
+    {
+	// Same as above.
+	%ignore operator==;
+	%ignore operator!=;
+	%ignore operator<<;
+    }
 }
 
 %define iter(cls, storetype)

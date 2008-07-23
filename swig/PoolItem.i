@@ -1,6 +1,9 @@
 %include <zypp/PoolItem.h>
 
-//typedef PoolItem PoolItem;
+#ifdef SWIGPERL5
+#else
+%template(PoolItemSet) std::set<zypp::PoolItem>;
+#endif
 
 %extend zypp::PoolItem
 {

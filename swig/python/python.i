@@ -2,6 +2,7 @@
 
 %rename *::asString "__str__";
 
+%ignore zypp::Arch_empty;
 
 namespace zypp
 {
@@ -18,7 +19,7 @@ namespace zypp
       // not compile (using swig 1.3.29).
       %ignore operator==;
       %ignore operator!=;
-  
+
       // Just to avoid warnings.
       %ignore operator<<;
   }

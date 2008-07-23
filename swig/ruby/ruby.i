@@ -1,7 +1,5 @@
 
-
 %rename *::asString "__str__";
-
 
 namespace zypp
 {

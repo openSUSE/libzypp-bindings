@@ -1,230 +1,17 @@
-namespace zypp {
-%apply unsigned { ResPool::size_type };
+%nodefault zypp::ResPool;
 
-%nodefault ResPool;
-%ignore ResPool::byKindBegin;
-%ignore ResPool::byKindEnd;
-%ignore ResPool::byNameBegin;
-%ignore ResPool::byNameEnd;
+// missing resfilter:: to call these
+%ignore zypp::ResPool::byKindBegin;
+%ignore zypp::ResPool::byKindEnd;
+%ignore zypp::ResPool::byNameBegin;
+%ignore zypp::ResPool::byNameEnd;
 
+%apply unsigned { zypp::ResPool::size_type };
 
+%include <zypp/ResPool.h>
 
-class ResPool
-  {
-    friend std::ostream & operator<<( std::ostream & str, const ResPool & obj );
-
-    public:
-      /** \ref PoolItem */
-      typedef PoolItem				         value_type;
-      typedef pool::PoolTraits::size_type		 size_type;
-      typedef pool::PoolTraits::const_iterator	         const_iterator;
-
-      typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
-      typedef pool::PoolTraits::repository_iterator        repository_iterator;
-
-    public:
-      /** Singleton ctor. */
-      static ResPool instance();
-
-      /** preliminary */
-      ResPoolProxy proxy() const;
-
-    public:
-      /** The pools serial number. Changing whenever the
-       * whenever the content changes. (Resolvables or
-       * Dependencies).
-       */
-      const SerialNumber & serial() const;
-
-    public:
-      /**  */
-      bool empty() const;
-      /**  */
-      size_type size() const;
-
-      /** */
-      const_iterator begin() const;
-      const_iterator end() const;
-
-    public:
-      /** Return the corresponding \ref PoolItem.
-       * Pool and sat pool should be in sync. Returns an empty
-       * \ref PoolItem if there is no corresponding \ref PoolItem.
-       * \see \ref PoolItem::satSolvable.
-       */
-      PoolItem find( const sat::Solvable & slv_r ) const;
-
-    public:
-      /** \name Iterate through all PoolItems matching a \c _Filter. */
-      //@{
-      template<class _Filter>
-          filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
-      { return make_filter_begin( filter_r, *this ); }
-
-      template<class _Filter>
-          filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
-      { return make_filter_end( filter_r, *this ); }
-      //@}
-
-    public:
-      /** \name Iterate through all PoolItems of a certain name and kind. */
-      //@{
-      typedef pool::ByIdent                       ByIdent;
-      typedef pool::PoolTraits::byIdent_iterator  byIdent_iterator;
-
-      byIdent_iterator byIdentBegin( const ByIdent & ident_r ) const
-      {
-	return make_transform_iterator( id2item().equal_range( ident_r.get() ).first,
-                                        pool::PoolTraits::Id2ItemValueSelector() );
-      }
-
-      byIdent_iterator byIdentBegin( ResKind kind_r, IdString name_r ) const
-      { return byIdentBegin( ByIdent(kind_r,name_r) ); }
-
-      byIdent_iterator byIdentBegin( ResKind kind_r, const C_Str & name_r ) const
-      { return byIdentBegin( ByIdent(kind_r,name_r) ); }
-
-      template<class _Res>
-      byIdent_iterator byIdentBegin( IdString name_r ) const
-      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r) ); }
-
-      template<class _Res>
-      byIdent_iterator byIdentBegin( const C_Str & name_r ) const
-      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r) ); }
-
-      /** Derive name and kind from \ref PoolItem. */
-      byIdent_iterator byIdentBegin( const PoolItem & pi_r ) const
-      { return byIdentBegin( ByIdent(pi_r.satSolvable()) ); }
-      /** Derive name and kind from \ref sat::Solvable. */
-      byIdent_iterator byIdentBegin( sat::Solvable slv_r ) const
-      { return byIdentBegin( ByIdent(slv_r) ); }
-      /** Takes a \ref sat::Solvable::ident string. */
-      byIdent_iterator byIdentBegin( IdString ident_r ) const
-      { return byIdentBegin( ByIdent(ident_r) ); }
-
-
-      byIdent_iterator byIdentEnd( const ByIdent & ident_r ) const
-      {
-	return make_transform_iterator( id2item().equal_range( ident_r.get() ).second,
-                                        pool::PoolTraits::Id2ItemValueSelector() );
-      }
-
-      byIdent_iterator byIdentEnd( ResKind kind_r, IdString name_r ) const
-      { return byIdentEnd( ByIdent(kind_r,name_r) ); }
-
-      byIdent_iterator byIdentEnd( ResKind kind_r, const C_Str & name_r ) const
-      { return byIdentEnd( ByIdent(kind_r,name_r) ); }
-
-      template<class _Res>
-      byIdent_iterator byIdentEnd( IdString name_r ) const
-      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r) ); }
-
-      template<class _Res>
-      byIdent_iterator byIdentEnd( const C_Str & name_r ) const
-      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r) ); }
-
-      /** Derive name and kind from \ref PoolItem. */
-      byIdent_iterator byIdentEnd( const PoolItem & pi_r ) const
-      { return byIdentEnd( ByIdent(pi_r.satSolvable()) ); }
-      /** Derive name and kind from \ref sat::Solvable. */
-      byIdent_iterator byIdentEnd( sat::Solvable slv_r ) const
-      { return byIdentEnd( ByIdent(slv_r) ); }
-      /** Takes a \ref sat::Solvable::ident string. */
-      byIdent_iterator byIdentEnd( IdString ident_r ) const
-      { return byIdentEnd( ByIdent(ident_r) ); }
-     //@}
-
-    public:
-      /** \name Iterate through all ResObjects of a certain kind. */
-      //@{
-      typedef zypp::resfilter::ByKind ByKind;
-      typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
-
-      byKind_iterator byKindBegin( const ResKind & kind_r ) const
-      { return make_filter_begin( ByKind(kind_r), *this ); }
-
-      template<class _Res>
-          byKind_iterator byKindBegin() const
-      { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
-
-      byKind_iterator byKindEnd( const ResKind & kind_r ) const
-      { return make_filter_end( ByKind(kind_r), *this ); }
-
-      template<class _Res>
-          byKind_iterator byKindEnd() const
-      { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
-      //@}
-
-    public:
-      /** \name Iterate through all ResObjects with a certain name (all kinds).
-       * \deprecated Instead of iterating byName and filter byKind use ByIdent iterator.
-      */
-      //@{
-      typedef zypp::resfilter::ByName ByName;
-      typedef filter_iterator<ByName,const_iterator> byName_iterator;
-
-
-
-    public:
-      /** \name Iterate through all Repositories that contribute ResObjects.
-       */
-      //@{
-      size_type knownRepositoriesSize() const;
-
-      repository_iterator knownRepositoriesBegin() const;
-
-      repository_iterator knownRepositoriesEnd() const;
-      //@}
-
-     public:
-      /** \name Iterate through requested/available Locales.
-       */
-      //@{
-      /** Set the requested locales.
-       * Languages to be supported by the system, e.g. language specific
-       * packages to be installed.
-       */
-      void setRequestedLocales( const LocaleSet & locales_r );
-
-      /** Add one \ref Locale to the set of requested locales.
-       * Return \c true if \c locale_r was newly added to the set.
-      */
-      bool addRequestedLocale( const Locale & locale_r );
-
-      /** Erase one \ref Locale from the set of requested locales.
-      * Return \c false if \c locale_r was not found in the set.
-       */
-      bool eraseRequestedLocale( const Locale & locale_r );
-
-      /** Return the requested locales.
-       * \see \ref setRequestedLocales
-      */
-      const LocaleSet & getRequestedLocales() const;
-
-      /** Wheter this \ref Locale is in the set of requested locales. */
-      bool isRequestedLocale( const Locale & locale_r ) const;
-
-      /** Get the set of available locales.
-       * This is computed from the package data so it actually
-       * represents all locales packages claim to support.
-       */
-      const LocaleSet & getAvailableLocales() const;
-
-      /** Wheter this \ref Locale is in the set of available locales. */
-      bool isAvailableLocale( const Locale & locale_r ) const;
-      //@}
-
-    private:
-      const pool::PoolTraits::ItemContainerT & store() const;
-      const pool::PoolTraits::Id2ItemT & id2item() const;
-
-    private:
-      /** Ctor */
-      ResPool( pool::PoolTraits::Impl_constPtr impl_r );
-      /** Const access to implementation. */
-      pool::PoolTraits::Impl_constPtr _pimpl;
-  };
-
+namespace zypp
+{
 
 #ifdef SWIGPERL5
 
@@ -272,7 +59,6 @@ iter3(ResPool, PoolItem*);
 #endif
 
 #ifdef SWIGPYTHON
-%template(PoolItemSet) std::set<PoolItem>;
 %newobject ResPool::const_iterator(PyObject **PYTHON_SELF);
 %extend  ResPool {
   swig::PySwigIterator* iterator(PyObject **PYTHON_SELF)

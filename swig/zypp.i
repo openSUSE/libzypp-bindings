@@ -69,7 +69,7 @@ typedef std::list<std::string> StringList;
 template < typename T >
 class intrusive_ptr {
   public:
-  T *operator->();
+    T *operator->();
 };
 
 namespace zypp {
@@ -100,6 +100,7 @@ namespace zypp {
 %include "perl5/perl.i"
 #endif
 
+%include "IdStringType.i"
 %include "Pathname.i"
 %include "Url.i"
 %include "ResStatus.i"
@@ -142,59 +143,5 @@ namespace zypp {
 %include "python/callbacks.i"
 #endif
 
-class ZYpp
-{
-  public:
-    typedef intrusive_ptr<ZYpp>       Ptr;
-    typedef intrusive_ptr<const ZYpp> constPtr;
-  public:
-
-    //ResPool pool() const;
-    //ResPoolProxy poolProxy() const;
-
-    /*
-    DiskUsageCounter::MountPointSet diskUsage();
-    void setPartitions(const DiskUsageCounter::MountPointSet &mp);
-    */
-    Target_Ptr target() const;
-    void initializeTarget(const zypp::Pathname & root);
-    void finishTarget();
-
-    typedef ZYppCommitResult CommitResult;
-    ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
-
-    Resolver_Ptr resolver() const;
-    KeyRing_Ptr keyRing() const;
-
-     /*
-    void setTextLocale( const Locale & textLocale_r );
-    Locale getTextLocale() const;
-    typedef std::set<Locale> LocaleSet;
-    void setRequestedLocales( const LocaleSet & locales_r );
-    LocaleSet getRequestedLocales() const;
-    LocaleSet getAvailableLocales() const;
-    void availableLocale( const Locale & locale_r );
-    */
-    zypp::Pathname homePath() const;
-    zypp::Pathname tmpPath() const;
-    void setHomePath( const zypp::Pathname & path );
-
-    Arch architecture() const;
-    void setArchitecture( const Arch & arch );
-
-   /**
-    * \short Apply persistant locks to current pool.
-    * Call this before solving
-    *
-    * \returns Number of items locked
-    */
-   int applyLocks();
-
-    protected:
-    virtual ~ZYpp();
-    private:
-    friend class ZYppFactory;
-    explicit ZYpp( const Impl_Ptr & impl_r );
-};
-
+%include <zypp/ZYpp.h>
 %include "ZYppFactory.i"

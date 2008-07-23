@@ -17,7 +17,7 @@
    };
 #endif
 
-%extend ResStatus
+%extend zypp::ResStatus
 {
   std::string asString() const
   {
