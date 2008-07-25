@@ -18,7 +18,7 @@ Summary:        Bindings for libzypp
 Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  cmake gcc-c++ python-devel ruby-devel swig
-BuildRequires:  libzypp-devel >= 3.0.0
+BuildRequires:  libzypp-devel >= 5.2.1
 Source:         %{name}-%{version}.tar.bz2
 
 %description

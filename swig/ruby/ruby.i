@@ -19,8 +19,8 @@ namespace zypp
 	%ignore operator!=;
 	%ignore operator<<;
     }
-}
 
+}
 
 /*
  *  Extend cls with an ruby-like each iterator and a to_a method.  Yields
@@ -80,6 +80,36 @@ namespace zypp
     } \
 }
 
+/*
+ *  This is for an iterator whichs operator* returns by value (i.e. a temporary).
+ *  Like e.g. the Capabilities::const_iterator does. If the compiler warns you are
+ *  taking the address of a temporary when using iter3, you most probaly need this one.
+ *
+ */
+#define by_value_iterator(cls) \
+%mixin cls "Enumerable"; \
+%extend cls \
+{ \
+    void each() { \
+	cls::const_iterator i = self->begin(); \
+        while (i != self->end()) { \
+	    const cls::value_type* tmp = new cls::value_type( *i ); \
+	    rb_yield(SWIG_NewPointerObj((void*) tmp, $descriptor(cls::value_type*), 1)); \
+            i++; \
+        } \
+    } \
+\
+    VALUE to_a() { \
+        VALUE ary = rb_ary_new(); \
+	cls::const_iterator i = self->begin(); \
+        while (i != self->end()) { \
+	    const cls::value_type* tmp = new cls::value_type( *i ); \
+            rb_ary_push(ary, SWIG_NewPointerObj((void*) tmp, $descriptor(cls::value_type*), 1)); \
+            i++; \
+        } \
+        return ary; \
+    } \
+}
 
 %exception
 {

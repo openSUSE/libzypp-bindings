@@ -1,16 +1,8 @@
 
-#if 1
 %include <zypp/Capabilities.h>
-#else
-// I dont think this is correct: ctor and dtor are not taken into account
-class Capabilities
-{
-
-};
-
 
 #ifdef SWIGRUBY
-iter3(Capabilities, Capability*);
+by_value_iterator(zypp::Capabilities);
 #endif
 
 
@@ -22,19 +14,18 @@ iter3(Capabilities, Capability*);
 // #endif
 
 #ifdef SWIGPYTHON
-%extend Capabilities
+%extend zypp::Capabilities
 {
-    // just a test
-    const Capability* haha()
-    {
-	Capabilities::iterator i = self->begin();
-	const Capability* tmp = &*i;
-	return tmp;
-    }
+  // just a test
+  const Capability* haha()
+  {
+    Capabilities::const_iterator i = self->begin();
+    const Capability* tmp = &*i;
+    return tmp;
+  }
 }
 #endif
 
 #ifdef SWIGPERL5
-iter2(Capabilities, Capability);
-#endif
+forwarditer(zypp::Capabilities, zypp::Capability);
 #endif
