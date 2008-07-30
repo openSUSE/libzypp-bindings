@@ -40,6 +40,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Repository.h"
+#include "zypp/ServiceInfo.h"
 #include "zypp/RepoManager.h"
 #include "zypp/Service.h"
 #include "zypp/repo/RepoType.h"
