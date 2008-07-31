@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul 31 14:25:21 CEST 2008 ma@suse.de
+
+- Work around undefined symbols in libzypp. (bnc #391831)
+- Adapt to zypp::Service being renamed to ServiceInfo
+- revision 10707
+- version 0.4.7
+
+-------------------------------------------------------------------
 Fri Jul 25 19:29:11 CEST 2008 - ma@suse.de
 
 - Removed almost all local copies of zypp header files. This also

@@ -42,7 +42,6 @@
 #include "zypp/Repository.h"
 #include "zypp/ServiceInfo.h"
 #include "zypp/RepoManager.h"
-#include "zypp/Service.h"
 #include "zypp/repo/RepoType.h"
 #include "zypp/TmpPath.h"
 #include "zypp/Resolver.h"
