@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug  1 10:23:55 CEST 2008 ma@suse.de
+
+- Remove obsolete TranslatedText
+- Add ProductInfo which is going to replace Product
+- revision 10716
+
+-------------------------------------------------------------------
 Thu Jul 31 14:25:21 CEST 2008 ma@suse.de
 
 - Work around undefined symbols in libzypp. (bnc #391831)

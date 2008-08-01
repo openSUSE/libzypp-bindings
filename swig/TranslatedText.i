@@ -1,2 +1,0 @@
-
-%include <zypp/TranslatedText.h>
