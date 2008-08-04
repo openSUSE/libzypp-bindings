@@ -121,6 +121,7 @@ namespace zypp {
 %include "SrcPackage.i"
 %include "RepoType.i"
 %include "RepoInfo.i"
+%include "ServiceInfo.i"
 %include "Repository.i"
 %include "RepoStatus.i"
 %include "RepoManager.i"
