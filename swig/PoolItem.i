@@ -7,7 +7,14 @@
 
 %extend zypp::PoolItem
 {
-  std::string asString() const
+#ifdef SWIGPYTHON
+%rename ("__str__") string();
+#endif
+#ifdef SWIGRUBY
+%rename ("to_s") string();
+#endif
+
+  std::string string() const
   {
     std::ostringstream str;
     str << *self;
