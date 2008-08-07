@@ -9,14 +9,16 @@ $:.unshift "../../../build/swig/ruby"
 require 'test/unit'
 
 class LoadTest < Test::Unit::TestCase
-  def test_loading
-    require 'zypp'
+  require 'zypp'
+  include Zypp
 
-    g = Zypp::ByteCount.new(Zypp::ByteCount.G)
+  def test_loading
+
+    g = ByteCount.new(ByteCount.G)
     assert g
-    gb = Zypp::ByteCount.new(Zypp::ByteCount.GB)
+    gb = ByteCount.new(ByteCount.GB)
     assert gb
-    k = Zypp::ByteCount.new(Zypp::ByteCount.K)
+    k = ByteCount.new(ByteCount.K)
     assert k.to_i == 1024
   end
 end
