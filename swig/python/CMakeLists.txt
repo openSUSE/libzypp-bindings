@@ -1,45 +1,45 @@
-# cmake likes unique target names
-SET(WRAP python)
+#
+# CMakeLists.txt for libzypp-bindings/swig/python
+#
+# !!Attn!!: This creates two files
+#  1. zypp.so
+#  2. zypp.py
+# and the .py file gets imported.
+#
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
+ENABLE_TESTING()
+ADD_SUBDIRECTORY(tests)
+
+# SWIG_OUPUT is per-target
+
+SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/satsolver_python.cc" )
 
 FIND_PACKAGE(PythonInterp REQUIRED)
-FIND_PACKAGE(PythonLibs REQUIRED)
-
 EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib())" OUTPUT_VARIABLE PYTHON_LIB_PATH)
 
 MESSAGE(STATUS "Python executable: ${PYTHON_EXECUTABLE}")
 MESSAGE(STATUS "Python lib path: ${PYTHON_LIB_PATH}")
 MESSAGE(STATUS "Python include path: ${PYTHON_INCLUDE_PATH}")
 
-SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx" )
-SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/zypp.i" )
-
 ADD_CUSTOM_COMMAND (
-   OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx
+   OUTPUT  ${SWIG_OUTPUT}
    COMMAND ${CMAKE_COMMAND} -E echo_append "Creating wrapper code for python..."
-   COMMAND ${SWIG_EXECUTABLE} -v -DZYPP_DEPRECATED -c++ -python  -o ${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx -I${ZYPP_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../zypp.i
+   COMMAND ${SWIG_EXECUTABLE} -v -DZYPP_DEPRECATED -c++ -python  -o ${SWIG_OUTPUT} -I${ZYPP_INCLUDE_DIR} ${SWIG_INPUT}
    COMMAND ${CMAKE_COMMAND} -E echo "Done."
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../*.i ${CMAKE_CURRENT_SOURCE_DIR}/*.i
 )
 
-ADD_CUSTOM_TARGET( ${WRAP}_glue
-   DEPENDS ${SWIG_OUTPUT}
-)
-
-ADD_LIBRARY( ${WRAP}_zypp SHARED "${CMAKE_CURRENT_BINARY_DIR}/zypp_wrap.cxx" )
-SET_TARGET_PROPERTIES( ${WRAP}_zypp
+ADD_LIBRARY( zypp_python SHARED ${SWIG_OUTPUT} )
+SET_TARGET_PROPERTIES( zypp_python
   PROPERTIES
     PREFIX ""
     OUTPUT_NAME _zypp
 )
-ADD_DEPENDENCIES( ${WRAP}_zypp ${WRAP}_glue )
 
 INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_PATH} )
 INCLUDE_DIRECTORIES( ${ZYPP_INCLUDE_DIR} )
-TARGET_LINK_LIBRARIES( ${WRAP}_zypp ${ZYPP_LIBRARY} )
+TARGET_LINK_LIBRARIES( zypp_python ${ZYPP_LIBRARY} )
 
-INSTALL(TARGETS ${WRAP}_zypp LIBRARY DESTINATION ${PYTHON_LIB_PATH})
+INSTALL(TARGETS zypp_python LIBRARY DESTINATION ${PYTHON_LIB_PATH})
 INSTALL( FILES ${CMAKE_CURRENT_BINARY_DIR}/zypp.py DESTINATION ${PYTHON_LIB_PATH})
-

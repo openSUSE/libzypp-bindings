@@ -1,3 +1,4 @@
+%ignore zypp::Target::reset;
 
 %include <zypp/Target.h>
 namespace zypp

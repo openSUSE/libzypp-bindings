@@ -27,7 +27,7 @@
 #include "zypp/ResTraits.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
-#include "zypp/ProductInfo.h"
+
 #include "zypp/ResObjects.h"
 #include "zypp/Target.h"
 #include "zypp/target/TargetImpl.h"
@@ -40,6 +40,9 @@
 #include "zypp/repo/RepoType.h"
 #include "zypp/TmpPath.h"
 #include "zypp/Resolver.h"
+
+#include "zypp/Product.h"
+#include "zypp/ProductInfo.h"
 
 using namespace boost;
 using namespace zypp;
@@ -117,11 +120,11 @@ namespace zypp {
 %include "Patch.i"
 %include "Pattern.i"
 %include "Product.i"
-%include "ProductInfo.i"
+
 %include "SrcPackage.i"
 %include "RepoType.i"
-%include "RepoInfo.i"
-%include "ServiceInfo.i"
+
+
 %include "Repository.i"
 %include "RepoStatus.i"
 %include "RepoManager.i"
@@ -139,5 +142,15 @@ namespace zypp {
 %include "python/callbacks.i"
 #endif
 
+%ignore zypp::ZYpp::setTextLocale;
+%ignore zypp::ZYpp::getTextLocale;
+%ignore zypp::ZYpp::setRequestedLocales;
+%ignore zypp::ZYpp::getRequestedLocales;
+%ignore zypp::ZYpp::getAvailableLocales;
+%ignore zypp::ZYpp::architecture;
+%ignore zypp::ZYpp::setArchitecture;
+%ignore zypp::ZYpp::applyLocks;
+
 %include <zypp/ZYpp.h>
+
 %include "ZYppFactory.i"
