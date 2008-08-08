@@ -42,7 +42,6 @@
 #include "zypp/Resolver.h"
 
 #include "zypp/Product.h"
-#include "zypp/ProductInfo.h"
 
 using namespace boost;
 using namespace zypp;

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  8 13:42:43 CEST 2008 - ma@suse.de
+
+- Remove ProductInfo. We don't replace Product.
+- revision 10799
+
+-------------------------------------------------------------------
 Fri Aug  1 10:23:55 CEST 2008 ma@suse.de
 
 - Remove obsolete TranslatedText
