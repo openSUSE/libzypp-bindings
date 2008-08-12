@@ -78,7 +78,7 @@ Group:          Development/Languages/Perl
 
 %files -n perl-zypp
 %defattr(-,root,root,-)
-/usr/lib/perl5/*/*/zypp.pm
-/usr/lib/perl5/*/*/zypp.so
+/usr/lib/perl5/vendor_perl/*/zypp.pm
+/usr/lib/perl5/vendor_perl/*/*/zypp.so
 
 %changelog
