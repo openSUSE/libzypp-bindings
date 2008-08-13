@@ -56,7 +56,12 @@ Group:          Development/Languages/Ruby
 
 %files -n ruby-zypp
 %defattr(-,root,root,-)
+%if 0%{?suse_version}
 %{_libdir}/ruby/vendor_ruby/%{rb_ver}/%{rb_arch}/zypp.so
+%endif
+%if 0%{?mandriva_version}
+%{ruby_sitearchdir}/zypp.so
+%endif
 
 %package -n python-zypp
 Summary:        Python bindings for libzypp
@@ -66,8 +71,8 @@ Group:          Development/Languages/Python
 
 %files -n python-zypp
 %defattr(-,root,root,-)
-%{_libdir}/python2.5/site-packages/_zypp.so
-%{_libdir}/python2.5/site-packages/zypp.py
+%{py_sitedir}/_zypp.so
+%{py_sitedir}/zypp.py
 
 %package -n perl-zypp
 Summary:        Perl bindings for libzypp
@@ -78,7 +83,7 @@ Group:          Development/Languages/Perl
 
 %files -n perl-zypp
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/*/zypp.pm
-/usr/lib/perl5/vendor_perl/*/*/zypp.so
+%{perl_vendorlib}/zypp.pm
+%{perl_vendorarch}/zypp.so
 
 %changelog
