@@ -75,6 +75,7 @@ Group:          Development/Languages/Python
 %{py_sitedir}/zypp.py
 
 %package -n perl-zypp
+Requires:       perl = %{perl_version}
 Summary:        Perl bindings for libzypp
 Group:          Development/Languages/Perl
 
