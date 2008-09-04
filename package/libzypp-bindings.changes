@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep  4 11:42:50 CEST 2008 - ma@suse.de
+
+- Added lost RepoInfo and ServiceInfo.
+- revision 10928
+
+-------------------------------------------------------------------
 Fri Aug  8 13:42:43 CEST 2008 - ma@suse.de
 
 - Remove ProductInfo. We don't replace Product.

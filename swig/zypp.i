@@ -119,11 +119,10 @@ namespace zypp {
 %include "Patch.i"
 %include "Pattern.i"
 %include "Product.i"
-
 %include "SrcPackage.i"
 %include "RepoType.i"
-
-
+%include "RepoInfo.i"
+%include "ServiceInfo.i"
 %include "Repository.i"
 %include "RepoStatus.i"
 %include "RepoManager.i"
