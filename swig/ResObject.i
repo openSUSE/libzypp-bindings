@@ -8,7 +8,6 @@
 {
     int __cmp__(intrusive_ptr<const ResObject>& other)
     {
-	return compareByNVRA(*self, other);
+        return *self == other;
     }
 }
-

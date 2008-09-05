@@ -54,20 +54,12 @@ typedef std::list<std::string> StringList;
 %}
 
 %nodefault ByKind;
-%define DEFINE_PTR_TYPE(name)
-%enddef
 
 %rename("+") "operator+";
 %rename("<<") "operator<<";
 %rename("!=") "operator!=";
 %rename("!") "operator!";
 %rename("==") "operator==";
-
-template < typename T >
-class intrusive_ptr {
-  public:
-    T *operator->();
-};
 
 namespace zypp {
   namespace base {
@@ -97,6 +89,12 @@ namespace zypp {
 %include "perl5/perl.i"
 #endif
 
+%import <boost/scoped_ptr.hpp>
+%import <boost/shared_ptr.hpp>
+%import <boost/weak_ptr.hpp>
+%import <boost/intrusive_ptr.hpp>
+%import <zypp/base/PtrTypes.h>
+
 %include "IdStringType.i"
 %include "Pathname.i"
 %include "ByteCount.i"
@@ -111,6 +109,9 @@ namespace zypp {
 %include "Capability.i"
 %include "Capabilities.i"
 %include "CapMatch.i"
+%include "RepoType.i"
+%include "RepoInfo.i"
+%include "ServiceInfo.i"
 %include "ResTraits.i"
 %include "ResStatus.i"
 %include "Resolvable.i"
@@ -120,9 +121,6 @@ namespace zypp {
 %include "Pattern.i"
 %include "Product.i"
 %include "SrcPackage.i"
-%include "RepoType.i"
-%include "RepoInfo.i"
-%include "ServiceInfo.i"
 %include "Repository.i"
 %include "RepoStatus.i"
 %include "RepoManager.i"

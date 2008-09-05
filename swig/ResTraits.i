@@ -5,18 +5,25 @@
     typedef KindOf<Resolvable>  KindType;
 };*/
 
-/** ResTraits. Defines common types and the Kind value. */
-template<typename _Res>
+namespace zypp
+{
+  /** ResTraits. Defines common types and the Kind value. */
+  template<typename _Res>
   struct ResTraits
   {
-      typedef intrusive_ptr<_Res>       PtrType;
-      typedef intrusive_ptr<const _Res> constPtrType;
+      typedef zypp::intrusive_ptr<_Res>       PtrType;
+      typedef zypp::intrusive_ptr<const _Res> constPtrType;
   };
 
-%template(ResTraitsResolvable) ResTraits<Resolvable>;
+   typedef intrusive_ptr<const ResObject> ResObject_constPtr;
+   typedef intrusive_ptr<ResObject>       ResObject_Ptr;
+   %template(ResObject_constPtr)          intrusive_ptr<const zypp::ResObject>;
+   %template(ResObject_Ptr)               intrusive_ptr<zypp::ResObject>;
 
-%template(ResObject_constPtr) intrusive_ptr<const ResObject>;
-%template(ResObject_Ptr) intrusive_ptr<ResObject>;
+}
+
+%template(ResTraitsResolvable) zypp::ResTraits<zypp::Resolvable>;
+%template(ResTraitsResObject)  zypp::ResTraits<zypp::ResObject>;
 
 // Common definitions for all Resolvable types
 // - *_Ptr and *_constPtr
@@ -28,8 +35,8 @@ template<typename _Res>
 typedef intrusive_ptr<const X> X##_constPtr;
 typedef intrusive_ptr<X> X##_Ptr;
 
-%template(X##_constPtr) intrusive_ptr<const X>;
-%template(X##_Ptr) intrusive_ptr<X>;
+%template(X##_constPtr) zypp::intrusive_ptr<const X>;
+%template(X##_Ptr)      zypp::intrusive_ptr<X>;
 
 bool isKind##X( const Resolvable::constPtr & p );
 bool isKind##X( const PoolItem & p );
