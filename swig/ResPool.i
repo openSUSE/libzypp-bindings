@@ -1,5 +1,3 @@
-%nodefault zypp::ResPool;
-
 // missing resfilter:: to call these
 %ignore zypp::ResPool::byKindBegin;
 %ignore zypp::ResPool::byKindEnd;
