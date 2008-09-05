@@ -22,9 +22,12 @@ for item in Z.pool():
       t = "i"
     else:
       t = "*"
+
     print "%s %s:%s-%s.%s\t(%s)" % ( t,
                                      item.kind(),
                                      item.name(),
                                      item.edition(),
                                      item.arch(),
                                      item.repoInfo().alias() )
+    if zypp.isKindPackage( item ):
+      print " Group: %s" %(zypp.asKindPackage( item ).group( ) )

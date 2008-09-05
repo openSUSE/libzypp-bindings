@@ -32,28 +32,33 @@ namespace zypp
 // - asKind* to convert a ResObject/PoolItem into a
 //   specific *_constPtr.
 %define %STUFF(X)
-typedef intrusive_ptr<const X> X##_constPtr;
-typedef intrusive_ptr<X> X##_Ptr;
+namespace zypp
+{
+  typedef intrusive_ptr<const X> X##_constPtr;
+  typedef intrusive_ptr<X>       X##_Ptr;
+  %template(X##_constPtr)        intrusive_ptr<const X>;
+  %template(X##_Ptr)             intrusive_ptr<X>;
 
-%template(X##_constPtr) zypp::intrusive_ptr<const X>;
-%template(X##_Ptr)      zypp::intrusive_ptr<X>;
+  bool isKind##X( const zypp::Resolvable::constPtr & p );
+  bool isKind##X( const zypp::PoolItem & p );
 
-bool isKind##X( const Resolvable::constPtr & p );
-bool isKind##X( const PoolItem & p );
-
-X##_constPtr asKind##X( const Resolvable::constPtr & p );
-X##_constPtr asKind##X( const PoolItem & p );
+  X##_constPtr asKind##X( const zypp::Resolvable::constPtr & p );
+  X##_constPtr asKind##X( const zypp::PoolItem & p );
+}
 
 %header
 {
-  inline bool isKind##X( const Resolvable::constPtr & p )
-  { return isKind<X>( p ); }
-  inline bool isKind##X( const PoolItem & p )
-  { return isKind<X>( p.resolvable() ); }
-  inline X::constPtr asKind##X( const Resolvable::constPtr & p )
-  { return asKind<X>( p ); }
-  inline X::constPtr asKind##X( const PoolItem & p )
-  { return asKind<X>( p.resolvable() ); }
+  namespace zypp
+  {
+    inline bool isKind##X( const zypp::Resolvable::constPtr & p )
+    { return isKind<X>( p ); }
+    inline bool isKind##X( const zypp::PoolItem & p )
+    { return isKind<X>( p.resolvable() ); }
+    inline X::constPtr asKind##X( const zypp::Resolvable::constPtr & p )
+    { return asKind<X>( p ); }
+    inline X::constPtr asKind##X( const zypp::PoolItem & p )
+    { return asKind<X>( p.resolvable() ); }
+  }
 }
 
 #if defined(SWIGPYTHON)
