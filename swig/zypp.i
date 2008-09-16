@@ -134,6 +134,7 @@ namespace zypp {
 %include "ZYppCommitResult.i"
 %include "TmpPath.i"
 %include "Resolver.i"
+%include "ZConfig.i"
 #ifdef SWIGPYTHON
 %include "python/callbacks.i"
 #endif
