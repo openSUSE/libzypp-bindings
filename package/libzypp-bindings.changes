@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Sep 16 11:03:12 CEST 2008 - dmacvicar@suse.de
+
+- add ZConfig 
+
+-------------------------------------------------------------------
 Fri Sep  5 18:41:31 CEST 2008 - ma@suse.de
 
 - Fix basic resolvabe attributes as needed by list_resolvables.py
