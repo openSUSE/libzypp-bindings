@@ -94,6 +94,7 @@ namespace zypp {
 %import <boost/weak_ptr.hpp>
 %import <boost/intrusive_ptr.hpp>
 %import <zypp/base/PtrTypes.h>
+%import <zypp/base/Flags.h>
 
 %include "IdStringType.i"
 %include "Pathname.i"
