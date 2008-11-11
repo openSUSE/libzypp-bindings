@@ -7,4 +7,6 @@
 %ignore zypp::filesystem::Pathname::cat(Pathname const &,Pathname const &);
 %ignore zypp::filesystem::Pathname::extend(Pathname const &,std::string const &);
 
+%ignore zypp::filesystem::operator<( const Pathname & l, const Pathname & r );
+
 %include <zypp/Pathname.h>
