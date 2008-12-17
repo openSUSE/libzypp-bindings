@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 2.6)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fno-strict-aliasing")
 
 #
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
