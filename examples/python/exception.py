@@ -2,16 +2,8 @@
 
 from zypp import TmpDir, RepoManagerOptions, RepoManager, RepoInfo, Url
 
-tmp_cache_path = TmpDir()
-tmp_raw_cache_path = TmpDir()
-tmp_known_repos_path = TmpDir()
-
-opts = RepoManagerOptions()
-opts.repoCachePath = tmp_cache_path.path()
-opts.repoRawCachePath = tmp_raw_cache_path.path()
-opts.knownReposPath = tmp_known_repos_path.path()
-
-repo_manager = RepoManager(opts)
+tmp_root=TmpDir()
+repo_manager = RepoManager(RepoManagerOptions(tmp_root.path()))
 
 repo_info = RepoInfo()
 
