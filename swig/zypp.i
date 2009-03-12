@@ -49,7 +49,6 @@ using namespace zypp::repo;
 using namespace zypp::resfilter;
 using namespace zypp::filesystem;
 
-typedef std::set<Url> UrlSet;
 typedef std::list<std::string> StringList;
 %}
 
