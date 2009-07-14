@@ -13,7 +13,7 @@
 Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
-License:        GPL
+License:        GPL v2 or later
 Summary:        Bindings for libzypp
 Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -22,7 +22,7 @@ BuildRequires:  libzypp-devel >= 5.8.0
 Source:         %{name}-%{version}.tar.bz2
 
 %description
--
+This package provides bindings for libzypp, the library for package management.
 
 %prep
 %setup -q
