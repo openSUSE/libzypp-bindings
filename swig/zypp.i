@@ -88,10 +88,17 @@ namespace zypp {
 %include "perl5/perl.i"
 #endif
 
+#ifdef BOOST_SMARTPTR_INCLUDE_DIR
+%import <boost/smart_ptr/scoped_ptr.hpp>
+%import <boost/smart_ptr/shared_ptr.hpp>
+%import <boost/smart_ptr/weak_ptr.hpp>
+%import <boost/smart_ptr/intrusive_ptr.hpp>
+#else
 %import <boost/scoped_ptr.hpp>
 %import <boost/shared_ptr.hpp>
 %import <boost/weak_ptr.hpp>
 %import <boost/intrusive_ptr.hpp>
+#endif
 %import <zypp/base/PtrTypes.h>
 %import <zypp/base/Flags.h>
 
