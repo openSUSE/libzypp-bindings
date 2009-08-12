@@ -71,8 +71,8 @@ Group:          Development/Languages/Python
 
 %files -n python-zypp
 %defattr(-,root,root,-)
-%{py_sitedir}/_zypp.so
-%{py_sitedir}/zypp.py
+%{python_sitelib}/_zypp.so
+%{python_sitelib}/zypp.py
 
 %package -n perl-zypp
 Requires:       perl = %{perl_version}
