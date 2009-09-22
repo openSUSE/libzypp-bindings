@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 22 21:41:23 CEST 2009 - ma@suse.de
+
+- Remove reference to dead zypp::ScanDBReport.
+- version 0.5.2
+
+-------------------------------------------------------------------
 Sun Aug  9 08:44:46 CEST 2009 - coolo@novell.com
 
 - use new python macros
