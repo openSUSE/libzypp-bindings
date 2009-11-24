@@ -23,7 +23,7 @@ Source:         %{name}-%{version}.tar.bz2
 
 %if 0%{?suse_version} == 1110
 # not present on sle11-sp1:
-%define python_sitelib /usr/lib/python%{python_version}/site-packages
+%define python_sitelib %{_libdir}/python%{python_version}/site-packages
 %endif
 
 %description
