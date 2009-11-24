@@ -21,11 +21,6 @@ BuildRequires:  cmake gcc-c++ python-devel ruby-devel swig
 BuildRequires:  libzypp-devel >= 5.8.0
 Source:         %{name}-%{version}.tar.bz2
 
-%if 0%{?suse_version} == 1110
-# not present on sle11-sp1:
-%define python_sitelib %{_libdir}/python%{python_version}/site-packages
-%endif
-
 %description
 This package provides bindings for libzypp, the library for package management.
 
@@ -76,8 +71,8 @@ Group:          Development/Languages/Python
 
 %files -n python-zypp
 %defattr(-,root,root,-)
-%{python_sitelib}/_zypp.so
-%{python_sitelib}/zypp.py
+%{py_sitedir}/_zypp.so
+%{py_sitedir}/zypp.py
 
 %package -n perl-zypp
 Requires:       perl = %{perl_version}
