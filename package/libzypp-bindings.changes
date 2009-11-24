@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 24 13:38:52 CET 2009 - ma@suse.de
+
+- Fix to build on sle11-sp1
+
+-------------------------------------------------------------------
 Tue Sep 22 21:41:23 CEST 2009 - ma@suse.de
 
 - Remove reference to dead zypp::ScanDBReport.
