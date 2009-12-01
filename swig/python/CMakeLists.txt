@@ -15,7 +15,7 @@ ADD_SUBDIRECTORY(tests)
 SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/satsolver_python.cc" )
 
 FIND_PACKAGE(PythonInterp REQUIRED)
-EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib())" OUTPUT_VARIABLE PYTHON_LIB_PATH)
+EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} -c "from sys import stdout; from distutils import sysconfig; stdout.write(sysconfig.get_python_lib(1))" OUTPUT_VARIABLE PYTHON_LIB_PATH)
 
 MESSAGE(STATUS "Python executable: ${PYTHON_EXECUTABLE}")
 MESSAGE(STATUS "Python lib path: ${PYTHON_LIB_PATH}")
