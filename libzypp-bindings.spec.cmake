@@ -31,6 +31,7 @@ This package provides bindings for libzypp, the library for package management.
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+      -DPYTHON_SITEDIR=%{py_sitedir} \
       -DLIB=%{_lib} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
       -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
