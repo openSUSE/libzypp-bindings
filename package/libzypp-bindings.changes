@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar 24 12:11:07 CET 2010 - ma@suse.de
+
+- Work around swig not understanding nested class.
+
+-------------------------------------------------------------------
 Mon Dec  7 14:02:01 CET 2009 - ma@suse.de
 
 - Pass py_sitedir macro from .spec file to cmake.
