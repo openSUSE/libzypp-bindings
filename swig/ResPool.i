@@ -59,17 +59,17 @@ iter3(ResPool, PoolItem*);
 #ifdef SWIGPYTHON
 %newobject ResPool::const_iterator(PyObject **PYTHON_SELF);
 %extend  ResPool {
-  swig::PySwigIterator* iterator(PyObject **PYTHON_SELF)
+  swig::SwigPyIterator* iterator(PyObject **PYTHON_SELF)
   {
     return swig::make_output_iterator(self->begin(), self->begin(),
                                       self->end(), *PYTHON_SELF);
   }
-  swig::PySwigIterator* kinditerator(PyObject **PYTHON_SELF, const ResObject::Kind & kind_r)
+  swig::SwigPyIterator* kinditerator(PyObject **PYTHON_SELF, const ResObject::Kind & kind_r)
   {
     return swig::make_output_iterator(self->byKindBegin( kind_r ), self->byKindBegin( kind_r ),
                                       self->byKindEnd( kind_r ), *PYTHON_SELF);
   }
-  swig::PySwigIterator* nameiterator(PyObject **PYTHON_SELF, const std::string &name)
+  swig::SwigPyIterator* nameiterator(PyObject **PYTHON_SELF, const std::string &name)
   {
     return swig::make_output_iterator(self->byNameBegin( name ), self->byNameBegin( name ),
                                       self->byNameEnd( name ), *PYTHON_SELF);
