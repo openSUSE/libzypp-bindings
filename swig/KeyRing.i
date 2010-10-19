@@ -9,6 +9,12 @@
   %template(DefautAccept) zypp::base::Flags<::DefautAcceptBits>;
 }
 
+%inline %{
+  zypp::KeyRing::DefaultAccept toDefaultAccept(int bits) {
+     return (zypp::KeyRing::DefaultAccept) static_cast<zypp::KeyRing::DefaultAccept>(bits);
+  }
+%}
+
 namespace zypp
 {
   typedef intrusive_ptr<KeyRing> KeyRing_Ptr;
