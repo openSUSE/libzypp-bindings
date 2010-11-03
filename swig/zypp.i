@@ -158,3 +158,19 @@ namespace zypp {
 %include <zypp/ZYpp.h>
 
 %include "ZYppFactory.i"
+
+//
+// helper
+//
+%{
+#include <zypp/base/LogControl.h>
+%}
+%inline %{
+  namespace zypp
+  {
+    void setZyppLogfile( const std::string & file_r )
+    {
+      base::LogControl::instance().logfile( file_r );
+    }
+  }
+%}
