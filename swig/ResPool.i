@@ -3,10 +3,16 @@
 %ignore zypp::ResPool::byKindEnd;
 %ignore zypp::ResPool::byNameBegin;
 %ignore zypp::ResPool::byNameEnd;
-
 %apply unsigned { zypp::ResPool::size_type };
-
 %include <zypp/ResPool.h>
+
+%ignore zypp::pool::operator<<;
+%include <zypp/pool/GetResolvablesToInsDel.h>
+namespace zypp
+{
+  typedef ::std::list<zyppPoolItem> PoolItemList;
+  %template(PoolItemList) ::std::list<PoolItem>;
+}
 
 namespace zypp
 {

@@ -40,6 +40,7 @@
 #include "zypp/repo/RepoType.h"
 #include "zypp/TmpPath.h"
 #include "zypp/Resolver.h"
+#include "zypp/pool/GetResolvablesToInsDel.h"
 
 #include "zypp/Product.h"
 

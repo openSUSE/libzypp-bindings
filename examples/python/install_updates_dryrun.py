@@ -44,6 +44,18 @@ for item in Z.pool():
   if item.status().transacts():
     print '%s | %s-%s | %s' % (item.repoInfo().alias(), item.name(), item.edition(), item.status() )
 
+
+#
+#
+#
+print '===================================================='
+todo = zypp.GetResolvablesToInsDel( Z.pool() )
+for item in todo._toDelete:
+    print '-- %s | %s-%s | %s' % (item.repoInfo().alias(), item.name(), item.edition(), item.status() )
+
+for item in todo._toInstall:
+    print '++ %s | %s-%s | %s' % (item.repoInfo().alias(), item.name(), item.edition(), item.status() )
+
 #
 # dryRun!
 #
