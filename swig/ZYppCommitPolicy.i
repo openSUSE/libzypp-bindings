@@ -5,4 +5,5 @@
 %rename("syncPoolAfterCommit=") ZYppCommitPolicy::syncPoolAfterCommit(bool);
 #endif
 
+%include <zypp/DownloadMode.h>
 %include <zypp/ZYppCommitPolicy.h>
