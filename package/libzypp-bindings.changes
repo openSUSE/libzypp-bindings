@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Nov  3 13:42:42 CET 2010 - ma@suse.de
+
+- Wrap DownloadMode enum
+- Add zypp::setZyppLogfilei. Pass empty string for off, '-' for 
+  stderr or a filename.
+- version 0.5.6
+
+-------------------------------------------------------------------
 Wed Oct 20 12:03:08 CEST 2010 - ma@suse.de
 
 - Offer interface to get/set KeyRing::defaultAccept bits.
