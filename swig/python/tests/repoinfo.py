@@ -4,8 +4,11 @@
 #
 
 import unittest
-from zypp import RepoInfo, Url, UrlSet, RepoType
+
 import sys
+sys.path.insert(0, '../../../../build/swig/python')
+
+from zypp import RepoInfo, Url, UrlSet, RepoType
 
 repo_urls = [ "file:/mounts/mirror/SuSE/ftp.opensuse.org/srv/ftp/pub/opensuse/debug/update/11.1/", 
               "http://download.opensuse.org/debug/update/11.1/" ] 
