@@ -5,6 +5,8 @@
 
 cmake_minimum_required(VERSION 2.6)
 
+ENABLE_TESTING()
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fno-strict-aliasing")
 
 #

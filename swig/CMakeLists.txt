@@ -3,6 +3,8 @@
 #
 #
 
+ENABLE_TESTING()
+
 SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/zypp.i" )
 
 #
