@@ -13,5 +13,10 @@ class LoadTest < Test::Unit::TestCase
     require 'zypp'
     zypp = Zypp::ZYppFactory::instance.get_zypp
     assert zypp
+    zconfig = Zypp::ZConfig::instance
+    assert zconfig
+    puts zconfig.system_architecture
+    zconfig.set_system_architecture(Zypp::Arch.new("i686"))
+    puts zconfig.system_architecture
   end
 end
