@@ -143,6 +143,16 @@ typedef std::list<std::string> StringList;
 
 %nodefault ByKind;
 
+#if defined(SWIGRUBY)
+#define Target_Type VALUE
+#endif
+#if defined(SWIGPYTHON)
+#define Target_Type PyObject*
+#endif
+#if defined(SWIGPERL)
+#define Target_Type SV *
+#endif
+
 %rename("+") "operator+";
 %rename("<<") "operator<<";
 %rename("!=") "operator!=";

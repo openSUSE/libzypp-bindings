@@ -23,10 +23,8 @@
 struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchMessageReport>
 {
 
-  private:
-    Target_Type _instance;
-  public:
-  PatchMessageReportReceiver(Target_Type instance) { _instance = instance; }
+  Target_Type instance;
+
   /** Display \c patch->message().
    * Return \c true to continue, \c false to abort commit.
    */
@@ -45,10 +43,7 @@ struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::t
 struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchScriptReport>
 {
 
-  private:
-    Target_Type _instance;
-  public:
-  PatchScriptReportReceiver(Target_Type instance) { _instance = instance; }
+  Target_Type instance;
 
   virtual void start( const zypp::Package::constPtr & package,
 		      const zypp::Pathname & path_r ) // script path
@@ -86,16 +81,13 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
 
-  private:
-    Target_Type _instance;
-  public:
-  RemoveResolvableReportReceiver(Target_Type instance) { _instance = instance; }
+  Target_Type instance;
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     Target_Type r = SWIG_NewPointerObj((void *)&(*resolvable), SWIGTYPE_p_zypp__Resolvable, 0);
 #if defined(SWIGPYTHON)
-    PyObject *pyfunc = PyObject_GetAttrString(_instance, "removal_start"); 
+    PyObject *pyfunc = PyObject_GetAttrString(instance, "removal_start"); 
     PyObject *prv = NULL;
 
     if (pyfunc == NULL)
@@ -122,12 +114,7 @@ cleanup:
 #endif
 
 #if defined(SWIGRUBY)
-#if SWIG_VERSION < 0x010340
-#define COMMIT_CLASS cTransport
-#else
-#define COMMIT_CLASS SwigClassTransport
-#endif
-    VALUE result = rb_funcall( _instance, rb_intern("removal_start" ), 1, r );
+    VALUE result = rb_funcall( instance, rb_intern("removal_start" ), 1, r );
 #endif
  
     return;
@@ -157,10 +144,7 @@ cleanup:
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
 
-  private:
-    Target_Type _instance;
-  public:
-  InstallResolvableReportReceiver(Target_Type instance) { _instance = instance; }
+  Target_Type instance;
 
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
