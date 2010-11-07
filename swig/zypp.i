@@ -169,7 +169,6 @@ namespace zypp {
 %include "std_string.i"
 %include "stl.i"
 
-
 #ifdef SWIGRUBY
 %include "ruby/std_list.i"
 %include "ruby/std_set.i"
@@ -187,6 +186,9 @@ namespace zypp {
 %include "perl5/perl.i"
 #endif
 
+/* These include files are already cleaned up from C++ cruft */
+%include "Arch.i"
+
 #ifdef BOOST_SMARTPTR_INCLUDE_DIR
 %import <boost/smart_ptr/scoped_ptr.hpp>
 %import <boost/smart_ptr/shared_ptr.hpp>
@@ -201,12 +203,12 @@ namespace zypp {
 %import <zypp/base/PtrTypes.h>
 %import <zypp/base/Flags.h>
 
+#if 1 /* set 0 for testing, these files still carry the full C++ cruft */
 %include "IdStringType.i"
 %include "Pathname.i"
 %include "ByteCount.i"
 %include "Url.i"
 %include "NeedAType.i"
-%include "Arch.i"
 %include "Edition.i"
 %include "Kind.i"
 %include "CheckSum.i"
@@ -242,6 +244,7 @@ namespace zypp {
 %include "Resolver.i"
 %include "ZConfig.i"
 %include "Callbacks.i"
+#endif
 
 %ignore zypp::ZYpp::setTextLocale;
 %ignore zypp::ZYpp::getTextLocale;
