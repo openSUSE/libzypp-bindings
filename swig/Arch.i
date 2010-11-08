@@ -8,16 +8,18 @@
  * The system has an architecture (i.e. x86_64) and so does every
  * Resolvable.
  *
- * Arch#compatible_with is used to detect compatible architectures.
+ * +Arch#compatible_with?+ is used to detect compatible architectures.
  * 'noarch' is compatible with any system architecture.
  *
  * There is no limit to architecture specifiers, any string can be
  * passed to the Arch constructor.
  * However, there is a set of architectures built into libzypp.
- * Arch#builtin? returns true for an architecture from the builtin set.
+ * +Arch#builtin?+ returns true for an architecture from the builtin set.
  *
- * == Usage
+ * === Usage
  *   arch = Arch.new("i686")
+ *   # equivalent:
+ *   # arch = Arch.i686
  *
  *   arch.builtin? -> true
  *
@@ -38,17 +40,49 @@ class Arch {
     delete $self;
   }
   
-  # all the standard architectures
+  /*
+   * builtin: noarch
+   */
   static Arch noarch() { return zypp::Arch_noarch; }
+  /*
+   * builtin: i386
+   */
   static Arch i386() { return zypp::Arch_i386; }
+  /*
+   * builtin: i486
+   */
   static Arch i486() { return zypp::Arch_i486; }
+  /*
+   * builtin: i586
+   */
   static Arch i586() { return zypp::Arch_i586; }
+  /*
+   * builtin: i686
+   */
   static Arch i686() { return zypp::Arch_i686; }
+  /*
+   * builtin: i86_64 (AMD 64)
+   */
   static Arch x86_64() { return zypp::Arch_x86_64; }
+  /*
+   * builtin: ia64 (Itanium)
+   */
   static Arch ia64() { return zypp::Arch_ia64; }
+  /*
+   * builtin: ppc (Power PC 32 bit)
+   */
   static Arch ppc() { return zypp::Arch_ppc; }
+  /*
+   * builtin: ppc64 (Power PC 64 bit)
+   */
   static Arch ppc64() { return zypp::Arch_ppc64; }
+  /*
+   * builtin: s390 (zSeries 32 bit)
+   */
   static Arch s390() { return zypp::Arch_s390; }
+  /*
+   * builtin: s390s (zSeries 64 bit)
+   */
   static Arch s390x() { return zypp::Arch_s390x; }
 
 #if defined(SWIGRUBY)
