@@ -3,6 +3,24 @@
  *
  * Architecture definitions
  *
+ * Document-class: Arch
+ * Instances of Arch represent architecture and compatibility.
+ * The system has an architecture (i.e. x86_64) and so does every
+ * Resolvable.
+ *
+ * Arch#compatible_with is used to detect compatible architectures.
+ * 'noarch' is compatible with any system architecture.
+ *
+ * There is no limit to architecture specifiers, any string can be
+ * passed to the Arch constructor.
+ * However, there is a set of architectures built into libzypp.
+ * Arch#builtin? returns true for an architecture from the builtin set.
+ *
+ * == Usage
+ *   arch = Arch.new("i686")
+ *
+ *   arch.builtin? -> true
+ *
  */
 
 %nodefault zypp::Arch;
@@ -19,9 +37,24 @@ class Arch {
   ~Arch() {
     delete $self;
   }
+  
+  # all the standard architectures
+  static Arch noarch() { return zypp::Arch_noarch; }
+  static Arch i386() { return zypp::Arch_i386; }
+  static Arch i486() { return zypp::Arch_i486; }
+  static Arch i586() { return zypp::Arch_i586; }
+  static Arch i686() { return zypp::Arch_i686; }
+  static Arch x86_64() { return zypp::Arch_x86_64; }
+  static Arch ia64() { return zypp::Arch_ia64; }
+  static Arch ppc() { return zypp::Arch_ppc; }
+  static Arch ppc64() { return zypp::Arch_ppc64; }
+  static Arch s390() { return zypp::Arch_s390; }
+  static Arch s390x() { return zypp::Arch_s390x; }
+
 #if defined(SWIGRUBY)
 %typemap(out) int is_builtin
    "$result = $1 ? Qtrue : Qfalse;";
+%rename("builtin?") builtin;
 #endif
   /*
    * Whether this is a builtin (or known) architecture.
@@ -33,6 +66,7 @@ class Arch {
 #if defined(SWIGRUBY)
 %typemap(out) int compatible_with
    "$result = $1 ? Qtrue : Qfalse;";
+%rename("compatible_with?") compatible_with;
 #endif
   /*
    * Check if this architecture is compatible with another one
