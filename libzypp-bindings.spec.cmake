@@ -42,6 +42,10 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       ..
 make %{?jobs:-j %jobs}
 
+%test
+cd build
+make test
+
 %install
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
