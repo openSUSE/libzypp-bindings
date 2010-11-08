@@ -191,6 +191,8 @@ namespace zypp {
 /* These include files are already cleaned up from C++ cruft */
 %include "Arch.i"
 
+/* These include files are pending to be cleaned up from C++ cruft */
+
 #ifdef BOOST_SMARTPTR_INCLUDE_DIR
 %import <boost/smart_ptr/scoped_ptr.hpp>
 %import <boost/smart_ptr/shared_ptr.hpp>
