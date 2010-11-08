@@ -1,5 +1,7 @@
 %module zypp
 
+#define PRODUCTION 1
+
 #ifdef SWIGPERL5
 %{
    #undef NORMAL
@@ -203,7 +205,7 @@ namespace zypp {
 %import <zypp/base/PtrTypes.h>
 %import <zypp/base/Flags.h>
 
-#if 1 /* set 0 for testing, these files still carry the full C++ cruft */
+#if PRODUCTION /* set 0 for testing, these files still carry the full C++ cruft */
 %include "IdStringType.i"
 %include "Pathname.i"
 %include "ByteCount.i"
@@ -237,7 +239,9 @@ namespace zypp {
 %include "Target.i"
 %include "MediaSetAccess.i"
 %include "PoolItem.i"
+#endif
 %include "ResPool.i"
+#if PRODUCTION
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
 %include "TmpPath.i"
