@@ -12,16 +12,16 @@ class LoadTest < Test::Unit::TestCase
   require 'zypp'
   include Zypp
   def test_target
-    z = ZYppFactory::instance.get_zypp
+    z = ZYppFactory::instance.getZYpp
 
-    assert z.home_path
-    assert z.tmp_path
+    assert z.homePath
+    assert z.tmpPath
 
-    z.initialize_target(Zypp::Pathname.new("/"))
+    z.initializeTarget(Zypp::Pathname.new("/"))
     t = z.target
     assert t
     t.load
-    t.build_cache
+    t.buildCache
     
     p = z.pool
     assert p
