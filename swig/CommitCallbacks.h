@@ -31,6 +31,7 @@ class CommitCallbacks {
     * 
     */
     void connect(Target_Type instance) {
+//	    fprintf(stderr, "connect(%p)\n", instance);
       disconnect();
       if (instance) {
 	_instance = instance;
@@ -46,6 +47,7 @@ class CommitCallbacks {
      * 
      */
     void disconnect() {
+//	    fprintf(stderr, "disconnect(%p)\n", _instance);
       if (_instance != Target_Null) {
 	_messageReceiver.instance = Target_Null;
 	_scriptReceiver.instance = Target_Null;
@@ -60,6 +62,7 @@ class CommitCallbacks {
      * 
      */
     Target_Type receiver() {
+//	    fprintf(stderr, "receiver(%p)\n", _instance);
       return _instance;
     }
 };
