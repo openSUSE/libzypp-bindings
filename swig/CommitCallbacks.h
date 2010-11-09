@@ -3,8 +3,8 @@ class CommitCallbacks {
   private:
     PatchMessageReportReceiver _messageReceiver;
     PatchScriptReportReceiver _scriptReceiver;
-    RemoveResolvableReportReceiver _installReceiver;
-    InstallResolvableReportReceiver _removeReceiver;
+    RemoveResolvableReportReceiver _removeReceiver;
+    InstallResolvableReportReceiver _installReceiver;
     Target_Type _instance;
 
   public:
@@ -66,3 +66,23 @@ class CommitCallbacks {
       return _instance;
     }
 };
+
+
+/*
+ * A (dummy) commit callback emitter used for testing only
+ * 
+ */
+
+class CommitCallbacksEmitter {
+  private:
+    callback::SendReport<target::rpm::RemoveResolvableReport> remove_resolvable;
+    callback::SendReport<target::PatchMessageReport> patch_message;
+    callback::SendReport<target::PatchScriptReport> patch_script;
+    callback::SendReport<target::rpm::InstallResolvableReport> install_resolvable;
+  public:
+    void remove_start(zypp::ResObject::constPtr resobj)
+    {
+      remove_resolvable->start( resobj );
+    }
+};
+

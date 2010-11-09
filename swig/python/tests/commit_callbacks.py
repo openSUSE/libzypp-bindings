@@ -10,7 +10,7 @@ cwd = os.path.abspath(os.path.dirname(__file__))
 import sys
 sys.path.insert(0, cwd + "/../../../build/swig/python")
 
-from zypp import CommitCallbacks
+import zypp
 
 class CommitReceiver:
   def removal_start(self, resolvable):
@@ -18,7 +18,12 @@ class CommitReceiver:
 
 class CommitCallbacksTestCase(unittest.TestCase):
     def testRemoveCallback(self):
-        commit_callbacks = CommitCallbacks()
+        Z = zypp.ZYppFactory_instance().getZYpp()
+        Z.initializeTarget( zypp.Pathname("/") )
+        Z.target().load();
+        
+        commit_callbacks_emitter = zypp.CommitCallbacksEmitter()
+        commit_callbacks = zypp.CommitCallbacks()
 #        print "commit_callbacks " , commit_callbacks
         assert None == commit_callbacks.receiver()
 #        print "callbacks receiver is NULL - good"
@@ -28,6 +33,12 @@ class CommitCallbacksTestCase(unittest.TestCase):
 #        print "connected to ", commit_receiver
         assert commit_receiver == commit_callbacks.receiver()
 #        print "callbacks receiver is set - good"
+
+        for item in Z.pool():
+            print "Emitting removal of ", item.resolvable()
+            commit_callbacks_emitter.remove_start(item.resolvable())
+            break
+
         commit_callbacks.disconnect()
 #        print "disconnected"
         assert None == commit_callbacks.receiver()
