@@ -31,8 +31,7 @@
 #define Target_DECREF(x) Py_DECREF(x)
 #define Target_True Py_True
 #define Target_False Py_False
-#define Target_Null NULL
-#define Target_Void Py_None
+#define Target_Null Py_None
 #define Target_Type PyObject*
 #define Target_Bool(x) PyBool_FromLong(x)
 #define Target_WChar(x) PyInt_FromLong(x)
@@ -57,7 +56,6 @@
 #define Target_True Qtrue
 #define Target_False Qfalse
 #define Target_Null Qnil
-#define Target_Void Qnil
 #define Target_Type VALUE
 #define Target_Bool(x) ((x)?Qtrue:Qfalse)
 #define Target_WChar(x) INT2FIX(x)
@@ -92,7 +90,6 @@ SWIGINTERNINLINE SV *SWIG_From_double  SWIG_PERL_DECL_ARGS_1(double value);
 #define Target_True (&PL_sv_yes)
 #define Target_False (&PL_sv_no)
 #define Target_Null NULL
-#define Target_Void NULL
 #define Target_Type SV *
 #define Target_Bool(x) (x)?Target_True:Target_False
 #define Target_WChar(x) NULL
