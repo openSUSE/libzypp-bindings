@@ -7,6 +7,9 @@
 # and the .pm file gets loaded.
 #
 
+ENABLE_TESTING()
+ADD_SUBDIRECTORY(tests)
+
 # SWIG_OUPUT is per-target
 SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/satsolver_perl.cc" )
 
