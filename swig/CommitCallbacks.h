@@ -75,14 +75,114 @@ class CommitCallbacks {
 
 class CommitCallbacksEmitter {
   private:
-    callback::SendReport<target::rpm::RemoveResolvableReport> remove_resolvable;
-    callback::SendReport<target::PatchMessageReport> patch_message;
-    callback::SendReport<target::PatchScriptReport> patch_script;
-    callback::SendReport<target::rpm::InstallResolvableReport> install_resolvable;
+    callback::SendReport<target::rpm::InstallResolvableReport> _install_resolvable;
+    callback::SendReport<target::rpm::RemoveResolvableReport> _remove_resolvable;
+    callback::SendReport<target::PatchMessageReport> _patch_message;
+    callback::SendReport<target::PatchScriptReport> _patch_script;
   public:
+    /*
+     * InstallResolvableReport
+     * 
+     */
+    void install_start(zypp::ResObject::constPtr resobj)
+    {
+      _install_resolvable->start( resobj );
+    }
+   
+    bool install_progress(zypp::ResObject::constPtr resobj, int value)
+    {
+      return _install_resolvable->progress( value, resobj ); /* arguments reversed :-/ */
+    }
+	
+    target::rpm::InstallResolvableReport::Action install_problem(
+        zypp::ResObject::constPtr resobj,
+        target::rpm::InstallResolvableReport::Error error,
+	const std::string & description,
+	target::rpm::InstallResolvableReport::RpmLevel level)
+    {
+      return _install_resolvable->problem( resobj, error, description, level );
+    }
+	
+    void install_finish(
+        zypp::ResObject::constPtr resobj,
+	target::rpm::InstallResolvableReport::Error error,
+	const std::string & reason,
+	target::rpm::InstallResolvableReport::RpmLevel level)
+    {
+      return _install_resolvable->finish( resobj, error, reason, level );
+    }
+	
+    /*
+     * RemoveResolvableReport
+     * 
+     */
     void remove_start(zypp::ResObject::constPtr resobj)
     {
-      remove_resolvable->start( resobj );
+      _remove_resolvable->start( resobj );
     }
-};
+	
+    bool remove_progress(zypp::ResObject::constPtr resobj, int value)
+    {
+      return _remove_resolvable->progress( value, resobj ); /* arguments reversed :-/ */
+    }
+	
+    target::rpm::RemoveResolvableReport::Action remove_problem(
+        zypp::ResObject::constPtr resobj,
+	target::rpm::RemoveResolvableReport::Error error,
+	const std::string & description)
+    {
+      return _remove_resolvable->problem( resobj, error, description );
+    }
+	
+    void remove_finish(
+        zypp::ResObject::constPtr resobj,
+	target::rpm::RemoveResolvableReport::Error error,
+	const std::string & reason)
+    {
+      return _remove_resolvable->finish( resobj, error, reason );
+    }
+	
+    /*
+     * PatchMessageReport
+     * 
+     */
 
+    bool patch_message(zypp::Patch::constPtr & patch)
+    {
+      return _patch_message->show(patch);
+    }
+    
+    /*
+     * PatchScriptReport
+     * 
+     */
+
+    void script_start( const zypp::Package::constPtr & package,
+			    const zypp::Pathname & path_r ) // script path
+    {
+      _patch_script->start(package, path_r);
+    }
+	
+	  /**
+	   *    * Progress provides the script output. If the script is quiet,
+	   *    * from time to time still-alive pings are sent to the ui. (Notify=PING)
+	   *    * Returning \c FALSE aborts script execution.
+	   *    */
+    bool script_progress( target::PatchScriptReport::Notify kind, const std::string &output )
+    {
+      return _patch_script->progress(kind, output);
+    }
+	
+    /** Report error. */
+    target::PatchScriptReport::Action script_problem( const std::string & description )
+    {
+      return _patch_script->problem(description);
+    }
+	
+    /** Report success. */
+    void finish()
+    {
+      _patch_script->finish();
+    }
+	
+};
