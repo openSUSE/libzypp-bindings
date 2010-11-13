@@ -85,7 +85,7 @@ class Arch {
    */
   static Arch s390x() { return zypp::Arch_s390x; }
 
-#if defined(SWIGRUBY)
+#if 0 /* defined(SWIGRUBY) */
 %typemap(out) int is_builtin
    "$result = $1 ? Qtrue : Qfalse;";
 %rename("builtin?") builtin;
@@ -94,7 +94,7 @@ class Arch {
    * Whether this is a builtin (or known) architecture.
    *
    */
-  int is_builtin() {
+  bool is_builtin() {
     return ($self->isBuiltIn() ? 1 : 0);
   }
 #if defined(SWIGRUBY)
@@ -112,6 +112,7 @@ class Arch {
     return ($self->compatibleWith(arch) ? 1 : 0);
   }
 
+#if ZYPP_VERSION > 800
   /*
    * return the arch before noarch if it's not a multilib arch
    * (e.g. x86_64,sparc64v,sparc64,ppc64,s390x).
@@ -121,6 +122,7 @@ class Arch {
   {
     return $self->baseArch();
   }
+#endif
 
 #if defined(SWIGRUBY)
 %alias compare "<=>";

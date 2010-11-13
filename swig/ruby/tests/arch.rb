@@ -2,7 +2,7 @@
 # Arch
 #
 
-$:.unshift "../../../build/swig/ruby"
+$:.unshift File.expand_path(File.join(File.dirname(__FILE__),"..","..","..","build","swig","ruby"))
 
 require 'test/unit'
 require 'zypp'
@@ -19,7 +19,7 @@ class ArchTest < Test::Unit::TestCase
     a = Arch.new("i386")
     assert a
     assert_equal "i386", a.to_s
-    assert a.is_builtin
+    assert_equal true, a.is_builtin
     
     # i486 is 'bigger' than i386
     
@@ -27,7 +27,9 @@ class ArchTest < Test::Unit::TestCase
     assert b
     assert_equal "i486", b.to_s
     assert b.is_builtin
-    assert_equal a, b.base_arch
+    if VERSION > 800
+      assert_equal a, b.base_arch
+    end
     assert a < b
     assert a.compatible_with?(b)
 
@@ -35,7 +37,7 @@ class ArchTest < Test::Unit::TestCase
     z = Arch.new("xyzzy")
     assert z
     assert_equal "xyzzy", z.to_s
-    assert !z.is_builtin
+    assert_equal false, z.is_builtin
     
     # predefined archs
     assert_equal Arch.new("noarch"), Arch.noarch 

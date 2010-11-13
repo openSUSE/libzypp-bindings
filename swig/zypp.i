@@ -1,5 +1,8 @@
 %module zypp
 
+/* set this to 0 (zero) to only create a subset of the bindings
+ * for testing
+ */
 #define PRODUCTION 1
 
 #ifdef SWIGPERL5
@@ -140,8 +143,7 @@ typedef std::list<std::string> StringList;
 
 %}
 
-%nodefault ByKind;
-
+/* prevent swig from creating a type called 'Target_Type' */
 #if defined(SWIGRUBY)
 #define Target_Type VALUE
 #endif
@@ -151,22 +153,6 @@ typedef std::list<std::string> StringList;
 #if defined(SWIGPERL)
 #define Target_Type SV *
 #endif
-
-%rename("+") "operator+";
-%rename("<<") "operator<<";
-%rename("!=") "operator!=";
-%rename("!") "operator!";
-%rename("==") "operator==";
-
-namespace zypp {
-  namespace base {
-    // silence 'Nothing known about class..' warning
-    class  ReferenceCounted {};
-  }
-}
-
-%include "std_string.i"
-%include "stl.i"
 
 #ifdef SWIGRUBY
 %include "ruby/std_list.i"
@@ -185,10 +171,33 @@ namespace zypp {
 %include "perl5/perl.i"
 #endif
 
+#define VERSION ZYPP_VERSION
+
 /* These include files are already cleaned up from C++ cruft */
 %include "Arch.i"
+%include "Resolvable.i"
+%include "Callbacks.i"
 
 /* These include files are pending to be cleaned up from C++ cruft */
+#if PRODUCTION /* set 0 for testing, these files still carry the full C++ cruft */
+
+%nodefault ByKind;
+
+%rename("+") "operator+";
+%rename("<<") "operator<<";
+%rename("!=") "operator!=";
+%rename("!") "operator!";
+%rename("==") "operator==";
+
+namespace zypp {
+  namespace base {
+    // silence 'Nothing known about class..' warning
+    class  ReferenceCounted {};
+  }
+}
+
+%include "std_string.i"
+%include "stl.i"
 
 #ifdef BOOST_SMARTPTR_INCLUDE_DIR
 %import <boost/smart_ptr/scoped_ptr.hpp>
@@ -204,7 +213,6 @@ namespace zypp {
 %import <zypp/base/PtrTypes.h>
 %import <zypp/base/Flags.h>
 
-#if PRODUCTION /* set 0 for testing, these files still carry the full C++ cruft */
 %include "IdStringType.i"
 %include "Pathname.i"
 %include "ByteCount.i"
@@ -223,7 +231,6 @@ namespace zypp {
 %include "ServiceInfo.i"
 %include "ResTraits.i"
 %include "ResStatus.i"
-%include "Resolvable.i"
 %include "ResObject.i"
 %include "Package.i"
 %include "Patch.i"
@@ -238,16 +245,12 @@ namespace zypp {
 %include "Target.i"
 %include "MediaSetAccess.i"
 %include "PoolItem.i"
-#endif
 %include "ResPool.i"
-#if PRODUCTION
 %include "ZYppCommitPolicy.i"
 %include "ZYppCommitResult.i"
 %include "TmpPath.i"
 %include "Resolver.i"
 %include "ZConfig.i"
-%include "Callbacks.i"
-#endif
 
 %ignore zypp::ZYpp::setTextLocale;
 %ignore zypp::ZYpp::getTextLocale;
@@ -261,6 +264,7 @@ namespace zypp {
 %include <zypp/ZYpp.h>
 
 %include "ZYppFactory.i"
+#endif
 
 //
 // helper
