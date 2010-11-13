@@ -15,10 +15,12 @@ class CommitCallbacks {
       _scriptReceiver.connect();
       _installReceiver.connect();
       _removeReceiver.connect();
+//	    printf("CommitCallbacks @ %p\n", this);
     }
 
     ~CommitCallbacks()
     {
+//	    printf("~CommitCallbacks @ %p\n", this);
       _removeReceiver.disconnect();
       _installReceiver.disconnect();
       _scriptReceiver.disconnect();
