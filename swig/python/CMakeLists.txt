@@ -12,7 +12,7 @@ ADD_SUBDIRECTORY(tests)
 
 # SWIG_OUPUT is per-target
 
-SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/satsolver_python.cc" )
+SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/libzypp_python.cc" )
 
 FIND_PACKAGE(PythonInterp REQUIRED)
 IF (NOT PYTHON_SITEDIR)

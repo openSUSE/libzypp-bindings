@@ -7,7 +7,7 @@ ADD_SUBDIRECTORY(tests)
 
 # SWIG_OUPUT is per-target
 
-SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/satsolver_ruby.cc" )
+SET( SWIG_OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/libzypp_ruby.cc" )
 
 MESSAGE(STATUS "Ruby executable: ${RUBY_EXECUTABLE}")
 MESSAGE(STATUS "Ruby vendor arch dir: ${RUBY_VENDORARCH_DIR}")
@@ -42,17 +42,17 @@ INSTALL(TARGETS zypp_ruby LIBRARY DESTINATION ${RUBY_VENDORARCH_DIR})
 #
 # This requires rdoc-swig from https://github.com/kkaempf/rdoc-swig
 #
-SET(rdoc_dir "${CMAKE_CURRENT_BINARY_DIR}/html")
-ADD_CUSTOM_COMMAND (
-   OUTPUT ${rdoc_dir}
-   COMMAND ${CMAKE_COMMAND} -E echo_append "Creating rdoc documentation ..."
-   COMMAND rm -rf ${rdoc_dir}
-   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/rdoc -o ${rdoc_dir} zypp.i *.i ruby/*.i
-   COMMAND ${CMAKE_COMMAND} -E echo "Done."
-   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/swig
-   DEPENDS ${CMAKE_SOURCE_DIR}/swig/*.i ${CMAKE_SOURCE_DIR}/swig/ruby/*.rb ${CMAKE_SOURCE_DIR}/swig/ruby/*.i
-)
-ADD_CUSTOM_TARGET(ruby_rdoc ALL DEPENDS "${rdoc_dir}")
+#SET(rdoc_dir "${CMAKE_CURRENT_BINARY_DIR}/html")
+#ADD_CUSTOM_COMMAND (
+#   OUTPUT ${rdoc_dir}
+#   COMMAND ${CMAKE_COMMAND} -E echo_append "Creating rdoc documentation ..."
+#   COMMAND rm -rf ${rdoc_dir}
+#   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/rdoc -o ${rdoc_dir} zypp.i *.i ruby/*.i
+#   COMMAND ${CMAKE_COMMAND} -E echo "Done."
+#   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/swig
+#   DEPENDS ${CMAKE_SOURCE_DIR}/swig/*.i ${CMAKE_SOURCE_DIR}/swig/ruby/*.rb ${CMAKE_SOURCE_DIR}/swig/ruby/*.i
+#)
+#ADD_CUSTOM_TARGET(ruby_rdoc ALL DEPENDS "${rdoc_dir}")
 
 #
 # Leave this to %doc in the .spec file
