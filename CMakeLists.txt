@@ -46,7 +46,19 @@ FIND_PACKAGE(SWIG REQUIRED)
 
 FIND_PACKAGE(Zypp REQUIRED)
 
-SET( SWIG_DEFINITIONS -DZYPP_DEPRECATED )
+# determine zypp version
+EXECUTE_PROCESS(COMMAND "/usr/bin/readlink" ${ZYPP_LIBRARY} OUTPUT_VARIABLE ZYPP_SOFILE)
+
+# match number at end, strip trailing \n by using a sub-match
+STRING(REGEX MATCH "([0-9]+)\n$" ZYPP_VERSION "${ZYPP_SOFILE}")
+SET( ZYPP_VERSION "${CMAKE_MATCH_1}" )
+MESSAGE(STATUS "Zypp so library: ${ZYPP_SOFILE}, version ${ZYPP_VERSION}")
+
+SET( SWIG_DEFINITIONS -DZYPP_DEPRECATED -DZYPP_VERSION=${ZYPP_VERSION} )
+
+#
+# Finding Boost
+#
 
 FIND_PATH( BOOST_SMARTPTR_INCLUDE_DIR boost/smart_ptr/shared_ptr.hpp
 	/usr/include
