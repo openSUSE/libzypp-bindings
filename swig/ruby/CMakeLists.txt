@@ -42,6 +42,7 @@ INSTALL(TARGETS zypp_ruby LIBRARY DESTINATION ${RUBY_VENDORARCH_DIR})
 #
 # This requires rdoc-swig from https://github.com/kkaempf/rdoc-swig
 #
+IF(EXISTS ${CMAKE_SOURCE_DIR}/swig/ruby/rdoc)
 SET(rdoc_dir "${CMAKE_CURRENT_BINARY_DIR}/html")
 ADD_CUSTOM_COMMAND (
    OUTPUT ${rdoc_dir}
@@ -53,7 +54,7 @@ ADD_CUSTOM_COMMAND (
    DEPENDS ${CMAKE_SOURCE_DIR}/swig/*.i ${CMAKE_SOURCE_DIR}/swig/ruby/*.rb ${CMAKE_SOURCE_DIR}/swig/ruby/*.i
 )
 ADD_CUSTOM_TARGET(ruby_rdoc ALL DEPENDS "${rdoc_dir}")
-
+ENDIF(EXISTS ${CMAKE_SOURCE_DIR}/swig/ruby/rdoc)
 #
 # Leave this to %doc in the .spec file
 #INSTALL(DIRECTORY "${rdoc_dir}" DESTINATION ${DOC_INSTALL_DIR})
