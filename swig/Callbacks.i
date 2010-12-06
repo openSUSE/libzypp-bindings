@@ -14,6 +14,65 @@
  */
 
 %{
+#include <cstdarg>
+
+static Target_Type
+target_call(Target_Type instance, const char *name, int argc, ... )
+{
+    va_list ap;
+    va_start(ap, argc);
+    printf("Calling %p->%s with %d args\n", (void *)instance, name, argc);
+#if defined(SWIGPYTHON)
+    /*
+     * Python call with multiple args is like Array
+     */
+    Target_Type argv = Target_SizedArray(argc);
+    while(argc-- > 0) {
+      Target_Append(argv, va_arg(ap, Target_Type));
+    }
+
+    PyObject *pyfunc = PyObject_GetAttrString(instance, name); 
+    PyObject *result = NULL;
+
+    if (pyfunc == NULL)
+    {
+        PyErr_Print(); 
+        PyErr_Clear(); 
+        goto cleanup;
+    }
+    if (! PyCallable_Check(pyfunc)) 
+    {
+        goto cleanup; 
+    }
+    
+    result = PyObject_CallObject(pyfunc, argv);
+    if (PyErr_Occurred())
+    {
+        PyErr_Clear(); 
+        goto cleanup; 
+    }
+
+cleanup:
+    if (pyfunc) Py_DecRef(pyfunc);
+#endif
+#if defined(SWIGRUBY)
+    /*
+     * Ruby call with multiple args is like argc/argv
+     */
+    Target_Type *argv = (Target_Type *)alloca(argc * sizeof(Target_Type));
+    Target_Type *argvp = argv;
+    int i = argc;
+    while(i-- > 0) {
+      *argvp++ = va_arg(ap, Target_Type);
+    }
+    VALUE result = rb_funcall3( instance, rb_intern(name), argc, argv );
+#endif
+#if defined(SWIGPERL)
+    Target_Type result = Target_Null;
+#endif
+    va_end(ap);
+    return result;
+}
 
 /*
  * Patch message
@@ -83,40 +142,13 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   Target_Type instance;
 
-  virtual void start( zypp::Resolvable::constPtr resolvable )
+  virtual void start( const zypp::Resolvable *resolvable )
   {
     Target_Type r = SWIG_NewPointerObj((void *)&(*resolvable), SWIGTYPE_p_zypp__Resolvable, 0);
+    Target_Type result = target_call(instance, "removal_start", 1, r );
 #if defined(SWIGPYTHON)
-    PyObject *pyfunc = PyObject_GetAttrString(instance, "removal_start"); 
-    PyObject *prv = NULL;
-
-    if (pyfunc == NULL)
-    {
-        PyErr_Print(); 
-        PyErr_Clear(); 
-        goto cleanup;
-    }
-    if (! PyCallable_Check(pyfunc)) 
-    {
-        goto cleanup; 
-    }
-    
-    prv = PyObject_CallObject(pyfunc, r);
-    if (PyErr_Occurred())
-    {
-        PyErr_Clear(); 
-        goto cleanup; 
-    }
-
-cleanup:
-    if (pyfunc) Py_DecRef(pyfunc);
-    if (prv) Py_DecRef(prv);
+    if (result) Py_DecRef(result);
 #endif
-
-#if defined(SWIGRUBY)
-    VALUE result = rb_funcall( instance, rb_intern("removal_start" ), 1, r );
-#endif
- 
     return;
   }
 
