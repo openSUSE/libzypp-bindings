@@ -221,6 +221,8 @@ namespace zypp {
 %include "Capability.i"
 %include "Capabilities.i"
 %include "CapMatch.i"
+%include "OnMediaLocation.i"
+%include "Resolvable.i"
 %include "RepoType.i"
 %include "RepoInfo.i"
 %include "ServiceInfo.i"
@@ -261,9 +263,7 @@ namespace zypp {
 %include "ZYppFactory.i"
 #endif
 
-/* These include files are already cleaned up from C++ cruft */
 %include "Arch.i"
-%include "Resolvable.i"
 %include "Callbacks.i"
 
 //
