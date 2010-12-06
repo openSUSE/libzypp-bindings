@@ -8,10 +8,12 @@ sys.path.insert(0, cwd + "/../../../build/swig/python")
 
 class TestSequenceFunctions(unittest.TestCase):
     
-  def testloading(self):
+  def teststarting(self):
     import zypp
-    zypp = zypp.ZYppFactory.instance().getZYpp()
-    assert zypp
-
+    Z = zypp.ZYppFactory.instance().getZYpp()
+    assert Z
+    Z.initializeTarget( zypp.Pathname("/") )
+    Z.target().load();
+                
 if __name__ == '__main__':
   unittest.main()
