@@ -16,7 +16,7 @@ class TestSequenceFunctions(unittest.TestCase):
     Z.target().load()
     installed_pkgs = Z.pool()
     for item in installed_pkgs:
-        if not zypp.isKindPattern(item):
+        if zypp.isKindPackage(item):
             print "Repopath %s" % item.repoInfo().packagesPath()
             item = zypp.asKindPackage(item)
             print "Location filename %s" % item.location().filename()
