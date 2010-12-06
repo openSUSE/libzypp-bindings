@@ -173,11 +173,6 @@ typedef std::list<std::string> StringList;
 
 #define VERSION ZYPP_VERSION
 
-/* These include files are already cleaned up from C++ cruft */
-%include "Arch.i"
-%include "Resolvable.i"
-%include "Callbacks.i"
-
 /* These include files are pending to be cleaned up from C++ cruft */
 #if PRODUCTION /* set 0 for testing, these files still carry the full C++ cruft */
 
@@ -265,6 +260,11 @@ namespace zypp {
 
 %include "ZYppFactory.i"
 #endif
+
+/* These include files are already cleaned up from C++ cruft */
+%include "Arch.i"
+%include "Resolvable.i"
+%include "Callbacks.i"
 
 //
 // helper
