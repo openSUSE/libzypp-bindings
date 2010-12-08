@@ -42,7 +42,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       ..
 make %{?jobs:-j %jobs}
 
-%test
+%check
 cd build
 make test
 
