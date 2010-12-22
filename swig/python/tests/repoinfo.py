@@ -56,7 +56,7 @@ class RepoInfoTestCase(unittest.TestCase):
 
     def testDump(self):
         out = self.info.dump()
-        assert len(out) == 414, 'Invalid output length %d' % len(out)
+        assert len(out) == 396, 'Invalid output length %d' % len(out)
 
     def testDumpIni(self):
         out = self.info.dumpAsIni()
