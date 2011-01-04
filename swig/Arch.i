@@ -84,6 +84,38 @@ class Arch {
    * builtin: s390s (zSeries 64 bit)
    */
   static Arch s390x() { return zypp::Arch_s390x; }
+  /*
+   * builtin: armv7l
+   */
+  static Arch armv7l() { return zypp::Arch_armv7l; }
+  /*
+   * builtin: armv6l
+   */
+  static Arch armv6l() { return zypp::Arch_armv6l; }
+  /*
+   * builtin: armv5tejl
+   */
+  static Arch armv5tejl() { return zypp::Arch_armv5tejl; }
+  /*
+   * builtin: armv5tel
+   */
+  static Arch armv5tel() { return zypp::Arch_armv5tel; }
+  /*
+   * builtin: armv5l
+   */
+  static Arch armv5l() { return zypp::Arch_armv5l; }
+  /*
+   * builtin: armv4tl
+   */
+  static Arch armv4tl() { return zypp::Arch_armv4tl; }
+  /*
+   * builtin: armv4l
+   */
+  static Arch armv4l() { return zypp::Arch_armv4l; }
+  /*
+   * builtin: armv3l
+   */
+  static Arch armv3l() { return zypp::Arch_armv3l; }
 
 #if 0 /* defined(SWIGRUBY) */
 %typemap(out) int is_builtin
