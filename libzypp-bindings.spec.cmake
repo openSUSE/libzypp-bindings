@@ -40,7 +40,8 @@ cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       ..
-make %{?jobs:-j %jobs}
+# the swig compile jobs take a lot of memory, so don't use %jobs here
+make -j1
 
 %check
 cd build

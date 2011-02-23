@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Feb 23 10:59:25 UTC 2011 - coolo@novell.com
+
+- disable use of %jobs to avoid swapping during compilation
+
+-------------------------------------------------------------------
 Wed Dec 22 10:00:27 CET 2010 - ma@suse.de
 
 - Use FIND_PROGRAM to detect readlink path.
