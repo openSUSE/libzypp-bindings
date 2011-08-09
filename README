@@ -2,7 +2,8 @@
 Attempt to create generated bindings for
 libzypp. Not restricted to one language.
 
-Authors: dmacvicar@suse.de
+Authors: kkaempf@suse.de
+         dmacvicar@suse.de
 	 aschnell@suse.de
 
 Ruby Notes
