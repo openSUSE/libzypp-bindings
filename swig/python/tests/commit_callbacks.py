@@ -12,8 +12,12 @@ sys.path.insert(0, cwd + "/../../../build/swig/python")
 
 import zypp
 
+removals = 0
+
 class CommitReceiver:
   def removal_start(self, resolvable):
+    global removals
+    removals += 1
     print "Starting to remove ", resolvable
 
 class CommitCallbacksTestCase(unittest.TestCase):
@@ -37,7 +41,10 @@ class CommitCallbacksTestCase(unittest.TestCase):
         for item in Z.pool():
             print "Emitting removal of ", item.resolvable()
             commit_callbacks_emitter.remove_start(item.resolvable())
+            print "Done"
             break
+
+        assert removals == 1
 
         commit_callbacks.disconnect()
 #        print "disconnected"

@@ -26,9 +26,17 @@ target_call(Target_Type instance, const char *name, int argc, ... )
     /*
      * Python call with multiple args is like Array
      */
-    Target_Type argv = Target_SizedArray(argc);
-    while(argc-- > 0) {
-      Target_Append(argv, va_arg(ap, Target_Type));
+    Target_Type argv = PyTuple_New(argc); 
+    int i; 
+    for (i = 0; i < argc; ++i)
+    {
+        PyObject* arg = va_arg(ap, PyObject*); 
+        if (arg == NULL)
+        {
+            arg = Py_None; 
+            Py_IncRef(arg); 
+        }
+        PyTuple_SET_ITEM(argv, i, arg); 
     }
 
     PyObject *pyfunc = PyObject_GetAttrString(instance, name); 
@@ -36,24 +44,29 @@ target_call(Target_Type instance, const char *name, int argc, ... )
 
     if (pyfunc == NULL)
     {
+        printf("%s not defined\n", name);
         PyErr_Print(); 
         PyErr_Clear(); 
         goto cleanup;
     }
     if (! PyCallable_Check(pyfunc)) 
     {
+        printf("%s not callable\n", name);
         goto cleanup; 
     }
     
     result = PyObject_CallObject(pyfunc, argv);
     if (PyErr_Occurred())
     {
+        printf("%s returned error\n", name);
+        PyErr_Print(); 
         PyErr_Clear(); 
         goto cleanup; 
     }
 
 cleanup:
     if (pyfunc) Py_DecRef(pyfunc);
+    if (argv) Py_DecRef(argv);
 #endif
 #if defined(SWIGRUBY)
     /*
@@ -142,7 +155,8 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   Target_Type instance;
 
-  virtual void start( const zypp::Resolvable *resolvable )
+/*  virtual void start( const zypp::Resolvable *resolvable ) */
+  virtual void start( Resolvable::constPtr resolvable )
   {
     Target_Type r = SWIG_NewPointerObj((void *)&(*resolvable), SWIGTYPE_p_zypp__Resolvable, 0);
     Target_Type result = target_call(instance, "removal_start", 1, r );
