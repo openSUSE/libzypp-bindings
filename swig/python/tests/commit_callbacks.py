@@ -41,6 +41,21 @@ removals = 0
 #
 # TODO: provide a complete list of function names and parameters
 #
+# I. Patch message
+#   patch_message(zypp::Patch) - show patch message
+#
+# II. Patch script
+#   patch_script_start(zypp::Package, String)
+#   patch_script_progress(zypp::Notify, String)
+#   patch_script_problem(String)
+#   patch_script_finish()
+#
+# III. Removal
+#   removal_start(zypp::Resolvable) - start of resolvable uninstall
+#   removal_progress(zypp::Resolvable, Integer) - progress in percent
+#   removal_problem(zypp::Resolvable, zypp::Error, String) - problem report
+#   removal_finish(zypp::Resolvable, zypp::Error, String) - uninstall finish
+#   
 
 class CommitReceiver:
   #
@@ -53,75 +68,104 @@ class CommitReceiver:
     removals += 1
     print "Starting to remove ", resolvable
 
+  #
+  # removal_progress() is called during a resolvable (typically package) uninstall
+  #   and be passed the resolvable to-be-removed and a percentage value
+  #    
+  def removal_progress(self, resolvable, percentage):
+    assert percentage == 42
+    print "Remove of ", resolvable, " at ", percentage, "%"
+
 #
 # Testcase for Callbacks
 #
     
 class CommitCallbacksTestCase(unittest.TestCase):
-    # this will test the remove callback
-    def testRemoveCallback(self):
+    def setUp(self):
         #
         # Normal zypp startup
         #
-        Z = zypp.ZYppFactory_instance().getZYpp()
-        Z.initializeTarget( zypp.Pathname("/") )
-        Z.target().load();
+        self.Z = zypp.ZYppFactory_instance().getZYpp()
+        self.Z.initializeTarget( zypp.Pathname("/") )
+        self.Z.target().load()
 
         # The 'zypp.CommitCallbacksEmitter()' is a test/debug class
         # which can be used to trigger various callbacks
         # (This is callback test code - we cannot do an actual package uninstall here!)
-        commit_callbacks_emitter = zypp.CommitCallbacksEmitter()
+        self.commit_callbacks_emitter = zypp.CommitCallbacksEmitter()
 
         #
         # create an instance of our CommitReceiver class defined above
         #
-        commit_receiver = CommitReceiver()
+        self.commit_receiver = CommitReceiver()
 
         # zypp.CommitCallbacks is the callback 'handler' which must be informed
         # about the receiver
-        commit_callbacks = zypp.CommitCallbacks()
+        self.commit_callbacks = zypp.CommitCallbacks()
 
         #
         # Ensure that no other receiver is registered
         #
-        assert None == commit_callbacks.receiver()
+        assert None == self.commit_callbacks.receiver()
 
         #
         # Connect the receiver instance with the callback handler
         #
-        commit_callbacks.connect(commit_receiver)
+        self.commit_callbacks.connect(self.commit_receiver)
 
         #
         # Ensure that its set correctly
         #
-        assert commit_receiver == commit_callbacks.receiver()
+        assert self.commit_receiver == self.commit_callbacks.receiver()
 
-        #
-        # Loop over pool - just to get real instances of Resolvable
-        #
-        for item in Z.pool():
-            print "Emitting removal of ", item.resolvable()
-            #
-            # Use the zypp.CommitCallbacksEmitter to fake an actual package removal
-            #
-            commit_callbacks_emitter.remove_start(item.resolvable())
-            print "Done"
-            break # one is sufficient
-
-        #
-        # Did the actual callback got executed ?
-        #
-        assert removals == 1
-
+    def tearDown(self):
         #
         # Disconnect the receiver from the callback handler
         #
-        commit_callbacks.disconnect()
+        self.commit_callbacks.disconnect()
 
         #
         # Ensure that the disconnect was successful
         #
-        assert None == commit_callbacks.receiver()
+        assert None == self.commit_callbacks.receiver()
+
+    # test patch message
+    def testPatchMessageCallback(self):
+        #
+        # Ugh, this would need a patch with a message :-/
+        #
+        # FIXME
+        assert True
+
+    # test patch script
+    def testPatchScriptCallback(self):
+        #
+        # Ugh, this would need a patch with a script :-/
+        #
+        # FIXME
+        assert True
+
+    # this will test the remove callback
+    def testRemoveCallback(self):
+
+        #
+        # Loop over pool - just to get real instances of Resolvable
+        #
+        for item in self.Z.pool():
+            print "Emitting removal of ", item.resolvable()
+            #
+            # Use the zypp.CommitCallbacksEmitter to fake an actual package removal
+            #
+            resolvable = item.resolvable()
+            self.commit_callbacks_emitter.remove_start(resolvable)
+            self.commit_callbacks_emitter.remove_progress(resolvable, 42)
+#            self.commit_callbacks_emitter.remove_problem(resolvable, zypp.REMOVE_NO_ERROR, "All fine")
+#            self.commit_callbacks_emitter.remove_finish(resolvable, zypp.REMOVE_NO_ERROR, "Done")
+            break # one is sufficient
+        #
+        # Did the actual callback got executed ?
+        #
+        assert removals == 1
 
 if __name__ == '__main__':
   unittest.main()

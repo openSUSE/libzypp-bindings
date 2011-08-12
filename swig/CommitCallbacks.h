@@ -165,11 +165,11 @@ class CommitCallbacksEmitter {
       _patch_script->start(package, path_r);
     }
 	
-	  /**
-	   *    * Progress provides the script output. If the script is quiet,
-	   *    * from time to time still-alive pings are sent to the ui. (Notify=PING)
-	   *    * Returning \c FALSE aborts script execution.
-	   *    */
+    /**
+     * Progress provides the script output. If the script is quiet,
+     * from time to time still-alive pings are sent to the ui. (Notify=PING)
+     * Returning \c FALSE aborts script execution.
+     */
     bool script_progress( target::PatchScriptReport::Notify kind, const std::string &output )
     {
       return _patch_script->progress(kind, output);
@@ -188,3 +188,5 @@ class CommitCallbacksEmitter {
     }
 	
 };
+
+#define REMOVE_NO_ERROR target::rpm::RemoveResolvableReport::NO_ERROR
