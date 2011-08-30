@@ -190,3 +190,4 @@ class CommitCallbacksEmitter {
 };
 
 #define REMOVE_NO_ERROR target::rpm::RemoveResolvableReport::NO_ERROR
+#define INSTALL_NO_ERROR target::rpm::InstallResolvableReport::NO_ERROR

@@ -33,6 +33,7 @@ import zypp
 #  actually run)
 #
 removals = 0
+installs = 0
 
 
 #
@@ -55,9 +56,19 @@ removals = 0
 #   removal_progress(zypp::Resolvable, Integer) - progress in percent
 #   removal_problem(zypp::Resolvable, zypp::Error, String) - problem report
 #   removal_finish(zypp::Resolvable, zypp::Error, String) - uninstall finish
+#
+# IV. Install
+#   install_start(zypp::Resolvable) - start of resolvable uninstall
+#   install_progress(zypp::Resolvable, Integer) - progress in percent
+#   install_problem(zypp::Resolvable, zypp::Error, String) - problem report
+#   install_finish(zypp::Resolvable, zypp::Error, String) - uninstall finish
 #   
 
 class CommitReceiver:
+    
+  ################################
+  # removal callbacks
+
   #
   # removal_start() will be called at the beginning of a resolvable (typically package) uninstall
   #   and be passed the resolvable to-be-removed
@@ -80,7 +91,7 @@ class CommitReceiver:
 
   #
   # removal_finish() is called after a resolvable (typically package) was uninstalled
-  #   and be passed the resolvable to-be-removed and a status (string) with detail (string)
+  #   and be passed the resolvable just removed and a status (string) with detail (string)
   # status is either
   # - "no_error":  typical 'good' status
   # - "not_found": resolvable not found (i.e. not installed)
@@ -98,6 +109,51 @@ class CommitReceiver:
   #
   def removal_problem(self, resolvable, error, description):
     print "Remove of ", resolvable.name(), " has problem ", error, ": ", description
+    return "ignore"
+
+  ################################
+  # install callbacks
+
+  #
+  # install_start() will be called at the beginning of a resolvable (typically package) install
+  #   and be passed the resolvable to-be-installed
+  #    
+  def install_start(self, resolvable):
+    # testing: increment the number of removals and print the resolvable
+    global installs
+    installs += 1
+    print "Starting to install ", resolvable
+
+  #
+  # install_progress() is called during a resolvable (typically package) install
+  #   and be passed the resolvable to-be-removed and a percentage value
+  # Must return True (continue) or False (abort install)
+  #    
+  def install_progress(self, resolvable, percentage):
+    assert percentage == 42
+    print "Install of ", resolvable, " at ", percentage, "%"
+    return True
+
+  #
+  # install_finish() is called after a resolvable (typically package) was installed
+  #   and be passed the resolvable just installed and a status (string) with detail (string)
+  # status is either
+  # - "no_error":  typical 'good' status
+  # - "not_found": resolvable not found
+  # - "io":        (disk) I/O error
+  # - "invalid":   any other error
+  #    
+  def install_finish(self, resolvable, status, detail):
+    print "Install of ", resolvable.name(), " finished with problem ", status, ": ", detail
+
+  #
+  # report a problem during resolvable install
+  # error is the same as 'status' of install_finish()
+  #
+  # Must return "abort", "retry" or "ignore"
+  #
+  def install_problem(self, resolvable, error, description):
+    print "Install of ", resolvable.name(), " has problem ", error, ": ", description
     return "ignore"
 
 #
@@ -190,6 +246,28 @@ class CommitCallbacksTestCase(unittest.TestCase):
         # Did the actual callback got executed ?
         #
         assert removals == 1
+
+    # this will test the install callback
+    def testInstallCallback(self):
+
+        #
+        # Loop over pool - just to get real instances of Resolvable
+        #
+        for item in self.Z.pool():
+            print "Emitting install of ", item.resolvable()
+            #
+            # Use the zypp.CommitCallbacksEmitter to fake an actual package removal
+            #
+            resolvable = item.resolvable()
+            self.commit_callbacks_emitter.install_start(resolvable)
+            self.commit_callbacks_emitter.install_progress(resolvable, 42)
+#            self.commit_callbacks_emitter.install_problem(resolvable, zypp.REMOVE_NO_ERROR, "All fine")
+#            self.commit_callbacks_emitter.install_finish(resolvable, zypp.REMOVE_NO_ERROR, "Done")
+            break # one is sufficient
+        #
+        # Did the actual callback got executed ?
+        #
+        assert installs == 1
 
 if __name__ == '__main__':
   unittest.main()
