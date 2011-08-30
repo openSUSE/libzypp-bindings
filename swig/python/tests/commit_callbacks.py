@@ -71,10 +71,34 @@ class CommitReceiver:
   #
   # removal_progress() is called during a resolvable (typically package) uninstall
   #   and be passed the resolvable to-be-removed and a percentage value
+  # Must return True (continue) or False (abort removal)
   #    
   def removal_progress(self, resolvable, percentage):
     assert percentage == 42
     print "Remove of ", resolvable, " at ", percentage, "%"
+    return True
+
+  #
+  # removal_finish() is called after a resolvable (typically package) was uninstalled
+  #   and be passed the resolvable to-be-removed and a status (string) with detail (string)
+  # status is either
+  # - "no_error":  typical 'good' status
+  # - "not_found": resolvable not found (i.e. not installed)
+  # - "io":        (disk) I/O error
+  # - "invalid":   any other error
+  #    
+  def removal_finish(self, resolvable, status, detail):
+    print "Remove of ", resolvable.name(), " finished with problem ", status, ": ", detail
+
+  #
+  # report a problem during resolvable removal
+  # error is the same as 'status' of removal_finish()
+  #
+  # Must return "abort", "retry" or "ignore"
+  #
+  def removal_problem(self, resolvable, error, description):
+    print "Remove of ", resolvable.name(), " has problem ", error, ": ", description
+    return "ignore"
 
 #
 # Testcase for Callbacks
