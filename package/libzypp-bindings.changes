@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 22 13:36:28 CEST 2011 - ma@suse.de
+
+- Remove reference to cmake policies not available on SLE11.
+
+-------------------------------------------------------------------
 Wed Feb 23 10:59:25 UTC 2011 - coolo@novell.com
 
 - disable use of %jobs to avoid swapping during compilation
