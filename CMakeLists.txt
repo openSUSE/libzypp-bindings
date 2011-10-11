@@ -3,16 +3,11 @@
 #
 #
 
-cmake_minimum_required(VERSION 2.6)
-
-if(COMMAND cmake_policy)
-  cmake_policy(SET CMP0017 NEW)
-endif(COMMAND cmake_policy)
-
+cmake_minimum_required(VERSION 2.8)
 
 ENABLE_TESTING()
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fno-strict-aliasing")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fno-strict-aliasing -std=c++0x")
 
 #
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
@@ -53,10 +48,10 @@ FIND_PACKAGE(Zypp REQUIRED)
 
 # determine zypp version
 FIND_PROGRAM(READ_LINK readlink)
-EXECUTE_PROCESS(COMMAND "${READ_LINK}" ${ZYPP_LIBRARY} OUTPUT_VARIABLE ZYPP_SOFILE)
+EXECUTE_PROCESS(COMMAND "${READ_LINK}" "-f" ${ZYPP_LIBRARY} OUTPUT_VARIABLE ZYPP_SOFILE)
 
 # match number at end, strip trailing \n by using a sub-match
-STRING(REGEX MATCH "([0-9]+)\n$" ZYPP_VERSION "${ZYPP_SOFILE}")
+STRING(REGEX MATCH "([0-9]+)\\.[0-9]+\\.[0-9]+\n$" ZYPP_VERSION "${ZYPP_SOFILE}")
 SET( ZYPP_VERSION "${CMAKE_MATCH_1}" )
 MESSAGE(STATUS "Zypp so library version ${ZYPP_VERSION}")
 

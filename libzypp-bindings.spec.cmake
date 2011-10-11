@@ -17,7 +17,8 @@ License:        GPL v2 or later
 Summary:        Bindings for libzypp
 Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  cmake gcc-c++ python-devel ruby-devel
+BuildRequires:  cmake python-devel ruby-devel
+BuildRequires:  gcc-c++ >= 4.5
 BuildRequires:  swig >= 1.3.40
 BuildRequires:  libzypp-devel >= 5.8.0
 Source:         %{name}-%{version}.tar.bz2

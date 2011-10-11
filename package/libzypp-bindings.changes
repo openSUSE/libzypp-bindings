@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Oct 11 13:46:06 CEST 2011 - ma@suse.de
+
+- Use gcc-c++ >= 4.5
+
+-------------------------------------------------------------------
 Wed Feb 23 10:59:25 UTC 2011 - coolo@novell.com
 
 - disable use of %jobs to avoid swapping during compilation
