@@ -20,7 +20,7 @@
  * Helpers
  *
  */
- 
+
 /*
  * Action
  * Symbol representation of :abort, :retry, and :ignore
@@ -35,6 +35,7 @@ static Target_Type action_abort()
       value = ID2SYM(rb_intern("abort"));
     return value;
 #endif
+    return 0; // fallback
   }
 
 static Target_Type action_retry()
@@ -45,6 +46,7 @@ static Target_Type action_retry()
       value = ID2SYM(rb_intern("retry"));
     return value;
 #endif
+    return 0; // fallback
   }
 
 static Target_Type action_ignore()
@@ -55,6 +57,7 @@ static Target_Type action_ignore()
       value = ID2SYM(rb_intern("ignore"));
     return value;
 #endif
+    return 0; // fallback
   }
 
 /*
@@ -74,6 +77,7 @@ static Target_Type error_no_error()
 #if defined(SWIGPYTHON)
   return Target_String("no_error");
 #endif
+    return 0; // fallback
   }
 
 static Target_Type error_not_found()
@@ -87,6 +91,7 @@ static Target_Type error_not_found()
 #if defined(SWIGPYTHON)
   return Target_String("not_found");
 #endif
+    return 0; // fallback
   }
 
 static Target_Type error_io()
@@ -100,6 +105,7 @@ static Target_Type error_io()
 #if defined(SWIGPYTHON)
   return Target_String("io");
 #endif
+    return 0; // fallback
   }
 
 static Target_Type error_invalid()
@@ -113,6 +119,7 @@ static Target_Type error_invalid()
 #if defined(SWIGPYTHON)
   return Target_String("invalid");
 #endif
+    return 0; // fallback
   }
 
 /*
@@ -263,41 +270,41 @@ target_call(Target_Type instance, const char *name, int argc, ... )
     /*
      * Python call with multiple args is like Array
      */
-    Target_Type argv = PyTuple_New(argc); 
-    int i; 
+    Target_Type argv = PyTuple_New(argc);
+    int i;
     for (i = 0; i < argc; ++i)
     {
-        PyObject* arg = va_arg(ap, PyObject*); 
+        PyObject* arg = va_arg(ap, PyObject*);
         if (arg == NULL)
         {
-            arg = Py_None; 
-            Py_IncRef(arg); 
+            arg = Py_None;
+            Py_IncRef(arg);
         }
-        PyTuple_SET_ITEM(argv, i, arg); 
+        PyTuple_SET_ITEM(argv, i, arg);
     }
 
-    PyObject *pyfunc = PyObject_GetAttrString(instance, name); 
+    PyObject *pyfunc = PyObject_GetAttrString(instance, name);
     PyObject *result = NULL;
 
     if (pyfunc == NULL)
     {
-        PyErr_Print(); 
-        PyErr_Clear(); 
+        PyErr_Print();
+        PyErr_Clear();
         goto cleanup;
     }
-    if (! PyCallable_Check(pyfunc)) 
+    if (! PyCallable_Check(pyfunc))
     {
         fprintf(stderr,"%s not callable\n", name);
-        goto cleanup; 
+        goto cleanup;
     }
-    
+
     result = PyObject_CallObject(pyfunc, argv);
     if (PyErr_Occurred())
     {
         fprintf(stderr,"%s returned error\n", name);
-        PyErr_Print(); 
-        PyErr_Clear(); 
-        goto cleanup; 
+        PyErr_Print();
+        PyErr_Clear();
+        goto cleanup;
     }
 
 cleanup:
@@ -426,7 +433,7 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
   {
     Action result;
     Target_Type str = Target_String(description.c_str());
-    Target_Type res = target_call(instance, "patch_script_problem", 1, str );    
+    Target_Type res = target_call(instance, "patch_script_problem", 1, str );
     result = target2patch_script_action(res);
 #if defined(SWIGPYTHON)
     Py_DecRef(str);
@@ -438,7 +445,7 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
   /** Patch script finish. */
   virtual void finish()
   {
-    Target_Type res = target_call(instance, "patch_script_finish", 0 );    
+    Target_Type res = target_call(instance, "patch_script_finish", 0 );
 #if defined(SWIGPYTHON)
     if (res) Py_DecRef(res);
 #endif
