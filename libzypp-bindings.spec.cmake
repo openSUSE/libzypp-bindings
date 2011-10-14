@@ -1,10 +1,17 @@
 #
 # spec file for package libzypp-bindings
 #
-# Copyright (c) 2007 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
-#
+# Copyright (c) 2011 SUSE LINUX Products GmbH, Nuernberg, Germany.
+ #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
@@ -13,7 +20,7 @@
 Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
-License:        GPL v2 or later
+License:        GPLv2+
 Summary:        Bindings for libzypp
 Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -56,6 +63,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{__rm} -rf %{buildroot}
 
 %package -n ruby-zypp
+License:        GPLv2+
 Summary:        Ruby bindings for libzypp
 Group:          Development/Languages/Ruby
 
@@ -72,6 +80,7 @@ Group:          Development/Languages/Ruby
 %endif
 
 %package -n python-zypp
+License:        GPLv2+
 Summary:        Python bindings for libzypp
 Group:          Development/Languages/Python
 %description -n python-zypp
@@ -83,6 +92,7 @@ Group:          Development/Languages/Python
 %{py_sitedir}/zypp.py
 
 %package -n perl-zypp
+License:        GPLv2+
 Requires:       perl = %{perl_version}
 Summary:        Perl bindings for libzypp
 Group:          Development/Languages/Perl
