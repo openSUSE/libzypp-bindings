@@ -20,7 +20,7 @@
 Name:           @PACKAGE@
 Version:        @VERSION@
 Release:        0
-License:        GPLv2+
+License:        GPL-2.0+
 Summary:        Bindings for libzypp
 Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -63,7 +63,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{__rm} -rf %{buildroot}
 
 %package -n ruby-zypp
-License:        GPLv2+
+License:        GPL-2.0+
 Summary:        Ruby bindings for libzypp
 Group:          Development/Languages/Ruby
 
@@ -80,7 +80,7 @@ Group:          Development/Languages/Ruby
 %endif
 
 %package -n python-zypp
-License:        GPLv2+
+License:        GPL-2.0+
 Summary:        Python bindings for libzypp
 Group:          Development/Languages/Python
 %description -n python-zypp
@@ -92,7 +92,7 @@ Group:          Development/Languages/Python
 %{py_sitedir}/zypp.py
 
 %package -n perl-zypp
-License:        GPLv2+
+License:        GPL-2.0+
 Requires:       perl = %{perl_version}
 Summary:        Perl bindings for libzypp
 Group:          Development/Languages/Perl
