@@ -35,8 +35,8 @@ class LoadTest < Test::Unit::TestCase
       break if i > 10
       puts pi
       # PoolItems have status and a resolvable
-#      r = pi.resolvable
-#      puts "#{r.name}-#{r.edition}"
+      r = pi.resolvable
+      puts "#{r.name}-#{r.edition}"
     end
     puts "packages:"
     #try iterate with kind
@@ -46,6 +46,8 @@ class LoadTest < Test::Unit::TestCase
       i = i + 1
       break if i > 10
       puts pi
+      r = pi.resolvable
+      puts "#{r.name}-#{r.edition}"
     end
 
     i = 0
@@ -54,6 +56,8 @@ class LoadTest < Test::Unit::TestCase
       i = i + 1
       break if i > 10
       puts pi
+      r = pi.resolvable
+      puts "#{r.name}-#{r.edition}"
     end
 
     assert true

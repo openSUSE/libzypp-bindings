@@ -25,14 +25,14 @@ iter2(ResPool, PoolItem);
 
 #ifdef SWIGRUBY
 
-iter3(ResPool, PoolItem*);
+iter3(ResPool, zypp::PoolItem*);
 
 // %extend ResPool {
 //     void each()
 //     {
 //         ResPool::const_iterator i = self->begin();
 //         while ( i != self->end() ) {
-//             rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_PoolItem, 0));
+//             rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_zypp__PoolItem, 0));
 //             ++i;
 //         }
 //     }
@@ -43,7 +43,7 @@ iter3(ResPool, PoolItem*);
     {
         ResPool::byKind_iterator i = self->byKindBegin( kind_r );
         while ( i != self->byKindEnd( kind_r ) ) {
-            rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_PoolItem, 0));
+            rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_zypp__PoolItem, 0));
             ++i;
         }
     }
@@ -54,7 +54,7 @@ iter3(ResPool, PoolItem*);
     {
         ResPool::byName_iterator i = self->byNameBegin( name );
         while ( i != self->byNameEnd( name ) ) {
-            rb_yield( SWIG_NewPointerObj( (void *) &*i, $descriptor(PoolItem), 0));
+            rb_yield( SWIG_NewPointerObj( (void *) &*i, SWIGTYPE_p_zypp__PoolItem, 0));
             ++i;
         }
     }
