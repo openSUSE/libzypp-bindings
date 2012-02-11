@@ -39,7 +39,7 @@ iter3(ResPool, PoolItem*);
 // }
 
 %extend ResPool {
-    void each_by_kind( const ResObject::Kind & kind_r )
+    void each_by_kind( const ResKind & kind_r )
     {
         ResPool::byKind_iterator i = self->byKindBegin( kind_r );
         while ( i != self->byKindEnd( kind_r ) ) {
