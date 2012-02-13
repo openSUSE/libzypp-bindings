@@ -127,6 +127,7 @@ SWIGINTERNINLINE SV *SWIG_From_double  SWIG_PERL_DECL_ARGS_1(double value);
 #include "zypp/ServiceInfo.h"
 #include "zypp/RepoManager.h"
 #include "zypp/repo/RepoType.h"
+#include "zypp/repo/PackageProvider.h"
 #include "zypp/TmpPath.h"
 #include "zypp/Resolver.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
@@ -230,6 +231,7 @@ namespace zypp {
 %include "ResStatus.i"
 %include "ResObject.i"
 %include "Package.i"
+%include "PackageProvider.i"
 %include "Patch.i"
 %include "Pattern.i"
 %include "Product.i"
@@ -248,6 +250,10 @@ namespace zypp {
 %include "TmpPath.i"
 %include "Resolver.i"
 %include "ZConfig.i"
+
+//just simple files, where we need default ctor
+%include <zypp/repo/RepoProvideFile.h>
+%include <zypp/repo/DeltaCandidates.h>
 
 %ignore zypp::ZYpp::setTextLocale;
 %ignore zypp::ZYpp::getTextLocale;

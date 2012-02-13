@@ -55,6 +55,13 @@ class LoadTest < Test::Unit::TestCase
       assert pi.is_a? PoolItem
       r = pi.resolvable
       assert_equal "libzypp",r.name
+      #try to download it
+      pkg = asKindPackage(pi)
+      puts RepoMediaAccess.new().class
+      puts pkg.class
+      puts DeltaCandidates.new().class
+      puts pkg.distribution
+      path = PackageProvider.new(RepoMediaAccess.new(),asKindPackage(pi),DeltaCandidates.new()).providePackage
     end
 
     assert true
