@@ -33,31 +33,28 @@ class LoadTest < Test::Unit::TestCase
     p.each do | pi |
       i = i + 1
       break if i > 10
-      puts pi
       # PoolItems have status and a resolvable
       r = pi.resolvable
-      puts "#{r.name}-#{r.edition}"
+      assert pi.is_a? PoolItem
     end
-    puts "packages:"
     #try iterate with kind
     i = 0
     p.each_by_kind(ResKind.package) do |pi|
       
       i = i + 1
       break if i > 10
-      puts pi
+      assert pi.is_a? PoolItem
       r = pi.resolvable
-      puts "#{r.name}-#{r.edition}"
+      assert isKindPackage(pi)
     end
 
     i = 0
-    puts "by name libzypp"
     p.each_by_name("libzypp") do |pi|
       i = i + 1
       break if i > 10
-      puts pi
+      assert pi.is_a? PoolItem
       r = pi.resolvable
-      puts "#{r.name}-#{r.edition}"
+      assert_equal "libzypp",r.name
     end
 
     assert true
