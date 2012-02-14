@@ -49,6 +49,7 @@ class LoadTest < Test::Unit::TestCase
     end
 
     i = 0
+    puts "search for libzypp ..."
     p.each_by_name("libzypp") do |pi|
       i = i + 1
       break if i > 10
@@ -56,12 +57,6 @@ class LoadTest < Test::Unit::TestCase
       r = pi.resolvable
       assert_equal "libzypp",r.name
       #try to download it
-      pkg = asKindPackage(pi)
-      puts RepoMediaAccess.new().class
-      puts pkg.class
-      puts DeltaCandidates.new().class
-      puts pkg.distribution
-      path = PackageProvider.new(RepoMediaAccess.new(),asKindPackage(pi),DeltaCandidates.new()).providePackage
     end
 
     assert true
