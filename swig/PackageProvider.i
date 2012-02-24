@@ -6,7 +6,7 @@
     {
     public:
       WrappedManagedFile(ManagedFile managed_file){ mf = managed_file; }
-      const std::string & asString(){ mf->asString();}
+      const std::string & asString(){ return mf->asString();}
     private:
       ManagedFile mf;
     };
