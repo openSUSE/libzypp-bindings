@@ -111,13 +111,16 @@ namespace zypp
     } \
 }
 
+%wrapper {
+  static VALUE zyppexception = rb_define_class("ZYppException", rb_eStandardError);
+}
+
 %exception
 {
   try {
     $action
   }
   catch (const Exception& e) {
-    static VALUE zyppexception = rb_define_class("ZYppException", rb_eStandardError);
     std::string tmp = e.historyAsString() + e.asUserString();
     rb_raise(zyppexception, tmp.c_str());
   }
