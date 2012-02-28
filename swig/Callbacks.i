@@ -34,6 +34,8 @@ static Target_Type action_abort()
     if (value == Qnil)
       value = ID2SYM(rb_intern("abort"));
     return value;
+#else
+  return Target_String("abort");
 #endif
     return 0; // fallback
   }
@@ -45,6 +47,8 @@ static Target_Type action_retry()
     if (value == Qnil)
       value = ID2SYM(rb_intern("retry"));
     return value;
+#else
+  return Target_String("retry");
 #endif
     return 0; // fallback
   }
@@ -56,6 +60,8 @@ static Target_Type action_ignore()
     if (value == Qnil)
       value = ID2SYM(rb_intern("ignore"));
     return value;
+#else
+  return Target_String("ignore");
 #endif
     return 0; // fallback
   }
@@ -73,8 +79,7 @@ static Target_Type error_no_error()
     if (value == Qnil)
       value = ID2SYM(rb_intern("no_error"));
     return value;
-#endif
-#if defined(SWIGPYTHON)
+#else
   return Target_String("no_error");
 #endif
     return 0; // fallback
@@ -87,8 +92,7 @@ static Target_Type error_not_found()
     if (value == Qnil)
       value = ID2SYM(rb_intern("not_found"));
     return value;
-#endif
-#if defined(SWIGPYTHON)
+#else
   return Target_String("not_found");
 #endif
     return 0; // fallback
@@ -101,8 +105,7 @@ static Target_Type error_io()
     if (value == Qnil)
       value = ID2SYM(rb_intern("io"));
     return value;
-#endif
-#if defined(SWIGPYTHON)
+#else
   return Target_String("io");
 #endif
     return 0; // fallback
@@ -115,8 +118,7 @@ static Target_Type error_invalid()
     if (value == Qnil)
       value = ID2SYM(rb_intern("invalid"));
     return value;
-#endif
-#if defined(SWIGPYTHON)
+#else
   return Target_String("invalid");
 #endif
     return 0; // fallback
