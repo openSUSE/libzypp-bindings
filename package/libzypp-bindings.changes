@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Feb 28 13:16:22 UTC 2012 - jreidinger@suse.com
+
+- fix iteration over pool in ruby (bnc#746439)
+- add ability to use PackageProvider via bindings 
+- predefine class for ZyppException in ruby so it can be used after
+  require of zypp
+- version 0.5.11
+
+-------------------------------------------------------------------
 Tue Oct 18 16:54:42 CEST 2011 - ma@suse.de
 
 - Add arch armv7hl, armv7nhl, armv7thl, armv7tnhl
