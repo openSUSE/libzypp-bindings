@@ -48,10 +48,10 @@ namespace std {
     template<class T> class set {
         %typemap(in) set<T> {
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 $1;
                 for (unsigned int i=0; i<size; i++) {
-                    VALUE o = RARRAY($input)->ptr[i];
+                    VALUE o = RARRAY_PTR($input)[i];
                     T* x;
 		    SWIG_ConvertPtr(o, (void **) &x, $descriptor(T *), 1);
                     $1.insert(*x);
@@ -65,10 +65,10 @@ namespace std {
         %typemap(in) const set<T>& (std::set<T> temp),
                      const set<T>* (std::set<T> temp) {
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 $1 = &temp;
                 for (unsigned int i=0; i<size; i++) {
-                    VALUE o = RARRAY($input)->ptr[i];
+                    VALUE o = RARRAY_PTR($input)[i];
                     T* x;
                     SWIG_ConvertPtr(o, (void **) &x, $descriptor(T *), 1);
                     temp.insert(*x);
@@ -107,14 +107,14 @@ namespace std {
         %typecheck(SWIG_TYPECHECK_VECTOR) set<T> {
             /* native sequence? */
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 if (size == 0) {
                     /* an empty sequence can be of any type */
                     $1 = 1;
                 } else {
                     /* check the first element only */
                     T* x;
-                    VALUE o = RARRAY($input)->ptr[0];
+                    VALUE o = RARRAY_PTR($input)[0];
                     if ((SWIG_ConvertPtr(o,(void **) &x, 
                                          $descriptor(T *),0)) != -1)
                         $1 = 1;
@@ -135,14 +135,14 @@ namespace std {
                                           const set<T>* {
             /* native sequence? */
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 if (size == 0) {
                     /* an empty sequence can be of any type */
                     $1 = 1;
                 } else {
                     /* check the first element only */
                     T* x;
-                    VALUE o = RARRAY($input)->ptr[0];
+                    VALUE o = RARRAY_PTR($input)[0];
                     if ((SWIG_ConvertPtr(o,(void **) &x, 
                                          $descriptor(T *),0)) != -1)
                         $1 = 1;
@@ -215,10 +215,10 @@ namespace std {
     template<class T> class set<T*> {
         %typemap(in) set<T*> {
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 $1 = std::set<T* >(size);
                 for (unsigned int i=0; i<size; i++) {
-                    VALUE o = RARRAY($input)->ptr[i];
+                    VALUE o = RARRAY_PTR($input)[i];
                     T* x;
                     SWIG_ConvertPtr(o, (void **) &x, $descriptor(T *), 1);
                     (($1_type &)$1)[i] = x;
@@ -232,11 +232,11 @@ namespace std {
         %typemap(in) const set<T*>& (std::set<T*> temp),
                      const set<T*>* (std::set<T*> temp) {
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 temp = std::set<T* >(size);
                 $1 = &temp;
                 for (unsigned int i=0; i<size; i++) {
-                    VALUE o = RARRAY($input)->ptr[i];
+                    VALUE o = RARRAY_PTR($input)[i];
                     T* x;
                     SWIG_ConvertPtr(o, (void **) &x, $descriptor(T *), 1);
                     temp[i] = x;
@@ -257,14 +257,14 @@ namespace std {
         %typecheck(SWIG_TYPECHECK_VECTOR) set<T*> {
             /* native sequence? */
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 if (size == 0) {
                     /* an empty sequence can be of any type */
                     $1 = 1;
                 } else {
                     /* check the first element only */
                     T* x;
-                    VALUE o = RARRAY($input)->ptr[0];
+                    VALUE o = RARRAY_PTR($input)[0];
                     if ((SWIG_ConvertPtr(o,(void **) &x, 
                                          $descriptor(T *),0)) != -1)
                         $1 = 1;
@@ -285,14 +285,14 @@ namespace std {
                                           const set<T*>* {
             /* native sequence? */
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 if (size == 0) {
                     /* an empty sequence can be of any type */
                     $1 = 1;
                 } else {
                     /* check the first element only */
                     T* x;
-                    VALUE o = RARRAY($input)->ptr[0];
+                    VALUE o = RARRAY_PTR($input)[0];
                     if ((SWIG_ConvertPtr(o,(void **) &x, 
                                          $descriptor(T *),0)) != -1)
                         $1 = 1;
@@ -367,10 +367,10 @@ namespace std {
     template<> class set<T> {
         %typemap(in) set<T> {
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 $1 = std::set<T >(size);
                 for (unsigned int i=0; i<size; i++) {
-                    VALUE o = RARRAY($input)->ptr[i];
+                    VALUE o = RARRAY_PTR($input)[i];
                     if (CHECK(o))
                         (($1_type &)$1)[i] = (T)(CONVERT_FROM(o));
                     else
@@ -387,11 +387,11 @@ namespace std {
         %typemap(in) const set<T>& (std::set<T> temp),
                      const set<T>* (std::set<T> temp) {
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 temp = std::set<T >(size);
                 $1 = &temp;
                 for (unsigned int i=0; i<size; i++) {
-                    VALUE o = RARRAY($input)->ptr[i];
+                    VALUE o = RARRAY_PTR($input)[i];
                     if (CHECK(o))
                         temp[i] = (T)(CONVERT_FROM(o));
                     else
@@ -411,13 +411,13 @@ namespace std {
         %typecheck(SWIG_TYPECHECK_VECTOR) set<T> {
             /* native sequence? */
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 if (size == 0) {
                     /* an empty sequence can be of any type */
                     $1 = 1;
                 } else {
                     /* check the first element only */
-                    VALUE o = RARRAY($input)->ptr[0];
+                    VALUE o = RARRAY_PTR($input)[0];
                     if (CHECK(o))
                         $1 = 1;
                     else
@@ -437,13 +437,13 @@ namespace std {
                                           const set<T>* {
             /* native sequence? */
             if (rb_obj_is_kind_of($input,rb_cArray)) {
-                unsigned int size = RARRAY($input)->len;
+                unsigned int size = RARRAY_LEN($input);
                 if (size == 0) {
                     /* an empty sequence can be of any type */
                     $1 = 1;
                 } else {
                     /* check the first element only */
-                    VALUE o = RARRAY($input)->ptr[0];
+                    VALUE o = RARRAY_PTR($input)[0];
                     if (CHECK(o))
                         $1 = 1;
                     else
