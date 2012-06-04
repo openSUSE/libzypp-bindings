@@ -74,7 +74,6 @@
 #define TARGET_THREAD_BEGIN_ALLOW do {} while(0)
 #define TARGET_THREAD_END_ALLOW do {} while(0)
 #include <ruby.h>
-#include <rubyio.h>
 #endif
 
 #if defined(SWIGPERL)
