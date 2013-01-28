@@ -7,8 +7,8 @@ namespace zypp
 %include <zypp/Target.h>
 namespace zypp
 {
-typedef intrusive_ptr<Target> Target_Ptr;
-%template(Target_Ptr) intrusive_ptr<Target>;
+typedef ::zypp::intrusive_ptr<Target> Target_Ptr;
+%template(Target_Ptr) ::zypp::intrusive_ptr<Target>;
 }
 %{
   namespace zypp

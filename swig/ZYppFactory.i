@@ -3,7 +3,7 @@
 
 namespace zypp
 {
-typedef intrusive_ptr<ZYpp> ZYpp_Ptr;
-%template(ZYpp_Ptr) intrusive_ptr<ZYpp>;
+typedef ::zypp::intrusive_ptr<ZYpp> ZYpp_Ptr;
+%template(ZYpp_Ptr) ::zypp::intrusive_ptr<ZYpp>;
 }
 

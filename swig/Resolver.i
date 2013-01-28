@@ -9,8 +9,8 @@
 
 namespace zypp
 {
-  typedef intrusive_ptr< Resolver > Resolver_Ptr;
-  %template(Resolver_Ptr) intrusive_ptr<Resolver>;
+  typedef ::zypp::intrusive_ptr< Resolver > Resolver_Ptr;
+  %template(Resolver_Ptr) ::zypp::intrusive_ptr<Resolver>;
 
 #ifndef SWIGRUBY
   /* swig generates wrong code (>> instead of > > for template type)

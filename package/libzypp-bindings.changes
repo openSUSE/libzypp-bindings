@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jan 28 14:02:12 CET 2013 - mls@suse.de
+
+- work around swig problem creating two different types for
+  intrusive_ptr
+- version 0.5.14
+
+-------------------------------------------------------------------
 Tue Jun  5 09:27:07 UTC 2012 - jreidinger@suse.com
 
 - disable segfaulting python test
