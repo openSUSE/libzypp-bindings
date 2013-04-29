@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 29 17:37:14 CEST 2013 - ma@suse.de
+
+- Compile with -std=c++11
+
+-------------------------------------------------------------------
 Mon Jan 28 14:02:12 CET 2013 - mls@suse.de
 
 - work around swig problem creating two different types for

@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 2.8)
 
 ENABLE_TESTING()
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fPIC -fno-strict-aliasing")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -fPIC -fno-strict-aliasing")
 
 #
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked

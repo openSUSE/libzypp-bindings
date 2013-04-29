@@ -108,6 +108,7 @@ SWIGINTERNINLINE SV *SWIG_From_double  SWIG_PERL_DECL_ARGS_1(double value);
 
 
 #include <sstream>
+#undef seed // don't know where it comes from, but it conflicts with <random>
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/Edition.h"
