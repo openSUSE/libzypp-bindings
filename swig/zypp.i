@@ -15,6 +15,12 @@
 %}
 #endif
 
+// stuff swig seems to be unable to parse
+#define BOOST_NOEXCEPT
+#define BOOST_NO_CXX11_NOEXCEPT
+#define BOOST_NO_CXX11_RVALUE_REFERENCES
+#define BOOST_NO_CXX11_SMART_PTR
+
 %{
 /* Includes the header in the wrapper code */
 #ifdef SWIGRUBY
@@ -27,7 +33,7 @@
 /*
  * type definitions to keep the C code generic
  */
- 
+
 #if defined(SWIGPYTHON)
 #define Target_Null_p(x) (x == Py_None)
 #define Target_INCREF(x) Py_INCREF(x)
@@ -54,8 +60,8 @@
 
 #if defined(SWIGRUBY)
 #define Target_Null_p(x) NIL_P(x)
-#define Target_INCREF(x) 
-#define Target_DECREF(x) 
+#define Target_INCREF(x)
+#define Target_DECREF(x)
 #define Target_True Qtrue
 #define Target_False Qfalse
 #define Target_Null Qnil
@@ -87,8 +93,8 @@ SWIGINTERNINLINE SV *SWIG_FromCharPtr(const char *cptr);
 SWIGINTERNINLINE SV *SWIG_From_double  SWIG_PERL_DECL_ARGS_1(double value);
 
 #define Target_Null_p(x) (x == NULL)
-#define Target_INCREF(x) 
-#define Target_DECREF(x) 
+#define Target_INCREF(x)
+#define Target_DECREF(x)
 #define Target_True (&PL_sv_yes)
 #define Target_False (&PL_sv_no)
 #define Target_Null NULL
