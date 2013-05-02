@@ -3,3 +3,4 @@
 %ignore zypp::Patch::id;
 
 %include <zypp/Patch.h>
+
