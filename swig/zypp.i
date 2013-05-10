@@ -136,7 +136,7 @@ SWIGINTERNINLINE SV *SWIG_From_double  SWIG_PERL_DECL_ARGS_1(double value);
 #include "zypp/repo/PackageProvider.h"
 #include "zypp/TmpPath.h"
 #include "zypp/Resolver.h"
-#include "zypp/pool/GetResolvablesToInsDel.h"
+#include "legacy/GetResolvablesToInsDel.h"
 
 #include "zypp/Product.h"
 

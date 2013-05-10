@@ -7,7 +7,7 @@
 %include <zypp/ResPool.h>
 
 %ignore zypp::pool::operator<<;
-%include <zypp/pool/GetResolvablesToInsDel.h>
+%include "legacy/GetResolvablesToInsDel.h"
 namespace zypp
 {
   typedef ::std::list<zyppPoolItem> PoolItemList;
