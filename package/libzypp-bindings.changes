@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Sep 30 11:10:31 UTC 2013 - jreidinger@suse.com
+
+- Add legacy GetResolvablesToInsDel class (removed from libzypp
+  in favor of transaction)
+- fix const pointer lost its namespace
+- 0.5.15
+
+
+-------------------------------------------------------------------
 Mon Apr 29 17:37:14 CEST 2013 - ma@suse.de
 
 - Compile with -std=c++11
