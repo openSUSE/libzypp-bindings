@@ -1,8 +1,8 @@
 #
 # spec file for package libzypp-bindings
 #
-# Copyright (c) 2011 SUSE LINUX Products GmbH, Nuernberg, Germany.
- #
+# Copyright (c) 2013 SUSE LINUX Products GmbH, Nuernberg, Germany.
+#
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
 # upon. The license for this file, and modifications and additions to the
@@ -24,10 +24,12 @@ License:        GPL-2.0+
 Summary:        Bindings for libzypp
 Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  cmake python-devel ruby-devel
+BuildRequires:  cmake
 BuildRequires:  gcc-c++ >= 4.5
-BuildRequires:  swig >= 1.3.40
 BuildRequires:  libzypp-devel >= 10.2.0
+BuildRequires:  python-devel
+BuildRequires:  ruby-devel
+BuildRequires:  swig >= 1.3.40
 Source:         %{name}-%{version}.tar.bz2
 
 %description
@@ -63,7 +65,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %{__rm} -rf %{buildroot}
 
 %package -n ruby-zypp
-License:        GPL-2.0+
 Summary:        Ruby bindings for libzypp
 Group:          Development/Languages/Ruby
 
@@ -80,7 +81,6 @@ Group:          Development/Languages/Ruby
 %endif
 
 %package -n python-zypp
-License:        GPL-2.0+
 Summary:        Python bindings for libzypp
 Group:          Development/Languages/Python
 %description -n python-zypp
@@ -92,7 +92,6 @@ Group:          Development/Languages/Python
 %{py_sitedir}/zypp.py
 
 %package -n perl-zypp
-License:        GPL-2.0+
 Requires:       perl = %{perl_version}
 Summary:        Perl bindings for libzypp
 Group:          Development/Languages/Perl

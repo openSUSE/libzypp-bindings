@@ -6,7 +6,6 @@ Mon Sep 30 11:10:31 UTC 2013 - jreidinger@suse.com
 - fix const pointer lost its namespace
 - 0.5.15
 
-
 -------------------------------------------------------------------
 Mon Apr 29 17:37:14 CEST 2013 - ma@suse.de
 
@@ -23,7 +22,7 @@ Mon Jan 28 14:02:12 CET 2013 - mls@suse.de
 Tue Jun  5 09:27:07 UTC 2012 - jreidinger@suse.com
 
 - disable segfaulting python test
-- version 0.5.13 
+- version 0.5.13
 
 -------------------------------------------------------------------
 Mon Jun  4 16:45:43 CEST 2012 - ma@suse.de
@@ -35,7 +34,7 @@ Mon Jun  4 16:45:43 CEST 2012 - ma@suse.de
 Tue Feb 28 13:16:22 UTC 2012 - jreidinger@suse.com
 
 - fix iteration over pool in ruby (bnc#746439)
-- add ability to use PackageProvider via bindings 
+- add ability to use PackageProvider via bindings
 - predefine class for ZyppException in ruby so it can be used after
   require of zypp
 - version 0.5.11
@@ -79,7 +78,7 @@ Wed Nov  3 14:39:12 CET 2010 - ma@suse.de
 Wed Nov  3 13:42:42 CET 2010 - ma@suse.de
 
 - Wrap DownloadMode enum
-- Add zypp::setZyppLogfilei. Pass empty string for off, '-' for 
+- Add zypp::setZyppLogfilei. Pass empty string for off, '-' for
   stderr or a filename.
 - version 0.5.6
 
@@ -165,7 +164,7 @@ Fri Sep 19 14:07:15 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Tue Sep 16 11:03:12 CEST 2008 - dmacvicar@suse.de
 
-- add ZConfig 
+- add ZConfig
 
 -------------------------------------------------------------------
 Fri Sep  5 18:41:31 CEST 2008 - ma@suse.de
