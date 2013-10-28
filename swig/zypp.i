@@ -12,6 +12,7 @@
    #undef Fflush
    #undef Mkdir
    #undef strerror
+   #undef seed
 %}
 #endif
 
