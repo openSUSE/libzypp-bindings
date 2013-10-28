@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 28 13:01:33 CET 2013 - ma@suse.de
+
+- work around perl conflict with c++ header.
+- version 0.5.15
+
+-------------------------------------------------------------------
 Mon Jan 28 14:02:12 CET 2013 - mls@suse.de
 
 - work around swig problem creating two different types for
