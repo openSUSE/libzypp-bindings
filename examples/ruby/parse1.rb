@@ -3,51 +3,43 @@
 require 'zypp'
 include Zypp
 
-tmp_cache_path = TmpDir.new()
-tmp_raw_cache_path = TmpDir.new()
-tmp_known_repos_path = TmpDir.new()
-
-opts = RepoManagerOptions.new()
-opts.repoCachePath = tmp_cache_path.path()
-opts.repoRawCachePath = tmp_raw_cache_path.path()
-opts.knownReposPath = tmp_known_repos_path.path()
-
+tmp_dir = TmpDir.new()
+opts = RepoManagerOptions.new(tmp_dir.path())
 repo_manager = RepoManager.new(opts)
 
 repo_info = RepoInfo.new()
+repo_info.setAlias("factorytest")
+repo_info.setName("Test Repo for Factory.")
+repo_info.setEnabled(true)
+repo_info.setAutorefresh(false)
+url = Url.new("http://download.opensuse.org/factory-tested/repo/oss/")
+repo_info.addBaseUrl(url)
+repo_manager.addRepository(repo_info)
 
-repo_info.set_alias("factorytest")
-repo_info.set_name("Test Repo for Factory.")
-repo_info.set_enabled(true)
-repo_info.set_autorefresh(false)
-# repo_info.add_base_url("ftp://dist.suse.de/install/stable-x86/")
-# repo_info.add_base_url("http://software.opensuse.org/download/home:/Arvin42/openSUSE_Factory/")
-repo_info.add_base_url("file:///suse/aschnell/tmp")
 
-repo_manager.add_repository(repo_info)
-
-z = ZYppFactory::instance.get_zypp
-pool = z.pool()
-
-repos = repo_manager.known_repositories()
+KeyRing.setDefaultAccept( KeyRing::ACCEPT_UNKNOWNKEY |
+        KeyRing::ACCEPT_VERIFICATION_FAILED | KeyRing::ACCEPT_UNSIGNED_FILE |
+        KeyRing::TRUST_KEY_TEMPORARILY)
+repos = repo_manager.knownRepositories()
 repos.each do | repo |
-    repo_manager.refresh_metadata(repo)
-    repo_manager.build_cache(repo)
-    rep = repo_manager.create_from_cache(repo)
-    store = rep.resolvables()
-    z.add_resolvables(store)
+    repo_manager.refreshMetadata(repo)
+    repo_manager.buildCache(repo)
+    repo_manager.loadFromCache(repo)
 end
 
 # puts pool.class
+z = ZYppFactory::instance.getZYpp
+pool = z.pool()
 
 pool.each do | p |
 
-    # puts p.class
+    puts p.class
     r = p.resolvable
-    # puts r.class
+    puts r.class
     puts "#{r.kind} #{r.name} #{r.edition.to_s} #{r.arch.to_s}"
+
     puts "  Summary: #{r.summary}"
-    puts "  Size: #{r.size}"
+    puts "  DownloadSize: #{r.downloadSize}"
     puts "  Vendor: #{r.vendor}"
     puts "  Buildtime: #{r.buildtime}"
 

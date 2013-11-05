@@ -22,6 +22,15 @@ namespace zypp
 
 }
 
+namespace zypp::ResObject::TraitsType
+{
+  typedef ::zypp::intrusive_ptr<const zypp::ResObject> constPtrType;
+}
+namespace zypp::Resolvable::TraitsType
+{
+  typedef ::zypp::intrusive_ptr<const zypp::Resolvable> constPtrType;
+}
+
 %template(ResTraitsResolvable) zypp::ResTraits<zypp::Resolvable>;
 %template(ResTraitsResObject)  zypp::ResTraits<zypp::ResObject>;
 
