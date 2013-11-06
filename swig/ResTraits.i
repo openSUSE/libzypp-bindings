@@ -49,9 +49,11 @@ namespace zypp
   %template(X##_Ptr)             ::zypp::intrusive_ptr<X>;
 
   bool isKind##X( const zypp::Resolvable::constPtr & p );
+  bool isKind##X( const zypp::ResObject::constPtr & p );
   bool isKind##X( const zypp::PoolItem & p );
 
   X##_constPtr asKind##X( const zypp::Resolvable::constPtr & p );
+  X##_constPtr asKind##X( const zypp::ResObject::constPtr & p );
   X##_constPtr asKind##X( const zypp::PoolItem & p );
 }
 
@@ -61,9 +63,13 @@ namespace zypp
   {
     inline bool isKind##X( const zypp::Resolvable::constPtr & p )
     { return isKind<X>( p ); }
+    inline bool isKind##X( const zypp::ResObject::constPtr & p )
+    { return isKind<X>( p ); }
     inline bool isKind##X( const zypp::PoolItem & p )
     { return isKind<X>( p.resolvable() ); }
     inline X::constPtr asKind##X( const zypp::Resolvable::constPtr & p )
+    { return asKind<X>( p ); }
+    inline X::constPtr asKind##X( const zypp::ResObject::constPtr & p )
     { return asKind<X>( p ); }
     inline X::constPtr asKind##X( const zypp::PoolItem & p )
     { return asKind<X>( p.resolvable() ); }
