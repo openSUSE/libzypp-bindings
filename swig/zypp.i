@@ -224,6 +224,7 @@ namespace zypp {
 %include "Kind.i"
 %include "CheckSum.i"
 %include "Date.i"
+%include "Changelog.i"
 %include "Dep.i"
 %include "Capability.i"
 %include "Capabilities.i"
