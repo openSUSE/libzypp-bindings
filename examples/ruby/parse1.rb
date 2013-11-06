@@ -3,6 +3,11 @@
 require 'zypp'
 include Zypp
 
+# Load installed packages
+z = ZYppFactory::instance.getZYpp
+z.initializeTarget( Pathname.new("/") )
+z.target.load;
+
 tmp_dir = TmpDir.new()
 opts = RepoManagerOptions.new(tmp_dir.path())
 repo_manager = RepoManager.new(opts)
@@ -14,8 +19,7 @@ repo_info.setEnabled(true)
 repo_info.setAutorefresh(false)
 url = Url.new("http://download.opensuse.org/factory-tested/repo/oss/")
 repo_info.addBaseUrl(url)
-repo_manager.addRepository(repo_info)
-
+#repo_manager.addRepository(repo_info)
 
 KeyRing.setDefaultAccept( KeyRing::ACCEPT_UNKNOWNKEY |
         KeyRing::ACCEPT_VERIFICATION_FAILED | KeyRing::ACCEPT_UNSIGNED_FILE |
@@ -28,16 +32,25 @@ repos.each do | repo |
 end
 
 # puts pool.class
-z = ZYppFactory::instance.getZYpp
 pool = z.pool()
 
 pool.each do | p |
 
-    puts p.class
+    #puts p.class
     r = p.resolvable
-    puts r.class
-    puts "#{r.kind} #{r.name} #{r.edition.to_s} #{r.arch.to_s}"
+    #puts r.class
+    puts "#{r.kind} #{r.name} #{r.edition} #{r.arch}"
 
+    if isKindPackage(p)
+      changes = asKindPackage(p).changelog
+      puts changes.class
+      puts changes.size
+      changes.each do | c |
+	puts c.date
+	puts c.author
+	puts c.text
+      end
+    end
     puts "  Summary: #{r.summary}"
     puts "  DownloadSize: #{r.downloadSize}"
     puts "  Vendor: #{r.vendor}"
