@@ -46,21 +46,22 @@ pool.each do | p |
       puts changes.class
       puts changes.size
       changes.each do | c |
-	puts c.date
-	puts c.author
-	puts c.text
+        puts c.date
+        puts c.author
+        puts c.text
       end
     end
     puts "  Summary: #{r.summary}"
     puts "  DownloadSize: #{r.downloadSize}"
     puts "  Vendor: #{r.vendor}"
     puts "  Buildtime: #{r.buildtime}"
+    puts "  Support Level: #{asUserString(asKindPackage(p).vendorSupport)}" if isKindPackage(p)
 
     d = r.dep(Dep.PROVIDES)
     # puts d.class
     d.each do | x |
-	# puts y.class
-	puts "  Provides: #{x.to_s}"
+      # puts y.class
+      puts "  Provides: #{x.to_s}"
     end
 
     puts
