@@ -237,6 +237,7 @@ namespace zypp {
 %include "ResTraits.i"
 %include "ResStatus.i"
 %include "ResObject.i"
+%include "VendorSupportOptions.i"
 %include "Package.i"
 %include "PackageProvider.i"
 %include "Patch.i"
