@@ -54,17 +54,20 @@ class RepoInfoTestCase(unittest.TestCase):
         baseurls = self.info.baseUrls()
         assert len(baseurls) == 1
 
-    def testDump(self):
-        out = self.info.dump()
-        assert len(out) > 300, 'Invalid output length %d' % len(out)
+    # ma: disabled broken dump tests. It's IMO not bindings task to test and fail
+    #     if libzypp reformats output or adds new attributes.
 
-    def testDumpIni(self):
-        out = self.info.dumpAsIni()
-        assert len(out) == 208, 'Invalid output length %d' % len(out)
+    #def testDump(self):
+        #out = self.info.dump()
+        #assert len(out) > 300, 'Invalid output length %d' % len(out)
 
-    def testDumpXML(self):
-        out = self.info.dumpAsXML()
-        assert len(out) == 253, 'Invalid output length %d' % len(out)
+    #def testDumpIni(self):
+        #out = self.info.dumpAsIni()
+        #assert len(out) == 208, 'Invalid output length %d' % len(out)
+
+    #def testDumpXML(self):
+        #out = self.info.dumpAsXML()
+        #assert len(out) == 253, 'Invalid output length %d' % len(out)
 
 if __name__ == "__main__":
     unittest.main()
