@@ -17,7 +17,7 @@ namespace zypp
 
 %ignore zypp::repo::RepoInfoBase::dumpOn(std::ostream &) const;
 %ignore zypp::repo::RepoInfoBase::dumpAsIniOn(std::ostream &) const;
-%ignore zypp::repo::RepoInfoBase::dumpAsXMLOn(std::ostream &) const;
+%ignore zypp::repo::RepoInfoBase::dumpAsXmlOn(std::ostream &) const;
 %include <zypp/repo/RepoInfoBase.h>
 
 // This is due to a typo in libzypp < 5.4.0
@@ -25,7 +25,7 @@ namespace zypp
 
 %ignore zypp::RepoInfo::dumpOn(std::ostream &) const;
 %ignore zypp::RepoInfo::dumpAsIniOn(std::ostream &) const;
-%ignore zypp::RepoInfo::dumpAsXMLOn(std::ostream &) const;
+%ignore zypp::RepoInfo::dumpAsXmlOn(std::ostream &) const;
 
 %include <zypp/RepoInfo.h>
 typedef std::list<zypp::RepoInfo> RepoInfoList;
@@ -50,7 +50,7 @@ typedef std::list<zypp::RepoInfo> RepoInfoList;
 	std::string dumpAsXML(void) const
 	{
 		std::ostringstream str;
-		self->dumpAsXMLOn(str);
+		self->dumpAsXmlOn(str);
 		return str.str();
 	}
 }
