@@ -20,6 +20,7 @@
 #define BOOST_NO_CXX11_NOEXCEPT
 #define BOOST_NO_CXX11_RVALUE_REFERENCES
 #define BOOST_NO_CXX11_SMART_PTR
+#define constexpr
 
 %{
 /* Includes the header in the wrapper code */
