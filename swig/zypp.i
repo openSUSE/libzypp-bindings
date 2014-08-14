@@ -151,6 +151,9 @@ typedef std::list<std::string> StringList;
 
 %}
 
+/* swig does not understand the __attribute__ extension */
+#define  __attribute__(x)
+
 /* prevent swig from creating a type called 'Target_Type' */
 #if defined(SWIGRUBY)
 #define Target_Type VALUE
