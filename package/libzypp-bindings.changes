@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 17 11:22:13 CEST 2014 - ma@suse.de
+
+- Adapt to libzypp changes.
+- 0.6.3
+
+-------------------------------------------------------------------
 Thu Aug 14 14:45:12 CEST 2014 - mls@suse.de
 
 - work around syntax errors because of __attribute__ 
