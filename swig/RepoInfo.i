@@ -1,6 +1,6 @@
 #ifdef SWIGPERL5
 #else
-%template(UrlSet) std::set<zypp::Url>;
+%template(UrlSet) std::list<zypp::Url>;
 #endif
 
 namespace zypp
@@ -31,7 +31,7 @@ namespace zypp
 typedef std::list<zypp::RepoInfo> RepoInfoList;
 %template(RepoInfoList) std::list<zypp::RepoInfo>;
 
-%extend zypp::RepoInfo 
+%extend zypp::RepoInfo
 {
 	std::string dump(void) const
 	{
