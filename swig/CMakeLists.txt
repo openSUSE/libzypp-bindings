@@ -12,6 +12,9 @@ SET( SWIG_INPUT "${CMAKE_CURRENT_SOURCE_DIR}/zypp.i" )
 #
 
 FIND_PACKAGE(Ruby)
+# Enforce Python 2.7, libzypp-bindings does not yet work with Python3
+set(PythonLibs_FIND_VERSION 2.7)
+set(PythonLibs_FIND_VERSION_MAJOR 2)
 FIND_PACKAGE(PythonLibs)
 FIND_PACKAGE(Perl)
 
