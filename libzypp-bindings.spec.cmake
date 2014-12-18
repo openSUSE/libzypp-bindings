@@ -27,7 +27,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  cmake
 BuildRequires:  gcc-c++ >= 4.5
 BuildRequires:  libzypp-devel >= 14.30.0
-BuildRequires:  python-devel
+BuildRequires:  python-devel < 3
 BuildRequires:  ruby-devel
 BuildRequires:  swig >= 1.3.40
 Source:         %{name}-%{version}.tar.bz2
