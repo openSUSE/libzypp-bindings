@@ -16,6 +16,13 @@ namespace zypp
 
 namespace zypp
 {
+%extend ResPool {
+  pool::GetResolvablesToInsDel getTransaction()
+  {
+    return pool::GetResolvablesToInsDel( *self );
+  }
+}
+
 
 #ifdef SWIGPERL5
 
