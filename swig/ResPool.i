@@ -16,6 +16,28 @@ namespace zypp
 
 namespace zypp
 {
+
+#ifdef SWIGPYTHON
+namespace sat
+{
+%extend  Pool {
+  std::string loadSolvFile(std::string _solv, std::string _alias)
+  {
+    RepoInfo tmpRepo;
+    tmpRepo.setAlias(_alias);
+
+    try {
+      addRepoSolv(_solv, tmpRepo);
+    } catch ( const Exception & e ) {
+      return e.msg();
+    }
+
+    return std::string();
+  }
+}
+}
+#endif
+
 %extend ResPool {
   pool::GetResolvablesToInsDel getTransaction()
   {
