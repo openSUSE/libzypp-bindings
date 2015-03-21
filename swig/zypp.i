@@ -140,6 +140,7 @@ SWIGINTERNINLINE SV *SWIG_From_double  SWIG_PERL_DECL_ARGS_1(double value);
 #include "legacy/GetResolvablesToInsDel.h"
 
 #include "zypp/sat/SolvAttr.h"
+#include "zypp/PoolQuery.h"
 #include "zypp/Product.h"
 
 using namespace boost;
@@ -264,6 +265,7 @@ namespace zypp {
 %include "Resolver.i"
 %include "ZConfig.i"
 %include "SolvAttr.i"
+%include "PoolQuery.i"
 
 //just simple files, where we need default ctor
 %include <zypp/repo/RepoProvideFile.h>
