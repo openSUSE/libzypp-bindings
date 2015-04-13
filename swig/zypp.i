@@ -276,8 +276,6 @@ namespace zypp {
 %ignore zypp::ZYpp::setArchitecture;
 %ignore zypp::ZYpp::applyLocks;
 
-%include <zypp/ZYpp.h>
-
 %include "ZYppFactory.i"
 #endif
 
