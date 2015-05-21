@@ -7,12 +7,11 @@ $:.unshift "../../../build/swig/ruby"
 
 # test loading of extension
 require 'test/unit'
+require 'zypp'
 
 class LoadTest < Test::Unit::TestCase
-  require 'zypp'
-  include Zypp
   def test_target
-    z = ZYppFactory::instance.getZYpp
+    z = Zypp::ZYppFactory::instance.getZYpp
 
     assert z.homePath
     assert z.tmpPath
@@ -35,17 +34,17 @@ class LoadTest < Test::Unit::TestCase
       break if i > 10
       # PoolItems have status and a resolvable
       r = pi.resolvable
-      assert pi.is_a? PoolItem
+      assert pi.is_a? Zypp::PoolItem
     end
     #try iterate with kind
     i = 0
-    p.each_by_kind(ResKind.package) do |pi|
+    p.each_by_kind(Zypp::ResKind.package) do |pi|
       
       i = i + 1
       break if i > 10
-      assert pi.is_a? PoolItem
+      assert pi.is_a? Zypp::PoolItem
       r = pi.resolvable
-      assert isKindPackage(pi)
+      assert Zypp::isKindPackage(pi)
     end
 
     i = 0
@@ -53,7 +52,7 @@ class LoadTest < Test::Unit::TestCase
     p.each_by_name("libzypp") do |pi|
       i = i + 1
       break if i > 10
-      assert pi.is_a? PoolItem
+      assert pi.is_a? Zypp::PoolItem
       r = pi.resolvable
       # broken in current SWIG assert_equal "libzypp",r.name
       #try to download it
