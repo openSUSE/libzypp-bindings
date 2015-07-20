@@ -2,6 +2,12 @@
    %template(StringList) std::list<std::string>;
 #endif
 
+/* don't wrap legacy ItemCapKind stuff */
+%ignore zypp::Resolver::isInstalledBy( const PoolItem & item );
+%ignore zypp::Resolver::installs( const PoolItem & item );
+%ignore zypp::Resolver::satifiedByInstalled (const PoolItem & item );
+%ignore zypp::Resolver::installedSatisfied( const PoolItem & item );
+
 %include <zypp/ProblemTypes.h>
 %include <zypp/ResolverProblem.h>
 %include <zypp/ProblemSolution.h>
@@ -16,10 +22,6 @@ typedef std::list<zypp::ProblemSolution_Ptr> ProblemSolutionList;
 
 typedef boost::intrusive_ptr< zypp::ProblemSolution > ProblemSolution_Ptr;
 %template(ProblemSolution_Ptr) boost::intrusive_ptr< zypp::ProblemSolution >;
-
-
-typedef std::list< zypp::solver::detail::SolutionAction_constPtr > CSolutionActionList;
-%template(CSolutionActionList) std::list< zypp::solver::detail::SolutionAction_constPtr >;
 
 namespace zypp
 {
