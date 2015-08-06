@@ -26,7 +26,7 @@ Group:          Development/Sources
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  cmake
 BuildRequires:  gcc-c++ >= 4.5
-BuildRequires:  libzypp-devel >= 15.10.0
+BuildRequires:  libzypp-devel >= 15.11.0
 BuildRequires:  python-devel < 3
 BuildRequires:  ruby-devel
 BuildRequires:  swig >= 2
