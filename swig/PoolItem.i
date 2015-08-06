@@ -1,3 +1,4 @@
+%template(SolvableType_PoolItem) zypp::sat::SolvableType<zypp::PoolItem>;
 %include <zypp/PoolItem.h>
 
 #ifdef SWIGPERL5

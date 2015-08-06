@@ -236,6 +236,7 @@ namespace zypp {
 %include "Capabilities.i"
 %include "CapMatch.i"
 %include "OnMediaLocation.i"
+%include "SolvAttr.i"
 %include "Resolvable.i"
 %include "RepoType.i"
 %include "RepoInfo.i"
@@ -264,7 +265,6 @@ namespace zypp {
 %include "TmpPath.i"
 %include "Resolver.i"
 %include "ZConfig.i"
-%include "SolvAttr.i"
 %include "PoolQuery.i"
 
 //just simple files, where we need default ctor
