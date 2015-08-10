@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 10 17:07:09 CEST 2015 - ma@suse.com
+
+- Adapt to libzypp changes due to FATE#318778
+- 0.7.3
+
+-------------------------------------------------------------------
 Mon Jul 20 13:44:19 CEST 2015 - ma@suse.de
 
 - Don't expose resolver internals (due to FATE#318099)
