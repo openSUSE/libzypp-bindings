@@ -90,3 +90,4 @@ namespace zypp
 %STUFF(SrcPackage)
 %STUFF(Pattern)
 %STUFF(Product)
+%STUFF(Application)
