@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 12 12:40:09 CEST 2017 - ma@suse.com
+
+- by V. Zhestkov: Adapt bindings to work with boost-1.62,
+  Fix perl examples
+- 0.7.4
+
+-------------------------------------------------------------------
 Mon Aug 10 17:07:09 CEST 2015 - ma@suse.com
 
 - Adapt to libzypp changes due to FATE#318778
