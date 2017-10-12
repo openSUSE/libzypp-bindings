@@ -69,7 +69,7 @@ Summary:        Ruby bindings for libzypp
 Group:          Development/Languages/Ruby
 
 %description -n ruby-zypp
--
+Ruby bindings for libzypp.
 
 %files -n ruby-zypp
 %defattr(-,root,root,-)
@@ -84,7 +84,7 @@ Group:          Development/Languages/Ruby
 Summary:        Python bindings for libzypp
 Group:          Development/Languages/Python
 %description -n python-zypp
--
+Python bindings for libzypp.
 
 %files -n python-zypp
 %defattr(-,root,root,-)
@@ -97,7 +97,7 @@ Summary:        Perl bindings for libzypp
 Group:          Development/Languages/Perl
 
 %description -n perl-zypp
--
+Perl bindings for libzypp.
 
 %files -n perl-zypp
 %defattr(-,root,root,-)

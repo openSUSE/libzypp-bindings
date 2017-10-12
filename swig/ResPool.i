@@ -3,6 +3,9 @@
 %ignore zypp::ResPool::byKindEnd;
 %ignore zypp::ResPool::byNameBegin;
 %ignore zypp::ResPool::byNameEnd;
+%ignore zypp::ResPool::byStatus;
+%ignore zypp::ResPool::byStatusBegin;
+%ignore zypp::ResPool::byStatusEnd;
 %apply unsigned { zypp::ResPool::size_type };
 %include <zypp/ResPool.h>
 

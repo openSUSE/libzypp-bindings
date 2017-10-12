@@ -17,10 +17,13 @@
 
 // stuff swig seems to be unable to parse
 #define BOOST_NOEXCEPT
+#define BOOST_SP_NOEXCEPT
+#define BOOST_SP_NOEXCEPT_WITH_ASSERT
 #define BOOST_NO_CXX11_NOEXCEPT
 #define BOOST_NO_CXX11_RVALUE_REFERENCES
 #define BOOST_NO_CXX11_SMART_PTR
 #define constexpr
+#define BOOST_CONSTEXPR constexpr
 
 %{
 /* Includes the header in the wrapper code */
@@ -206,6 +209,9 @@ namespace zypp {
 
 %include "std_string.i"
 %include "stl.i"
+
+%import <boost/config.hpp>
+%import <boost/pointer_cast.hpp>
 
 #ifdef BOOST_SMARTPTR_INCLUDE_DIR
 %import <boost/smart_ptr/scoped_ptr.hpp>
